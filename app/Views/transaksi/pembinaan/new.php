@@ -1,6 +1,6 @@
-<?= $this->extend('layout/backend') ?>;
+<?= $this->extend('layout/backend') ?>
 
-<?= $this->section('content') ?>;
+<?= $this->section('content') ?>
 
 <section class="section">
     <div class="section-header">
@@ -14,12 +14,8 @@
                 <a href="<?= site_url('transaksi/pembinaan/index') ?>" class="btn btn-primary ml-auto">Back</a>
             </div>
             <div class="card-body p-4">
-                <form method="post" action="<?= site_url('transaksi/pembinaan/index') ?>">
+                <form method="post" action="<?= site_url('transaksi/pembinaan/create') ?>">
                     <?= csrf_field() ?>
-                    <!-- <div class="form-group">
-                        <label>NO KWITANSI</label>
-                        <input type="text" class="form-control" name="no_kwitansi" placeholder="No Kwitansi" required>
-                    </div> -->
                     <div class="form-group">
                         <label>TANGGAL</label>
                         <input type="date" class="form-control" name="tanggal" placeholder="Tanggal" required>
@@ -46,7 +42,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- di isi form dinamis yang dibuat dengan jQuery -->
+                                <!-- diisi oleh form dinamis dengan jQuery -->
                             </tbody>
                         </table>
                     </div>
@@ -59,8 +55,6 @@
             </div>
         </div>
     </div>
-
-    </div>
 </section>
 
-<?= $this->endSection() ?>;
+<?= $this->endSection() ?>

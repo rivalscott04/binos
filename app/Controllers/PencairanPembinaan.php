@@ -8,78 +8,55 @@ use CodeIgniter\RESTful\ResourceController;
 class PencairanPembinaan extends ResourceController
 {
     protected $db;
-    private $objPencairanPembinaan;
+    private $pencairanPembinaanModel;
 
     public function __construct()
     {
-        $this->objPencairanPembinaan = new ModelPencairanPembinaan();
-        $this->db = \Config\Database::connect(); // Mengenalkan koneksi ke database
+        $this->pencairanPembinaanModel = new ModelPencairanPembinaan();
+        $this->db = \Config\Database::connect(); // Inisialisasi koneksi database
     }
 
-    /**
-     * Return an array of resource objects, themselves in array format.
-     *
-     * @return ResponseInterface
-     */
-    public function index()
+    public function index(): string
     {
-        $data['dtpencairan_pembinaan'] = $this->objPencairanPembinaan->findAll();
+        $data['dtpencairan_pembinaan'] = $this->pencairanPembinaanModel->findAll();
         return view('pencairan/pembinaan/index', $data);
     }
 
-    /**
-     * Return a new resource object, with default properties.
-     *
-     * @return ResponseInterface
-     */
-    public function new()
+    public function new(): string
     {
-        $data['dtpencairan_pembinaan'] = $this->objPencairanPembinaan->findAll();
+        $data['dtpencairan_pembinaan'] = $this->pencairanPembinaanModel->findAll();
         return view('pencairan/pembinaan/new', $data);
     }
 
-    /**
-     * Create a new resource object, from "posted" parameters.
-     *
-     * @return ResponseInterface
-     */
     public function create()
     {
         $data = $this->request->getVar('data'); // Ambil data dari form (array JSON)
 
         try {
-            // Gunakan fungsi model untuk insert batch dengan perhitungan otomatis
-            $this->objPencairanPembinaan->insertBatchWithCalculation($data);
+            $this->pencairanPembinaanModel->insertBatchWithCalculation($data);
             return redirect()->to(site_url('/pencairan/pembinaan/index'))->with('success', 'Data Berhasil Disimpan');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
-    /**
-     * Delete the designated resource object from the model.
-     *
-     * @param int|string|null $id
-     *
-     * @return ResponseInterface
-     */
     public function delete($id = null)
     {
-        $this->db->table('pencairan_pembinaan')->where(['id_pencairan_pembinaan' => $id])->delete();
-        return redirect()->to(site_url('/pencairan/pembinaan/index'))->with('success', 'Data Berhasil Dihapus');
+        if ($id && $this->pencairanPembinaanModel->delete($id)) {
+            return redirect()->to(site_url('/pencairan/pembinaan/index'))->with('success', 'Data Berhasil Dihapus');
+        }
+        return redirect()->back()->with('error', 'Gagal menghapus data.');
     }
 
     public function akun()
     {
         $akun = model(ModelAkunPembinaan::class);
-        $result = $akun->findAll();
-        return $this->response->setJSON($result);
+        return $this->response->setJSON($akun->findAll());
     }
 
     public function item()
     {
         $akun = model(ModelAkunPembinaan::class);
-        $result = $akun->findAll();
-        return $this->response->setJSON($result);
+        return $this->response->setJSON($akun->findAll());
     }
 }

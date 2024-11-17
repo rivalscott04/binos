@@ -11,40 +11,55 @@ class ModelPencairanPembinaan extends Model
     protected $returnType       = 'object';
     protected $allowedFields    = [
         'no_kwitansi', 'tanggal', 'kegiatan', 'rincian', 'volume', 'harga_satuan', 'jumlah'
-    ]; // Tambahkan kolom 'volume', 'harga_satuan', 'jumlah' jika digunakan
-
+    ];
     protected $useTimestamps    = true;
 
-    // Fungsi untuk menghasilkan nomor kwitansi secara otomatis
-    public function no_kwitansi()
+    /**
+     * Menghasilkan nomor kwitansi otomatis.
+     * 
+     * @return string
+     */
+    public function no_kwitansi(): string
     {
-        $number = $this->db->table('pencairan_pembinaan')->select('RIGHT(no_kwitansi,4) as no_kwitansi', FALSE)
-            ->orderBy('no_kwitansi', 'DESC')->limit(1)->get()->getRowArray();
+        $this->db->transStart();
 
-        if ($number == null) {
-            $no = 1;
-        } else {
-            $no = intval($number['no_kwitansi']) + 1;
-        }
-        return str_pad($no, 4, "0", STR_PAD_LEFT); // Format nomor menjadi 4 digit, misalnya '0001'
+        $number = $this->db->table($this->table)
+            ->select('RIGHT(no_kwitansi,4) as no_kwitansi', false)
+            ->orderBy('no_kwitansi', 'DESC')
+            ->limit(1)
+            ->get()
+            ->getRowArray();
+
+        $this->db->transComplete();
+
+        $no = ($number == null) ? 1 : intval($number['no_kwitansi']) + 1;
+        return str_pad($no, 4, "0", STR_PAD_LEFT);
     }
 
-    // Fungsi untuk menyimpan data batch dengan perhitungan otomatis
-    public function insertBatchWithCalculation(array $data)
+    /**
+     * Menyimpan data batch dengan perhitungan otomatis untuk kolom 'jumlah'.
+     * 
+     * @param array $data
+     * @return bool
+     * @throws \InvalidArgumentException
+     */
+    public function insertBatchWithCalculation(array $data): bool
     {
-        foreach ($data as $key => $row) {
+        $processedData = [];
+
+        foreach ($data as $row) {
             if (!isset($row['volume'], $row['harga_satuan'])) {
                 throw new \InvalidArgumentException("Kolom 'volume' dan 'harga_satuan' harus disertakan");
             }
 
-            // Hitung jumlah berdasarkan volume dan harga_satuan
-            $data[$key]['jumlah'] = $row['volume'] * $row['harga_satuan'];
-
-            // Tambahkan nomor kwitansi otomatis jika belum ada
-            $data[$key]['no_kwitansi'] = $this->no_kwitansi();
+            $processedData[] = [
+                'no_kwitansi' => $this->no_kwitansi(),
+                'volume' => $row['volume'],
+                'harga_satuan' => $row['harga_satuan'],
+                'jumlah' => $row['volume'] * $row['harga_satuan'],
+            ] + $row;
         }
 
-        // Gunakan insertBatch untuk menyimpan data ke database
-        return $this->db->table($this->table)->insertBatch($data);
+        return $this->insertBatch($processedData);
     }
 }
