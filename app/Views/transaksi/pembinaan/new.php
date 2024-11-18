@@ -11,10 +11,10 @@
         <div class="card">
             <div class="card-header">
                 <h4>Tambah Data Transaksi</h4>
-                <a href="<?= site_url('transaksi/pembinaan/index') ?>" class="btn btn-primary ml-auto">Back</a>
+                <a href="<?= site_url('pencairan/pembinaan/index') ?>" class="btn btn-primary ml-auto">Back</a>
             </div>
             <div class="card-body p-4">
-                <form method="post" action="<?= site_url('transaksi/pembinaan/create') ?>">
+                <form method="post" action="<?= site_url('pencairan/pembinaan/create') ?>">
                     <?= csrf_field() ?>
                     <div class="form-group">
                         <label>TANGGAL</label>
@@ -67,42 +67,32 @@
             e.preventDefault();
             let newRow = `
             <tr>
-                <td>${no++}</td>
-                <td><input type="text" class="form-control" name="data[kegiatan][]" required></td>
-                <td><input type="text" class="form-control" name="data[uraian_kegiatan][]" required></td>
-                <td><input type="text" class="form-control" name="data[rincian][]" required></td>
-                <td><input type="number" class="form-control" name="data[volume][]" min="0" required></td>
-                <td><input type="number" class="form-control" name="data[harga_satuan][]" min="0" required></td>
-                <td><input type="number" class="form-control" name="data[jumlah][]" readonly></td>
+                <td>${no}</td>
+                <td><input type="text" class="form-control" name="data[${no}][kegiatan]" required></td>
+                <td><input type="text" class="form-control" name="data[${no}][uraian_kegiatan]" required></td>
+                <td><input type="text" class="form-control" name="data[${no}][rincian]" required></td>
+                <td><input type="number" class="form-control" name="data[${no}][volume]" min="0" required></td>
+                <td><input type="number" class="form-control" name="data[${no}][harga_satuan]" min="0" required></td>
+                <td><input type="number" class="form-control" name="data[${no}][jumlah]" readonly></td>
                 <td><button class="btn btn-danger btn-sm btn-block remove"><i class="fa fa-trash"></i></button></td>
             </tr>`;
             $('#tableLoop tbody').append(newRow);
+            no++;
         });
 
         // Hapus baris
         $('#tableLoop').on('click', '.remove', function (e) {
             e.preventDefault();
             $(this).closest('tr').remove();
-            // Reset nomor pada kolom pertama
-            resetRowNumbers();
         });
 
         // Hitung jumlah otomatis
-        $('#tableLoop').on('input', '[name="data[volume][]"], [name="data[harga_satuan][]"]', function () {
+        $('#tableLoop').on('input', '[name^="data["]', function () {
             let row = $(this).closest('tr');
-            let volume = parseFloat(row.find('[name="data[volume][]"]').val()) || 0;
-            let hargaSatuan = parseFloat(row.find('[name="data[harga_satuan][]"]').val()) || 0;
-            row.find('[name="data[jumlah][]"]').val(volume * hargaSatuan);
+            let volume = parseFloat(row.find('[name*="[volume]"]').val()) || 0;
+            let hargaSatuan = parseFloat(row.find('[name*="[harga_satuan]"]').val()) || 0;
+            row.find('[name*="[jumlah]"]').val(volume * hargaSatuan);
         });
-
-        // Reset nomor urut tabel
-        function resetRowNumbers() {
-            let rows = $('#tableLoop tbody tr');
-            no = 1;
-            rows.each(function () {
-                $(this).find('td:first').text(no++);
-            });
-        }
     });
 </script>
 

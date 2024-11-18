@@ -30,7 +30,13 @@ class PencairanPembinaan extends ResourceController
 
     public function create()
     {
-        $data = $this->request->getVar('data'); // Ambil data dari form (array JSON)
+        $data = $this->request->getPost('data'); // Ambil data dari form
+
+        // Debugging untuk memastikan data diterima
+        if (!$data) {
+            log_message('error', 'Data tidak ditemukan: ' . json_encode($this->request->getPost()));
+            return redirect()->back()->with('error', 'Data tidak ditemukan atau format tidak sesuai.');
+        }
 
         try {
             $this->pencairanPembinaanModel->insertBatchWithCalculation($data);
