@@ -6,12 +6,12 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>BINOS &mdash; KEJARI MATARAM</title>
 
-    <!-- General CSS Files -->
-    <link rel="stylesheet" href="<?= base_url('template/node_modules/bootstrap/dist/css/bootstrap.min.css') ?>" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="<?= base_url('template/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css') ?>">
+    <!-- General CSS Files (CDN) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <!-- Template CSS -->
+    <!-- Template CSS (Lokal) -->
     <link rel="stylesheet" href="<?= base_url('template/assets/css/style.css') ?>">
     <link rel="stylesheet" href="<?= base_url('template/assets/css/components.css') ?>">
 </head>
@@ -75,15 +75,15 @@
         </div>
     </div>
 
-    <!-- General JS Scripts -->
-    <script src="<?= base_url('template/node_modules/jquery/dist/jquery.min.js') ?>"></script>
-    <script src="<?= base_url('template/node_modules/datatables/media/js/jquery.dataTables.min.js') ?>"></script>
-    <script src="<?= base_url('template/node_modules/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
-    <script src="<?= base_url('template/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
-    <script src="<?= base_url('template/node_modules/nicescroll/dist/jquery.nicescroll.min.js') ?>"></script>
-    <script src="<?= base_url('template/assets/js/stisla.js') ?>"></script>
+    <!-- General JS Scripts (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
 
-    <!-- Template JS File -->
+    <!-- Template JS File (Lokal) -->
+    <script src="<?= base_url('template/assets/js/stisla.js') ?>"></script>
     <script src="<?= base_url('template/assets/js/scripts.js') ?>"></script>
     <script src="<?= base_url('template/assets/js/custom.js') ?>"></script>
 </body>
