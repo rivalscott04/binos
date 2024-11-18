@@ -7,16 +7,16 @@
     <title>BINOS &mdash; KEJARI MATARAM</title>
 
     <!-- General CSS Files -->
-    <link rel="stylesheet" href="<?= base_url() ?>/template/node_modules/bootstrap/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="<?= base_url() ?>/template/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>template/node_modules/bootstrap/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="<?= base_url() ?>template/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 
     <!-- CSS Libraries -->
 
     <!-- Template CSS -->
-    <link rel="stylesheet" href="<?= base_url() ?>/template/assets/css/style.css">
-    <link rel="stylesheet" href="<?= base_url() ?>/template/assets/css/components.css">
+    <link rel="stylesheet" href="<?= base_url() ?>template/assets/css/style.css">
+    <link rel="stylesheet" href="<?= base_url() ?>template/assets/css/components.css">
 </head>
 
 <body>
@@ -276,12 +276,12 @@
     </div>
 
     <!-- General JS Scripts -->
-    <script src="<?= base_url() ?>/template/node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="<?= base_url() ?>/template/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
-    <script src="<?= base_url() ?>/template/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="<?= base_url() ?>/template/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="<?= base_url() ?>/template/node_modules/nicescroll/dist/jquery.nicescroll.min.js"></script>
-    <script src="<?= base_url() ?>/template/assets/js/stisla.js"></script>
+    <script src="<?= base_url() ?>template/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="<?= base_url() ?>template/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url() ?>template/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<?= base_url() ?>template/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="<?= base_url() ?>template/node_modules/nicescroll/dist/jquery.nicescroll.min.js"></script>
+    <script src="<?= base_url() ?>template/assets/js/stisla.js"></script>
 
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
@@ -289,8 +289,8 @@
     <!-- JS Libraies -->
 
     <!-- Template JS File -->
-    <script src="<?= base_url() ?>/template/assets/js/scripts.js"></script>
-    <script src="<?= base_url() ?>/template/assets/js/custom.js"></script>
+    <script src="<?= base_url() ?>template/assets/js/scripts.js"></script>
+    <script src="<?= base_url() ?>template/assets/js/custom.js"></script>
 
     <!-- Page Specific JS File -->
 </body>
