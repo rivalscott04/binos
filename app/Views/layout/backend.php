@@ -13,7 +13,9 @@
 
     <!-- Template CSS (Lokal) -->
     <link rel="stylesheet" href="<?= base_url('template/assets/css/style.css') ?>">
+    <small>Debug CSS Style: <?= base_url('template/assets/css/style.css') ?></small>
     <link rel="stylesheet" href="<?= base_url('template/assets/css/components.css') ?>">
+    <small>Debug CSS Components: <?= base_url('template/assets/css/components.css') ?></small>
 </head>
 
 <body>
@@ -84,8 +86,11 @@
 
     <!-- Template JS File (Lokal) -->
     <script src="<?= base_url('template/assets/js/stisla.js') ?>"></script>
+    <small>Debug JS Stisla: <?= base_url('template/assets/js/stisla.js') ?></small>
     <script src="<?= base_url('template/assets/js/scripts.js') ?>"></script>
+    <small>Debug JS Scripts: <?= base_url('template/assets/js/scripts.js') ?></small>
     <script src="<?= base_url('template/assets/js/custom.js') ?>"></script>
+    <small>Debug JS Custom: <?= base_url('template/assets/js/custom.js') ?></small>
 </body>
 
 </html>
