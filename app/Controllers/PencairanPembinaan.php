@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\ModelPencairanPembinaan;
+use App\Models\ModelAkunPembinaan;
 use CodeIgniter\RESTful\ResourceController;
 
 class PencairanPembinaan extends ResourceController
@@ -25,24 +26,33 @@ class PencairanPembinaan extends ResourceController
     public function new(): string
     {
         $data['dtpencairan_pembinaan'] = $this->pencairanPembinaanModel->findAll();
+        var_dump($data);
         return view('pencairan/pembinaan/new', $data);
     }
 
     public function create()
     {
-        $data = $this->request->getPost('data'); // Ambil data dari form
+        $data = $this->request->getPost(); // Ambil data dari form
+        var_dump($data['perihal']);
+        // foreach ($data as $row) {
+        //     echo $row;
+        //     if (!isset($row['volume'], $row['harga_satuan'])) {
+        //         throw new \InvalidArgumentException("Kolom 'volume' dan 'harga_satuan' harus disertakan");
+        //     }
+        // }
 
         // Debugging untuk memastikan data diterima
         if (!$data) {
             log_message('error', 'Data tidak ditemukan: ' . json_encode($this->request->getPost()));
-            return redirect()->back()->with('error', 'Data tidak ditemukan atau format tidak sesuai.');
+            // return redirect()->back()->with('error', 'Data tidak ditemukan atau format tidak sesuai.');
         }
 
         try {
             $this->pencairanPembinaanModel->insertBatchWithCalculation($data);
             return redirect()->to(site_url('/pencairan/pembinaan/index'))->with('success', 'Data Berhasil Disimpan');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            // var_dump($data);
+            // return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
@@ -56,8 +66,10 @@ class PencairanPembinaan extends ResourceController
 
     public function akun()
     {
-        $akun = model(ModelAkunPembinaan::class);
-        return $this->response->setJSON($akun->findAll());
+        // $akunt = model(ModelAkunPembinaan::class);
+        $akun = new ModelAkunPembinaan();
+        // var_dump($akun->getAllAkun());
+        return $this->response->setJSON($akun->getAllAkun());
     }
 
     public function item()

@@ -9,7 +9,7 @@ class ModelPencairanPembinaan extends Model
     protected $table            = 'pencairan_pembinaan';
     protected $primaryKey       = 'id_pencairan_pembinaan';
     protected $returnType       = 'object';
-    protected $allowedFields    = [
+    protected $allowedFields    = ['akun', 'perihal', 'kode_item',
         'no_kwitansi', 'tanggal', 'kegiatan', 'rincian', 'volume', 'harga_satuan', 'jumlah'
     ];
     protected $useTimestamps    = true;
@@ -47,19 +47,26 @@ class ModelPencairanPembinaan extends Model
     {
         $processedData = [];
 
-        foreach ($data as $row) {
-            if (!isset($row['volume'], $row['harga_satuan'])) {
+        foreach ($data['volume'] as $index =>  $val) {
+            if (!isset($val)) {
                 throw new \InvalidArgumentException("Kolom 'volume' dan 'harga_satuan' harus disertakan");
             }
 
             $processedData[] = [
+                // 'tanggal' => $data['tanggal'],
+                // 'perihal' => $data['perihal'],
+                'akun' => $data['perihal'][$index],
+                'kode_item' => $data['perihal'][$index],
+                'rincian' => $data['perihal'][$index],
                 'no_kwitansi' => $this->no_kwitansi(),
-                'volume' => $row['volume'],
-                'harga_satuan' => $row['harga_satuan'],
-                'jumlah' => $row['volume'] * $row['harga_satuan'],
-            ] + $row;
+                'volume' => $data['volume'][$index],
+                'harga_satuan' => $data['harga_satuan'][$index],
+                'jumlah' => $data['volume'][$index] * $data['harga_satuan'][$index],
+            ] +$data;
         }
-
+        var_dump('ayoooo');
+        var_dump($processedData);
+        // return true;
         return $this->insertBatch($processedData);
     }
 }
