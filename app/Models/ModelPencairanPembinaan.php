@@ -64,8 +64,6 @@ class ModelPencairanPembinaan extends Model
                 'jumlah' => $data['volume'][$index] * $data['harga_satuan'][$index],
             ];
         }
-        var_dump('ayoooo');
-        var_dump($processedData);
         // return true;
         return $this->insertBatch($processedData);
     }
