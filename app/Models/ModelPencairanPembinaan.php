@@ -53,16 +53,16 @@ class ModelPencairanPembinaan extends Model
             }
 
             $processedData[] = [
-                // 'tanggal' => $data['tanggal'],
-                // 'perihal' => $data['perihal'],
-                'akun' => $data['perihal'][$index],
-                'kode_item' => $data['perihal'][$index],
+                'tanggal' => $data['tanggal'],
+                'perihal' => $data['perihal'],
+                'akun' => $data['akun'][$index],
+                'kode_item' => $data['kode_item'][$index],
                 'rincian' => $data['perihal'][$index],
                 'no_kwitansi' => $this->no_kwitansi(),
                 'volume' => $data['volume'][$index],
                 'harga_satuan' => $data['harga_satuan'][$index],
                 'jumlah' => $data['volume'][$index] * $data['harga_satuan'][$index],
-            ] +$data;
+            ];
         }
         var_dump('ayoooo');
         var_dump($processedData);
