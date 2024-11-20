@@ -116,9 +116,11 @@
 
         .th {
             border: 1px solid black;
-            /* Menambahkan border pada cell */
+            /* Menambahkan border pad
+            foa cell */
             background-color: #f2f2f2;
             font-family: Arial, sans-serif;
+            font-size: 14px;
             /* Warna latar belakang untuk header */
         }
     </style>
