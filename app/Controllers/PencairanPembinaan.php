@@ -76,7 +76,8 @@ class PencairanPembinaan extends ResourceController
     public function prints($id = null) {
         $data = $this->request->getGet();
         if($data['jenis'] == 'nodis') {
-            return view('pencairan/pembinaan/nodis', $data);
+            $isi = $this->pencairanPembinaanModel->get_detail($data['nota']);
+            return view('pencairan/pembinaan/nodis', compact('data', 'isi'));
         } elseif ($data['jenis'] == 'sptjm'){
             return view('pencairan/pembinaan/sptjm', $data);
         }elseif ($data['jenis'] == 'spp') {

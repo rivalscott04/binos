@@ -26,6 +26,8 @@
                                         style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
                                     <input type="hidden" class="form-control" name="jenis" id="jenisnya"
                                         style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
+                                        <input type="hidden" class="form-control" name="nota" value="<?= $data[0]->no_kwitansi ?>"
+                                        style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
                                 </form>
                                 </p>
 

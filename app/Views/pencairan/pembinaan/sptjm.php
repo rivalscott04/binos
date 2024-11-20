@@ -99,7 +99,7 @@
         <table class="_head">
             <tr>
                 <td class="logo">
-                    <img src="https://blog.logomyway.com/wp-content/uploads/2021/09/hogwarts-logo-main.jpg" alt="Logo"
+                    <img src="<?= base_url('template/assets/img/logo.png') ?>" alt="Logo"
                         style="width: 100px; height: auto;">
                 </td>
                 <td class="_center">

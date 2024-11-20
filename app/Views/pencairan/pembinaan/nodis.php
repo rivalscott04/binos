@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Nota Dinas</title>
+    <title>NODIS</title>
     <link rel="stylesheet" href="<?= base_url('template/assets/css/paper.min.css') ?>">
     <style>
         @page {
@@ -21,6 +22,12 @@
 
         ._center {
             text-align: center;
+            padding-left: 20px;
+        }
+
+        ._centere {
+            text-align: center;
+            padding-left: 190px;
         }
 
         ._right {
@@ -32,13 +39,13 @@
         }
 
         ._head .title {
-            font-size: 20px;
+            font-size: 25px;
             font-weight: bold;
             margin: 0;
         }
 
         ._head .subtitle {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
             margin: 0;
         }
@@ -79,101 +86,156 @@
 
         .signature {
             margin-top: 60px;
-            text-align: right;
+            margin-right: 30px;
+            margin-left: 400px;
+            text-align: center;
         }
 
         .signature p {
             margin: 0;
         }
+
+        .table {
+            border-collapse: collapse;
+            /* Menggabungkan border tabel */
+            width: 100%;
+            /* Lebar tabel 100% */
+            margin-top: 10px;
+            font-size: 12px;
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        .td {
+            border: 1px solid black;
+            /* Menambahkan border pada cell */
+            padding: 8px;
+            /* Memberikan jarak di dalam cell */
+            text-align: center;
+            /* Menyelaraskan teks ke kiri */
+        }
+
+        .th {
+            border: 1px solid black;
+            /* Menambahkan border pada cell */
+            background-color: #f2f2f2;
+            /* Warna latar belakang untuk header */
+        }
     </style>
 </head>
+
 <body class="A4">
 
-<div class="sheet padding-10mm">
+    <div class="sheet padding-10mm">
 
-    <table style="width: 100%; text-align: center; border-collapse: collapse;">
-        <tr style="display: flex; justify-content: center; align-items: center;">
-            <td class="logo" style="padding-right: 20px;">
-                <img src="https://blog.logomyway.com/wp-content/uploads/2021/09/hogwarts-logo-main.jpg" alt="Logo" style="width: 100px; height: auto;">
-            </td>
-            <td class="_center" style="flex: 1; text-align: center;">
-                <p class="title" style="font-weight: bold; font-size: 18px; margin: 5px 0;">KEMENTERIAN AGAMA REPUBLIK INDONESIA</p>
-                <p class="subtitle" style="font-size: 16px; margin: 5px 0;">KANTOR WILAYAH KEMENTERIAN AGAMA<br>PROVINSI NUSA TENGGARA BARAT</p>
-                <p class="address" style="font-size: 14px; margin: 5px 0;">Jalan Udayana No. 4, Mataram 83122 Telp (0370) 633400, Fax (0370) 632227</p>
-                <p class="url" style="font-size: 14px; margin: 5px 0;">Website: www.kemenag.go.id</p>
-            </td>
-        </tr>
-    </table>
-    
-
-    <hr/>
-
-    <div class="_main">
-        <table>
+        <table class="_head">
             <tr>
-                <td style="width: 80px">Nomor</td>
-                <td style="width: 5px">:</td>
-                <td class="_no">8710/Kw.18.1/2/KP.08/11/2024</td>
-            </tr>
-            <tr>
-                <td>Yth.</td>
-                <td>:</td>
-                <td>Kabag TU, Kabid, Pejabat, dan Ketua Tim Kerja pada Kantor Wilayah Kementerian Agama Provinsi NTB</td>
-            </tr>
-            <tr>
-                <td>Dari</td>
-                <td>:</td>
-                <td>Kepala Kantor Wilayah Kementerian Agama Provinsi NTB</td>
-            </tr>
-            <tr>
-                <td>Perihal</td>
-                <td>:</td>
-                <td>Undangan Kick Off Meeting (Rakernas) Kementerian Agama</td>
-            </tr>
-            <tr>
-                <td>Tanggal</td>
-                <td>:</td>
-                <td>11 November 2024</td>
+                <td class="_centere">
+                    <p class="subtitle">KEJAKSAAN NEGERI MATARAM</p>
+                    <p class="title">SEKSI TINDAK PIDANA UMUM</p>
+                </td>
             </tr>
         </table>
 
-        <p style="margin-top: 20px;">Dengan hormat,</p>
+        <hr />
 
-        <p class="_justify">
-            Sehubungan dengan pelaksanaan kegiatan <strong>Kick Off Meeting</strong> (Rakernas) Kementerian Agama, di lingkungan Kantor Wilayah Kementerian Agama Provinsi Nusa Tenggara Barat, dengan ini mengharap kehadiran Saudara dalam kegiatan dimaksud yang dilaksanakan pada:
-        </p>
+        <div class="_main">
+            <p class="_center" style="margin-bottom: 0px;">NOTA DINAS</p>
+            <p class="_center" style="margin-top: 0px;">NOMOR : <?= $data['no'] ?? 'kosong' ?></p>
+            <table>
+                <tr>
+                    <td style="width: 100px">Yth</td>
+                    <td style="width: 5px">:</td>
+                    <td>Kepala Kejaksaan Negeri Mataram Selaku Kuasa Pengguna Anggaran (KPA)</td>
+                </tr>
+                <tr>
+                    <td>Dari</td>
+                    <td>:</td>
+                    <td>Kepala Sub Bagian Pembinaan</td>
+                </tr>
+                <tr>
+                    <td>Tanggal</td>
+                    <td>:</td>
+                    <td>BERDASARKAN TANGGAL</td>
+                </tr>
+                <tr>
+                    <td>Sifat</td>
+                    <td>:</td>
+                    <td>Biasa</td>
+                </tr>
+                <tr>
+                    <td>Lampiran</td>
+                    <td>:</td>
+                    <td>1 (satu) Berkas</td>
+                </tr>
+                <tr>
+                    <td>Hal</td>
+                    <td>:</td>
+                    <td>Permohonan Biaya Operasional Bidang Pembinaan</td>
+                </tr>
+            </table>
 
-        <table style="margin-top: 20px;">
-            <tr>
-                <td style="width: 100px;">Hari/Tanggal</td>
-                <td style="width: 5px;">:</td>
-                <td>Selasa, 12 November 2024</td>
-            </tr>
-            <tr>
-                <td>Waktu</td>
-                <td>:</td>
-                <td>08.30 WITA s.d. selesai</td>
-            </tr>
-            <tr>
-                <td>Tempat</td>
-                <td>:</td>
-                <td>Ruang Rapat Utama Kanwil Kementerian Agama Provinsi Nusa Tenggara Barat</td>
-            </tr>
+            <p style="margin-top: 20px;">Sehubungan dengan telah dilaksanakan kegiatan Pembinaan bulan (SEPTEMBER 2024)
+                dengan ini kami mengajukan permohonan biaya pelaksanaannya sesuai dengan ketentuan yang berlaku. Apabila
+                Bapak Berkenan mohon untuk ditindaklanjuti :</p>
+            <table class="table">
+                <tr class="tr">
+                    <th class="th">No</th>
+                    <th class="th">Kode Kegiatan</th>
+                    <th class="th">Uraian Kegiatan</th>
+                    <th class="th">Rincian</th>
+                    <th class="th">Volume</th>
+                    <th class="th">Harga Satuan</th>
+                    <th class="th">Jumlah</th>
+                </tr>
+                <?php 
+            $no = 1; // Counter untuk nomor
+            foreach ($isi as $item): ?>
+                <tr>
+                    <td class="td"><?= $no++ ?></td>
+                    <td class="td"><?= $item->akun ?></td>
+                    <td class="td"><?= $item->nama_item ?></td>
+                    <td class="td"><?= $item->rincian ?></td>
+                    <td class="td"><?= $item->volume ?></td>
+                    <td class="td"><?= number_format($item->harga_satuan, 0, ',', '.') ?></td>
+                    <td class="td"><?= number_format($item->jumlah, 0, ',', '.') ?></td>
+                </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
         </table>
 
         <p class="_justify" style="margin-top: 20px;">
-            Demikian untuk dipatuhi tepat waktu. Atas perhatiannya disampaikan terima kasih.
+            Demikian untuk dimaklumi selanjutnya mohon petunjuk.
         </p>
     </div>
 
     <div class="signature">
-        <p>Hormat kami,</p>
-        <p>Kepala Kantor Wilayah</p>
-        <br><br><br><br>
-        <p><strong>H. Zamroni Aziz</strong></p>
+        <p>Kepala Sub Bagian Pembinaan</p>
+        <br><br><br>
+        <p style="text-decoration: underline;"><strong>Junaedi, S.H., M.H.</strong></p>
+        <p>Adi Wira NIP.196812311989031011</p>
     </div>
 
-</div>
+    <table>
+        <p>Tembusan :</p>
+        <tr>
+            <td style="width: 10px">1.</td>
+            <td>Yth. Kepala Kejaksaan Negeri Mataram (Sebagai Laporan)</td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td>Yth. Kepala Sub Bagian Pembinaan</td>
+        </tr>
+        <tr>
+            <td>3.</td>
+            <td>Arsip</td>
+        </tr>
+    </table>
+
+
+    </div>
 
 </body>
+
 </html>
