@@ -246,7 +246,7 @@
             echo strftime('%d %B %Y');
             ?> </p>
             <p>Kepala Sub Bagian Pembinaan</p>
-            <br><br><br><br>
+            <br><br>
             <p style="text-decoration: underline;"><strong>Junaedi, S.H., M.H.</strong></p>
             <p>Adi Wira NIP.196812311989031011</p>
         </div>
