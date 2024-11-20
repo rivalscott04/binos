@@ -114,7 +114,12 @@
                 <tr>
                     <td>Tanggal</td>
                     <td>:</td>
-                    <td>BERDASARKAN TANGGAL</td>
+                    <td>
+                    <?php
+                        setlocale(LC_TIME, 'id_ID.UTF-8');
+                        echo strftime('%d %B %Y');
+                    ?>
+                    </td>
                 </tr>
                 <tr>
                     <td>Jenis Pembayaran</td>
