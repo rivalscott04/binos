@@ -208,33 +208,34 @@
         <p class="_justify" style="margin-top: 20px;">
             Demikian untuk dimaklumi selanjutnya mohon petunjuk.
         </p>
+
+
+        <div class="signature">
+            <p>Kepala Sub Bagian Pembinaan</p>
+            <br><br><br>
+            <p style="text-decoration: underline;"><strong>Junaedi, S.H., M.H.</strong></p>
+            <p>Adi Wira NIP.196812311989031011</p>
+        </div>
+
+        <table>
+            <p>Tembusan :</p>
+            <tr>
+                <td style="width: 10px">1.</td>
+                <td>Yth. Kepala Kejaksaan Negeri Mataram (Sebagai Laporan)</td>
+            </tr>
+            <tr>
+                <td>2.</td>
+                <td>Yth. Kepala Sub Bagian Pembinaan</td>
+            </tr>
+            <tr>
+                <td>3.</td>
+                <td>Arsip</td>
+            </tr>
+        </table>
     </div>
 
-    <div class="signature">
-        <p>Kepala Sub Bagian Pembinaan</p>
-        <br><br><br>
-        <p style="text-decoration: underline;"><strong>Junaedi, S.H., M.H.</strong></p>
-        <p>Adi Wira NIP.196812311989031011</p>
-    </div>
-
-    <table>
-        <p>Tembusan :</p>
-        <tr>
-            <td style="width: 10px">1.</td>
-            <td>Yth. Kepala Kejaksaan Negeri Mataram (Sebagai Laporan)</td>
-        </tr>
-        <tr>
-            <td>2.</td>
-            <td>Yth. Kepala Sub Bagian Pembinaan</td>
-        </tr>
-        <tr>
-            <td>3.</td>
-            <td>Arsip</td>
-        </tr>
-    </table>
 
 
-    </div>
 
 </body>
 
