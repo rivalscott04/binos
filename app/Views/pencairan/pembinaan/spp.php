@@ -162,7 +162,7 @@
     <thead>
         <tr>
             <th rowspan="2">KEGIATAN</th>
-            <th rowspan="2">PAGU DALAM DIPA</th>
+            <th rowspan="2" font-size="12px">PAGU DALAM DIPA</th>
             <th rowspan="2">SPP S.D BULAN LALU</th>
             <th rowspan="2">SPP BULAN INI</th>
             <th rowspan="2">JUMLAH SPP S.D BULAN INI</th>
