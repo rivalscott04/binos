@@ -131,7 +131,7 @@
             <tr>
                 <td class="_centere">
                     <p class="subtitle">KEJAKSAAN NEGERI MATARAM</p>
-                    <p class="title">SEKSI TINDAK PIDANA UMUM</p>
+                    <p class="title">SUB BAGIAN PEMBINAAN</p>
                 </td>
             </tr>
         </table>
@@ -155,7 +155,12 @@
                 <tr>
                     <td>Tanggal</td>
                     <td>:</td>
-                    <td>BERDASARKAN TANGGAL</td>
+                    <td>
+                        <?php
+                            setlocale(LC_TIME, 'id_ID.UTF-8');
+                            echo strftime('%d %B %Y'); 
+                        ?>         
+                    </td>
                 </tr>
                 <tr>
                     <td>Sifat</td>
@@ -174,7 +179,10 @@
                 </tr>
             </table>
 
-            <p style="margin-top: 20px;">Sehubungan dengan telah dilaksanakan kegiatan Pembinaan bulan (SEPTEMBER 2024)
+            <p style="margin-top: 20px;">Sehubungan dengan telah dilaksanakan kegiatan Pembinaan bulan <?php
+                            setlocale(LC_TIME, 'id_ID.UTF-8');
+                            echo strftime('%B %Y'); 
+                        ?>     
                 dengan ini kami mengajukan permohonan biaya pelaksanaannya sesuai dengan ketentuan yang berlaku. Apabila
                 Bapak Berkenan mohon untuk ditindaklanjuti :</p>
             <table class="table">
@@ -212,7 +220,8 @@
 
         <div class="signature">
             <p>Kepala Sub Bagian Pembinaan</p>
-            <br><br><br>
+            <img src="<?= base_url('template/assets/img/key.png') ?>" alt="Logo"
+                        style="width: 100px; height: auto;">
             <p style="text-decoration: underline;"><strong>Junaedi, S.H., M.H.</strong></p>
             <p>Adi Wira NIP.196812311989031011</p>
         </div>
