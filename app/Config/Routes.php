@@ -23,6 +23,8 @@ $routes->delete('/akun/pembinaan/index/(:num)', 'Akun::delete/$1');
 //PENCAIRAN PEMBINAAN
 $routes->get('/pencairan/pembinaan/index', 'PencairanPembinaan::index');
 $routes->get('/pencairan/pembinaan/new', 'PencairanPembinaan::new');
+$routes->get('/pencairan/pembinaan/prints', 'PencairanPembinaan::prints');
+$routes->get('/pencairan/pembinaan/detail/(:num)', 'PencairanPembinaan::detail/$1');
 $routes->post('/pencairan/pembinaan/index', 'PencairanPembinaan::create'); //MENGIRIMKAN DATA NEW 
 
 $routes->get('/pencairan/pembinaan/edit/(:num)', 'PencairanPembinaan::edit/$1');

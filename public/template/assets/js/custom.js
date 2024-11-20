@@ -12,6 +12,12 @@ function hapus(id){
     $('#del-'+id).submit();
 }
 
+function prints(id){
+    console.log(id);
+    document.getElementById('jenisnya').value = id;
+    $('#prints').submit();
+}
+
 //Pagination 
 $(document).ready(function(){
     $('#myTable').DataTable();

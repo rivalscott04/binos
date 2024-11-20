@@ -57,7 +57,7 @@
                                     <td><?= $value->perihal ?></td>
                                     <td class="text text-center">
                                         <!-- DETAIL -->
-                                        <a href="<?= site_url('pencairan/pembinaan/detail/' . $value->id_pencairan_pembinaan) ?>" class="btn btn-warning"><i class="fa-solid fa-eye"></i></a>
+                                        <a href="<?= site_url('pencairan/pembinaan/detail/' . $value->no_kwitansi) ?>" class="btn btn-warning"><i class="fa-solid fa-eye"></i></a>
                                         <!-- EDIT -->
                                         <button type="button" class="btn btn-warning edit-btn" data-id="<?= $value->id_pencairan_pembinaan ?>" data-no_kwitansi="<?= $value->no_kwitansi ?>" data-tanggal="<?= $value->tanggal ?>" data-akun="<?= $value->akun ?>" data-kode_item="<?= $value->kode_item ?>" data-perihal="<?= $value->perihal ?>" data-rincian="<?= $value->rincian ?>" data-volume="<?= $value->volume ?>" data-harga_satuan="<?= $value->harga_satuan ?>" data-toggle="modal" data-target="#editModal"><i class="fa-regular fa-pen-to-square"></i></button>
                                         <!-- DELETE -->

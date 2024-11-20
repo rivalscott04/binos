@@ -28,6 +28,12 @@ class PencairanPembinaan extends ResourceController
         $data['dtpencairan_pembinaan'] = $this->pencairanPembinaanModel->findAll();
         return view('pencairan/pembinaan/new', $data);
     }
+    public function detail($id =null)
+    {
+        $data['data'] = $this->pencairanPembinaanModel->get_detail($id);
+        // var_dump($data['data'][0]['tanggal']);
+        return view('pencairan/pembinaan/detail', $data);
+    }
 
     public function create()
     {
@@ -65,6 +71,18 @@ class PencairanPembinaan extends ResourceController
             return redirect()->to(site_url('/pencairan/pembinaan/index'))->with('success', 'Data Berhasil Diubah');
         }
         return redirect()->back()->with('error', 'Gagal mengubah data.');
+    }
+
+    public function prints($id = null) {
+        $data = $this->request->getGet();
+        if($data['jenis'] == 'nodis') {
+            return view('pencairan/pembinaan/nodis', $data);
+        } elseif ($data['jenis'] == 'sptjm'){
+            return view('pencairan/pembinaan/sptjm', $data);
+        }elseif ($data['jenis'] == 'spp') {
+            return view('pencairan/pembinaan/spp', $data);
+        }
+        var_dump($data);
     }
 
     public function akun()

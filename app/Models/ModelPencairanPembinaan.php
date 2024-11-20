@@ -82,4 +82,11 @@ class ModelPencairanPembinaan extends Model
         ];
         return $this->update($id, $processedData);
     }
+
+    public function get_detail($kode) {
+        return $this->select('pencairan_pembinaan.*, akun_pembinaan.nama_item, akun_pembinaan.akun')
+                    ->join('akun_pembinaan', 'akun_pembinaan.kode_item = pencairan_pembinaan.kode_item')
+                    ->where('pencairan_pembinaan.no_kwitansi',$kode)
+                    ->findAll();
+    }
 }
