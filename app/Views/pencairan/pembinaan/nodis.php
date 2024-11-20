@@ -118,6 +118,7 @@
             border: 1px solid black;
             /* Menambahkan border pada cell */
             background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
             /* Warna latar belakang untuk header */
         }
     </style>
