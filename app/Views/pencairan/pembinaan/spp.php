@@ -162,7 +162,7 @@
     <thead>
         <tr>
             <th rowspan="2">KEGIATAN</th>
-            <th rowspan="2" font-size="12px">PAGU DALAM DIPA</th>
+            <th rowspan="2">PAGU DALAM DIPA</th>
             <th rowspan="2">SPP S.D BULAN LALU</th>
             <th rowspan="2">SPP BULAN INI</th>
             <th rowspan="2">JUMLAH SPP S.D BULAN INI</th>
@@ -226,14 +226,6 @@
         </tr>
         <tr>
             <td style="padding-left: 60px;">521211 - Belanja Bahan</td>
-            <td>88,400,000</td>
-            <td>39,135,760</td>
-            <td>9,975,000</td>
-            <td>49,110,760</td>
-            <td>39,289,240</td>
-        </tr>
-        <tr>
-            <td style="padding-left: 80px;">000197 - Cetak Spanduk / Jilid / Copy</td>
             <td>88,400,000</td>
             <td>39,135,760</td>
             <td>9,975,000</td>
