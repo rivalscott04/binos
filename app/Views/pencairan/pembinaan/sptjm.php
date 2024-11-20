@@ -167,7 +167,10 @@
         </div>
 
         <div class="signature">
-            <p>Mataram, (TANGGAL PRINT)</p>
+            <p>Mataram, <?php
+                            setlocale(LC_TIME, 'id_ID.UTF-8');
+                            echo strftime('%d %B %Y'); 
+                        ?>     </p>
             <p>Kepala Sub Bagian Pembinaan</p>
             <br><br><br><br>
             <p style="text-decoration: underline;"><strong>Junaedi, S.H., M.H.</strong></p>
