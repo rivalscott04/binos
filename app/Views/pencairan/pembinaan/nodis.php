@@ -131,7 +131,7 @@
             <tr>
                 <td class="_centere">
                     <p class="subtitle">KEJAKSAAN NEGERI MATARAM</p>
-                    <p class="title">SEKSI TINDAK PIDANA UMUM</p>
+                    <p class="title">SUB BAGIAN PEMBINAAN</p>
                 </td>
             </tr>
         </table>
