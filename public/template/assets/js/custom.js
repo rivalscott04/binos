@@ -9,7 +9,7 @@
 
 // Fungsi Hapus
 function hapus(id){
-    $('#del-'+id),submit();
+    $('#del-'+id).submit();
 }
 
 //Pagination 
