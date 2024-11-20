@@ -212,7 +212,8 @@
 
         <div class="signature">
             <p>Kepala Sub Bagian Pembinaan</p>
-            <br><br><br>
+            <img src="<?= base_url('template/assets/img/logo.png') ?>" alt="Logo"
+                        style="width: 100px; height: auto;">
             <p style="text-decoration: underline;"><strong>Junaedi, S.H., M.H.</strong></p>
             <p>Adi Wira NIP.196812311989031011</p>
         </div>
