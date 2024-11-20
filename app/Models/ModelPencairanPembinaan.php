@@ -9,7 +9,7 @@ class ModelPencairanPembinaan extends Model
     protected $table = 'pencairan_pembinaan';
     protected $primaryKey = 'id_pencairan_pembinaan';
     protected $returnType = 'object';
-    protected $allowedFields = ['akun', 'perihal', 'kode_item', 'no_kwitansi', 'tanggal', 'kegiatan', 'rincian', 'volume', 'harga_satuan', 'jumlah'];
+    protected $allowedFields = ['akun', 'perihal', 'kode_item', 'no_surat', 'no_kwitansi', 'tanggal', 'kegiatan', 'rincian', 'volume', 'harga_satuan', 'jumlah'];
     protected $useTimestamps = true;
 
     /**
@@ -83,10 +83,16 @@ class ModelPencairanPembinaan extends Model
         return $this->update($id, $processedData);
     }
 
-    public function get_detail($kode) {
-        return $this->select('pencairan_pembinaan.*, akun_pembinaan.nama_item, akun_pembinaan.akun')
-                    ->join('akun_pembinaan', 'akun_pembinaan.kode_item = pencairan_pembinaan.kode_item')
-                    ->where('pencairan_pembinaan.no_kwitansi',$kode)
-                    ->findAll();
+    public function updateNomor(string $id, string $no): bool
+    {
+        $data = [
+            'kegiatan' => $no,
+        ];
+        return $this->where('no_kwitansi', $id)->update($data);
+    }
+
+    public function get_detail($kode)
+    {
+        return $this->select('pencairan_pembinaan.*, akun_pembinaan.nama_item, akun_pembinaan.akun')->join('akun_pembinaan', 'akun_pembinaan.kode_item = pencairan_pembinaan.kode_item')->where('pencairan_pembinaan.no_kwitansi', $kode)->findAll();
     }
 }

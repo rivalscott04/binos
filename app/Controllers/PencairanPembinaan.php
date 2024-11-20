@@ -74,16 +74,19 @@ class PencairanPembinaan extends ResourceController
     }
 
     public function prints($id = null) {
+        $sekarang = $this->formatTanggalIndonesia(date('d-m-Y'));
         $data = $this->request->getGet();
+        $cek = $this->pencairanPembinaanModel->where('no_kwitansi', $data['nota'])->set(['no_surat' => $data['no']])->update();//updateNomor($data['nota'], $data['no']);
+
         if($data['jenis'] == 'nodis') {
             $isi = $this->pencairanPembinaanModel->get_detail($data['nota']);
-            return view('pencairan/pembinaan/nodis', compact('data', 'isi'));
+            return view('pencairan/pembinaan/nodis', compact('data', 'isi','sekarang'));
         } elseif ($data['jenis'] == 'sptjm'){
-            return view('pencairan/pembinaan/sptjm', $data);
+            return view('pencairan/pembinaan/sptjm', compact('data', 'sekarang'));
         }elseif ($data['jenis'] == 'spp') {
-            return view('pencairan/pembinaan/spp', $data);
+            return view('pencairan/pembinaan/spp', compact('data', 'sekarang'));
         }
-        var_dump($data);
+        var_dump($cek);
     }
 
     public function akun()
@@ -98,5 +101,30 @@ class PencairanPembinaan extends ResourceController
     {
         $akun = model(ModelAkunPembinaan::class);
         return $this->response->setJSON($akun->findAll());
+    }
+
+    public function formatTanggalIndonesia($tanggal)
+    {
+        $bulan = [
+            1 => 'Januari',
+            2 => 'Februari',
+            3 => 'Maret',
+            4 => 'April',
+            5 => 'Mei',
+            6 => 'Juni',
+            7 => 'Juli',
+            8 => 'Agustus',
+            9 => 'September',
+            10 => 'Oktober',
+            11 => 'November',
+            12 => 'Desember',
+        ];
+
+        $tanggalObj = new \DateTime($tanggal); // Pastikan format inputnya valid
+        $hari = $tanggalObj->format('j'); // Hari (tanpa leading zero)
+        $bulanIndo = $bulan[(int) $tanggalObj->format('n')]; // Bulan dalam Bahasa Indonesia
+        $tahun = $tanggalObj->format('Y'); // Tahun
+
+        return "$hari $bulanIndo $tahun";
     }
 }

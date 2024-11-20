@@ -22,7 +22,7 @@
                                 <h4 class="text text-center ">NOTA DINAS</h4>
                                 <p class="text text-center">NOMOR:
                                 <form action="<?= site_url('pencairan/pembinaan/prints') ?>" method="get" id="prints">
-                                    <input type="text" class="form-control" name="no" required
+                                    <input type="text" class="form-control" name="no" value="<?= $data[0]->no_surat  ?>"
                                         style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
                                     <input type="hidden" class="form-control" name="jenis" id="jenisnya"
                                         style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">

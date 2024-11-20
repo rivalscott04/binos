@@ -99,7 +99,7 @@
         <table class="_head">
             <tr>
                 <td class="logo">
-                    <img src="<?= base_url('template/assets/img/logo.png') ?>" alt="Logo"
+                    <img src="<?= base_url('img/logo.png') ?>" alt="Logo"
                         style="width: 100px; height: auto;">
                 </td>
                 <td class="_center">
@@ -167,7 +167,7 @@
         </div>
 
         <div class="signature">
-            <p>Mataram, (TANGGAL PRINT)</p>
+            <p>Mataram, <?= $sekarang ?></p>
             <p>Kepala Sub Bagian Pembinaan</p>
             <br><br><br><br>
             <p style="text-decoration: underline;"><strong>Junaedi, S.H., M.H.</strong></p>
