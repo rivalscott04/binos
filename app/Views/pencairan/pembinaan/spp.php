@@ -153,28 +153,91 @@
                 </tr>
             </table>
 
-            <table class="table">
-                <tr class="tr">
-                    <th class="th">KODE</th>
-                    <th class="th">URAIAN KEGIATAN</th>
-                    <th class="th">PAGU DALAM DIPA</th>
-                    <th class="th">SPP S.D BULAN LALU</th>
-                    <th class="th">SPP BULAN INI</th>
-                    <th class="th">SPP S.D BULAN INI</th>
-                    <th class="th">JUMLAH SPP S.D BULAN INI</th>
-                    <th class="th">SISA PAGU</th>
-                </tr>
-                <tr>
-                    <td class="td">ISI</td>
-                    <td class="td">ISI</td>
-                    <td class="td">ISI</td>
-                    <td class="td">ISI</td>
-                    <td class="td">ISI</td>
-                    <td class="td">ISI</td>
-                    <td class="td">ISI</td>
-                    <td class="td">ISI</td>
-                </tr>
-            </table>
+            <table border="1" style="border-collapse: collapse; width: 100%; text-align: left;">
+    <thead>
+        <tr>
+            <th rowspan="2">KEGIATAN</th>
+            <th rowspan="2">PAGU DALAM DIPA</th>
+            <th rowspan="2">SPP S.D BULAN LALU</th>
+            <th rowspan="2">SPP BULAN INI</th>
+            <th rowspan="2">JUMLAH SPP S.D BULAN INI</th>
+            <th rowspan="2">SISA</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="6"><strong>CCL.051 - Penambahan Layanan Internet, Instalasi, Jaringan dan Langganan Vsat</strong></td>
+        </tr>
+        <tr>
+            <td style="padding-left: 20px;">051 - Pelaksanaan</td>
+            <td>47,000,000</td>
+            <td>38,035,280</td>
+            <td>4,027,080</td>
+            <td>42,062,360</td>
+            <td>4,937,640</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 40px;">051.0A - Langganan Jaringan Internet</td>
+            <td>47,000,000</td>
+            <td>38,035,280</td>
+            <td>4,027,080</td>
+            <td>42,062,360</td>
+            <td>4,937,640</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 60px;">522191 - Belanja Jasa Lainnya</td>
+            <td>47,000,000</td>
+            <td>38,035,280</td>
+            <td>4,027,080</td>
+            <td>42,062,360</td>
+            <td>4,937,640</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 80px;">000116 - Layanan Internet Kantor</td>
+            <td>47,000,000</td>
+            <td>38,035,280</td>
+            <td>4,027,080</td>
+            <td>42,062,360</td>
+            <td>4,937,640</td>
+        </tr>
+        <tr>
+            <td colspan="6"><strong>EBA.962 - Layanan Umum</strong></td>
+        </tr>
+        <tr>
+            <td style="padding-left: 20px;">053 - Layanan Dukungan Manajemen Satker</td>
+            <td>88,400,000</td>
+            <td>39,135,760</td>
+            <td>9,975,000</td>
+            <td>49,110,760</td>
+            <td>39,289,240</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 40px;">053.0A - Pengadaan, Cetak dan Jilid</td>
+            <td>88,400,000</td>
+            <td>39,135,760</td>
+            <td>9,975,000</td>
+            <td>49,110,760</td>
+            <td>39,289,240</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 60px;">521211 - Belanja Bahan</td>
+            <td>88,400,000</td>
+            <td>39,135,760</td>
+            <td>9,975,000</td>
+            <td>49,110,760</td>
+            <td>39,289,240</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 80px;">000197 - Cetak Spanduk / Jilid / Copy</td>
+            <td>88,400,000</td>
+            <td>39,135,760</td>
+            <td>9,975,000</td>
+            <td>49,110,760</td>
+            <td>39,289,240</td>
+        </tr>
+    </tbody>
+</table>
+
         </div>
 
         <div class="signature">
