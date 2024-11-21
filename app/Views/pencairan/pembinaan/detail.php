@@ -20,20 +20,22 @@
                     <div class="form-group">
                         <table class="table">
                             <tbody style="margin: 0px;">
-                                <h4 class="text text-center ">NOTA DINAS</h4>
                                 <tr>
-                                <th>NOMOR</th>
-                                <td>:</td>
+                                    <th>NOMOR</th>
+                                        <td>NOTA DINAS:</td>
                                 </tr>
-                                <form action="<?= site_url('pencairan/pembinaan/prints') ?>" method="get" id="prints">
-                                    <input type="text" class="form-control" name="no" value="<?= $data[0]->no_surat  ?>"
-                                        style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
-                                    <input type="hidden" class="form-control" name="jenis" id="jenisnya"
-                                        style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
-                                        <input type="hidden" class="form-control" name="nota" value="<?= $data[0]->no_kwitansi ?>"
-                                        style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
-                                </form>
-                                </p>
+                                <tr>
+                                        <td> 
+                                            <form action="<?= site_url('pencairan/pembinaan/prints') ?>" method="get" id="prints">
+                                            <input type="text" class="form-control" name="no" value="<?= $data[0]->no_surat  ?>"
+                                            style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
+                                            <input type="hidden" class="form-control" name="jenis" id="jenisnya"
+                                            style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
+                                            <input type="hidden" class="form-control" name="nota" value="<?= $data[0]->no_kwitansi ?>"
+                                            style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
+                                            </form>
+                                        </td>
+                                </tr>
 
                                 <tr>
                                     <th>Yth</th>
