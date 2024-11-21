@@ -21,7 +21,10 @@
                         <table class="table">
                             <tbody style="margin: 0px;">
                                 <h4 class="text text-center ">NOTA DINAS</h4>
-                                <p class="text text-center">NOMOR:
+                                <tr>
+                                <th>NOMOR</th>
+                                <td>:</td>
+                                </tr>
                                 <form action="<?= site_url('pencairan/pembinaan/prints') ?>" method="get" id="prints">
                                     <input type="text" class="form-control" name="no" value="<?= $data[0]->no_surat  ?>"
                                         style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
