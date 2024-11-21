@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>NODIS</title>
+    <title>NOTA DINAS</title>
     <link rel="stylesheet" href="<?= base_url('template/assets/css/paper.min.css') ?>">
     <style>
         @page {
