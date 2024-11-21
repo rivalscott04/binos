@@ -143,7 +143,7 @@
 
         <div class="_main">
             <p class="_center" style="margin-bottom: 0px;">NOTA DINAS</p>
-            <p class="_center" style="margin-top: 0px;">NOMOR : ND-<?= $isi[0]->no_surat ?? 'kosong' ?>/N.2.10.3/Es.3/10/2024</p>
+            <p class="_center" style="margin-top: 0px;">NOMOR : ND-<?= $isi[0]->no_surat ?? 'kosong' ?>/N.2.10.1/Cu.1/10/2024</p>
             <table>
                 <tr>
                     <td style="width: 100px">Yth</td>
