@@ -101,7 +101,7 @@
             width: 100%;
             /* Lebar tabel 100% */
             margin-top: 10px;
-            font-size: 12px;
+            font-size: 15px;
             font-family: "Times New Roman", Times, serif;
         }
 
@@ -120,7 +120,7 @@
             foa cell */
             background-color: #f2f2f2;
             font-family: Arial, sans-serif;
-            font-size: 14px;
+            font-size: 15px;
             /* Warna latar belakang untuk header */
         }
     </style>
@@ -160,9 +160,9 @@
                     <td>:</td>
                     <td>
                         <?php
-                            setlocale(LC_TIME, 'id_ID.UTF-8');
-                            echo strftime('%d %B %Y'); 
-                        ?>         
+                        setlocale(LC_TIME, 'id_ID.UTF-8');
+                        echo strftime('%d %B %Y');
+                        ?>
                     </td>
                 </tr>
                 <tr>
@@ -182,10 +182,10 @@
                 </tr>
             </table>
 
-            <p style="margin-top: 20px;">Sehubungan dengan telah dilaksanakan kegiatan Pembinaan bulan <?php
-                            setlocale(LC_TIME, 'id_ID.UTF-8');
-                            echo strftime('%B %Y'); 
-                        ?>     
+            <p style="margin-top: 20px; font-size: 14px;">Sehubungan dengan telah dilaksanakan kegiatan Pembinaan bulan <?php
+                                                                                                                        setlocale(LC_TIME, 'id_ID.UTF-8');
+                                                                                                                        echo strftime('%B %Y');
+                                                                                                                        ?>
                 dengan ini kami mengajukan permohonan biaya pelaksanaannya sesuai dengan ketentuan yang berlaku. Apabila
                 Bapak Berkenan mohon untuk ditindaklanjuti :</p>
             <table class="table">
@@ -198,25 +198,25 @@
                     <th class="th">Harga Satuan</th>
                     <th class="th">Jumlah</th>
                 </tr>
-                <?php 
-            $no = 1; // Counter untuk nomor
-            foreach ($isi as $item): ?>
-                <tr>
-                    <td class="td"><?= $no++ ?></td>
-                    <td class="td"><?= $item->akun ?></td>
-                    <td class="td"><?= $item->nama_item ?></td>
-                    <td class="td"><?= $item->rincian ?></td>
-                    <td class="td"><?= $item->volume ?></td>
-                    <td class="td"><?= number_format($item->harga_satuan, 0, ',', '.') ?></td>
-                    <td class="td"><?= number_format($item->jumlah, 0, ',', '.') ?></td>
-                </tr>
+                <?php
+                $no = 1; // Counter untuk nomor
+                foreach ($isi as $item): ?>
+                    <tr>
+                        <td class="td"><?= $no++ ?></td>
+                        <td class="td"><?= $item->akun ?></td>
+                        <td class="td"><?= $item->nama_item ?></td>
+                        <td class="td"><?= $item->rincian ?></td>
+                        <td class="td"><?= $item->volume ?></td>
+                        <td class="td"><?= number_format($item->harga_satuan, 0, ',', '.') ?></td>
+                        <td class="td"><?= number_format($item->jumlah, 0, ',', '.') ?></td>
+                    </tr>
                 <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
         </table>
 
-        <p class="_justify" style="margin-top: 20px;">
+        <p style="margin-top: 20px; font-size: 14px;">
             Demikian untuk dimaklumi selanjutnya mohon petunjuk.
         </p>
 
@@ -224,7 +224,7 @@
         <div class="signature">
             <p>Kepala Sub Bagian Pembinaan</p>
             <img src="<?= base_url('template/assets/img/key.png') ?>" alt="Logo"
-                        style="width: 100px; height: auto;">
+                style="width: 100px; height: auto;">
             <p style="text-decoration: underline;"><strong>Junaedi, S.H., M.H.</strong></p>
             <p>Adi Wira NIP.196812311989031011</p>
         </div>
