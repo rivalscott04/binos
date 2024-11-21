@@ -43,18 +43,18 @@ form#prints input[type="hidden"] {
                         <table class="table">
                             <tbody style="margin: 0px;">
                             <tr>
-    <th>NOMOR</th>
-    <td>
-        <form action="<?= site_url('pencairan/pembinaan/prints') ?>" method="get" id="prints" style="display: inline-block;">
-            <input type="text" class="form-control" name="no" value="<?= $data[0]->no_surat ?>" 
-                   style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
-            <input type="hidden" class="form-control" name="jenis" id="jenisnya" 
-                   style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
-            <input type="hidden" class="form-control" name="nota" value="<?= $data[0]->no_kwitansi ?>" 
-                   style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
-        </form>
-    </td>
-</tr>
+                                 <th>Nomor Nota Dinas</th>
+                                <td>
+                                <form action="<?= site_url('pencairan/pembinaan/prints') ?>" method="get" id="prints" style="display: inline-block;">
+                                    <input type="text" class="form-control" name="no" value="<?= $data[0]->no_surat ?>" 
+                                        style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
+                                    <input type="hidden" class="form-control" name="jenis" id="jenisnya" 
+                                        style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
+                                    <input type="hidden" class="form-control" name="nota" value="<?= $data[0]->no_kwitansi ?>" 
+                                        style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
+                                </form>
+                                </td>
+                            </tr>
 
 
                                 <tr>
