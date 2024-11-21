@@ -1,7 +1,29 @@
 <?= $this->extend('layout/backend') ?>;
 
 <?= $this->section('content') ?>;
+<style>
+    form#prints {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+}
 
+form#prints input[type="text"] {
+    display: inline-block;
+    width: 100%; /* Ubah sesuai kebutuhan */
+    margin: 0;
+    padding: 5px;
+    box-sizing: border-box;
+    font-size: 14px; /* Sesuaikan dengan font elemen lainnya */
+    vertical-align: middle;
+}
+
+form#prints input[type="hidden"] {
+    display: none; /* Sembunyikan elemen hidden */
+}
+
+</style>
 <section class="section">
     <div class="section-header">
         <h1>DETAIL TRANSAKSI PEMBINAAN</h1>
@@ -20,22 +42,20 @@
                     <div class="form-group">
                         <table class="table">
                             <tbody style="margin: 0px;">
-                                <tr>
-                                    <th>NOMOR</th>
-                                        <td>NOTA DINAS:</td>
-                                </tr>
-                                <tr>
-                                        <td> 
-                                            <form action="<?= site_url('pencairan/pembinaan/prints') ?>" method="get" id="prints">
-                                            <input type="text" class="form-control" name="no" value="<?= $data[0]->no_surat  ?>"
-                                            style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
-                                            <input type="hidden" class="form-control" name="jenis" id="jenisnya"
-                                            style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
-                                            <input type="hidden" class="form-control" name="nota" value="<?= $data[0]->no_kwitansi ?>"
-                                            style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
-                                            </form>
-                                        </td>
-                                </tr>
+                            <tr>
+    <th>NOMOR</th>
+    <td>
+        <form action="<?= site_url('pencairan/pembinaan/prints') ?>" method="get" id="prints" style="display: inline-block;">
+            <input type="text" class="form-control" name="no" value="<?= $data[0]->no_surat ?>" 
+                   style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
+            <input type="hidden" class="form-control" name="jenis" id="jenisnya" 
+                   style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
+            <input type="hidden" class="form-control" name="nota" value="<?= $data[0]->no_kwitansi ?>" 
+                   style="display: inline-block; width: auto; vertical-align: middle; margin-left: 5px;">
+        </form>
+    </td>
+</tr>
+
 
                                 <tr>
                                     <th>Yth</th>
