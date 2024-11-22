@@ -91,7 +91,7 @@ class ModelPencairanPembinaan extends Model
         if ($cek == 1) {
             $pagu = $model->where('kode_item', $lokasi)->get()->getResultArray();
     
-            if (!empty($pagu) && $pagu[0]['jumlah_pagu'] >= $jumlah) {
+            if (!empty($pagu) && ($pagu[0]['jumlah_terpakai'] + $jumlah) <= $pagu[0]['jumlah_pagu']) {
                 // Jika saldo mencukupi, update jumlah_realisasi
                 $model->where('kode_item', $lokasi)
                     ->set('jumlah_terpakai', "jumlah_terpakai + $jumlah", false) // false untuk raw query
