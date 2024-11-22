@@ -31,7 +31,9 @@ class PencairanPembinaan extends ResourceController
     public function detail($id =null)
     {
         $data['data'] = $this->pencairanPembinaanModel->get_detail($id);
+        // var_dump($data['data'][0]->no_surat);
         // var_dump($data['data'][0]['tanggal']);
+        var_dump($data['data']);
         return view('pencairan/pembinaan/detail', $data);
     }
 
@@ -76,17 +78,19 @@ class PencairanPembinaan extends ResourceController
     public function prints($id = null) {
         $sekarang = $this->formatTanggalIndonesia(date('d-m-Y'));
         $data = $this->request->getGet();
-        $cek = $this->pencairanPembinaanModel->where('no_kwitansi', $data['nota'])->set(['no_surat' => $data['no']])->update();//updateNomor($data['nota'], $data['no']);
-
+        // var_dump($data);
+        $cek = $this->pencairanPembinaanModel->where('no_kwitansi', $data['nota'])->set(['no_surat' => $data['nomor'], 'tgl_surat' => $data['tanggal']])->update();//updateNomor($data['nota'], $data['no']);
+        
         if($data['jenis'] == 'nodis') {
             $isi = $this->pencairanPembinaanModel->get_detail($data['nota']);
+            var_dump($isi);
             return view('pencairan/pembinaan/nodis', compact('data', 'isi','sekarang'));
         } elseif ($data['jenis'] == 'sptjm'){
             return view('pencairan/pembinaan/sptjm', compact('data', 'sekarang'));
         }elseif ($data['jenis'] == 'spp') {
             return view('pencairan/pembinaan/spp', compact('data', 'sekarang'));
         }
-        var_dump($cek);
+        // var_dump($cek);
     }
 
     public function akun()

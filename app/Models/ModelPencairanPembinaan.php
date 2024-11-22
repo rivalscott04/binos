@@ -9,7 +9,7 @@ class ModelPencairanPembinaan extends Model
     protected $table = 'pencairan_pembinaan';
     protected $primaryKey = 'id_pencairan_pembinaan';
     protected $returnType = 'object';
-    protected $allowedFields = ['akun', 'perihal', 'kode_item', 'no_surat', 'no_kwitansi', 'tanggal', 'kegiatan', 'rincian', 'volume', 'harga_satuan', 'jumlah'];
+    protected $allowedFields = ['akun', 'perihal', 'kode_item', 'no_surat', 'tgl_surat', 'no_kwitansi', 'tanggal', 'kegiatan', 'rincian', 'volume', 'harga_satuan', 'jumlah'];
     protected $useTimestamps = true;
 
     /**

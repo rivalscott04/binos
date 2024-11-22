@@ -144,6 +144,19 @@ $routes->post('/master/item/index/(:num)', 'AkunItem::delete/$1');
 $routes->delete('/master/item/index/(:num)', 'AkunItem::delete/$1');
 
 
+//ROUTE AKUN MASTER AKUN
+$routes->get('/master/pagu/index', 'PaguAnggaran::index'); //MENAMPILKAN HALAMAN AKUN AKUN
+$routes->get('/master/pagu/new', 'PaguAnggaran::new'); //MENAMPILKAN HALAMAN NEW AKUN
+$routes->post('/master/pagu/index', 'PaguAnggaran::create'); //MENGIRIMKAN DATA NEW AKUN
+//EDIT DATA AKUN AKUN
+$routes->get('/master/pagu/(:num)/edit', 'PaguAnggaran::edit/$1');
+$routes->post('/master/pagu/edit/(:num)', 'PaguAnggaran::update/$1');
+$routes->PUT('/master/pagu/edit/(:num)', 'PaguAnggaran::update/$1');
+//DELETE DATA AKUN AKUN 
+$routes->post('/master/pagu/index/(:num)', 'PaguAnggaran::delete/$1');
+$routes->delete('/master/pagu/index/(:num)', 'PaguAnggaran::delete/$1');
+
+
 //ROUTE AKUN TRANSAKSI PEMBINAAN
 $routes->get('/transaksi/pembinaan/index', 'TransaksiPembinaan::index'); //MENAMPILKAN HALAMAN 
 $routes->get('/transaksi/pembinaan/new', 'TransaksiPembinaan::new'); //MENAMPILKAN HALAMAN NEW  

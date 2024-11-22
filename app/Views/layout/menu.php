@@ -25,6 +25,7 @@
                     <li><a class="nav-link" href="<?= base_url('master/subkomponen/index') ?>">Sub Komponen</a></li>
                     <li><a class="nav-link" href="<?= base_url('master/akun/index') ?>">Akun</a></li>
                     <li><a class="nav-link" href="<?= base_url('master/item/index') ?>">Item</a></li>
+                    <li><a class="nav-link" href="<?= base_url('master/pagu/index') ?>">Pagu Anggaran</a></li>
                 </ul>
             </li>
             <li class="menu-header">PENCARIAN</li>
