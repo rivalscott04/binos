@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class PaguAnggaran extends Model
 {
-    protected $table            = 'paguanggarans';
+    protected $table            = 'paguanggaran';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';

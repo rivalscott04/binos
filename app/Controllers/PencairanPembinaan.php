@@ -33,7 +33,7 @@ class PencairanPembinaan extends ResourceController
         $data['data'] = $this->pencairanPembinaanModel->get_detail($id);
         // var_dump($data['data'][0]->no_surat);
         // var_dump($data['data'][0]['tanggal']);
-        var_dump($data['data']);
+        // var_dump($data['data']);
         return view('pencairan/pembinaan/detail', $data);
     }
 
@@ -103,8 +103,11 @@ class PencairanPembinaan extends ResourceController
 
     public function item()
     {
-        $akun = model(ModelAkunPembinaan::class);
-        return $this->response->setJSON($akun->findAll());
+        // $akun = model(ModelAkunPembinaan::class);
+        $builder = $this->db->table('item');
+        $query = $builder->get();
+        $data = $query->getResultArray();
+        return $this->response->setJSON($data);
     }
 
     public function formatTanggalIndonesia($tanggal)

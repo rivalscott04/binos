@@ -127,9 +127,6 @@ function Barisbarupembinaan() {
     var Nomor = $("#tableLoop tbody tr").length + 1;
     var Baris = '<tr>';
         Baris += '<td class="text-center">' + Nomor + '</td>';
-        // Baris += '<td>';
-        // Baris += '<select class="form-control" name="kode_akun[]" id="kode_akun' + Nomor + '" required></select>';
-        // Baris += '</td>';
         Baris += '<td>';
         Baris += '<select class="form-control" name="akun[]" id="akun' + Nomor + '" required></select>';
         Baris += '</td>';
@@ -140,31 +137,51 @@ function Barisbarupembinaan() {
         Baris += '<input type="text" name="rincian[]" class="form-control" placeholder="rincian..." required></input>';
         Baris += '</td>';
         Baris += '<td>';
-        Baris += '<input type="number" name="volume[]" class="form-control" placeholder="volume..." required></input>';
+        Baris += '<input type="number" name="volume[]" class="form-control volume" id="volume' + Nomor + '" placeholder="volume..." required></input>';
         Baris += '</td>';
         Baris += '<td>';
-        Baris += '<input type="number" name="harga_satuan[]" class="form-control" placeholder="harga satuan..." required></input>';
+        Baris += '<input type="number" name="harga_satuan[]" class="form-control harga_satuan" id="harga_satuan' + Nomor + '" placeholder="harga satuan..." required></input>';
         Baris += '</td>';
         Baris += '<td>';
-        Baris += '<input type="number" name="jumlah[]" class="form-control" placeholder="jumlah..." required></input>';
+        Baris += '<input type="number" name="jumlah[]" class="form-control jumlah" id="jumlah' + Nomor + '" placeholder="jumlah..." readonly></input>';
         Baris += '</td>';
-        // Baris += '<td>';
-        // Baris += '<select class="form-control" name="id_status[]" id="id_status"' + Nomor + '" required></select>';
-        // Baris += '</td>';
         Baris += '<td class="text-center">';
-        Baris += '<a class="btn btn-sm btn-warning" title="Hapus Baris" id="HapusBaris"><i class="fas fa-trash"></i></a>'
+        Baris += '<a class="btn btn-sm btn-warning" title="Hapus Baris" id="HapusBaris"><i class="fas fa-trash"></i></a>';
         Baris += '</td>';
         Baris += '</tr>';
         
-        $("#tableLoop tbody").append(Baris);
-        $("#tableLoop tbody td").each(function(){
-            $(this).find('td:nth-child(2) input').focus();
-        });
+    $("#tableLoop tbody").append(Baris);
 
-        FormSelectAkun(Nomor);
-        FormSelectItem(Nomor);
-        // FormSelectStatus(Nomor);
+    // Fungsi untuk mengatur select akun dan item
+    FormSelectAkun(Nomor);
+    FormSelectItem(Nomor);
+
+    // Menambahkan event listener untuk perubahan pada volume dan harga_satuan
+    updateJumlah(Nomor);
 }
+
+function updateJumlah(Nomor) {
+    // Ketika volume atau harga_satuan berubah
+    $('#volume' + Nomor).on('input', function() {
+        hitungJumlah(Nomor);
+    });
+    $('#harga_satuan' + Nomor).on('input', function() {
+        hitungJumlah(Nomor);
+    });
+}
+
+function hitungJumlah(Nomor) {
+    // Ambil nilai volume dan harga_satuan
+    var volume = parseFloat($('#volume' + Nomor).val()) || 0;
+    var harga_satuan = parseFloat($('#harga_satuan' + Nomor).val()) || 0;
+
+    // Hitung jumlah
+    var jumlah = volume * harga_satuan;
+
+    // Update field jumlah
+    $('#jumlah' + Nomor).val(jumlah.toFixed(2));  // Menampilkan dengan 2 angka desimal
+}
+
 $(document).ready(function(){
     var A;
     for (A = 1; A<= 1; A++){

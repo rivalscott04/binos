@@ -28,7 +28,7 @@
                     <li><a class="nav-link" href="<?= base_url('master/pagu/index') ?>">Pagu Anggaran</a></li>
                 </ul>
             </li>
-            <li class="menu-header">PENCARIAN</li>
+            <li class="menu-header">PENCAIRAN</li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i> <span>Pencairan Anggaran</span></a>
                 <ul class="dropdown-menu">
@@ -45,6 +45,7 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i> <span>Penyerapan Anggaran</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="<?= base_url('transaksi/pembinaan/index') ?>">Pembinaan</a></li>
+                    <li><a class="nav-link" href="<?= base_url('transaksi/realisasi/index') ?>">Realisasi</a></li>
                     <li><a class="nav-link" href="<?= base_url('transaksi/intelijen/index') ?>">Intelijen</a></li>
                     <li><a class="nav-link" href="<?= base_url('transaksi/pidanaumum/index') ?>">Pidana Umum</a></li>
                     <li><a class="nav-link" href="<?= base_url('transaksi/pidanakhusus/index') ?>">Pidana Khusus</a></li>

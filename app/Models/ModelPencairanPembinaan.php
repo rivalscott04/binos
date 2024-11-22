@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use PHPUnit\Framework\Constraint\Count;
 
 class ModelPencairanPembinaan extends Model
 {
@@ -45,12 +46,31 @@ class ModelPencairanPembinaan extends Model
     public function insertBatchWithCalculation(array $data): bool
     {
         $processedData = [];
-
+        $model = new PaguAnggaran();
+        $cek = 0;
+        $lokasi = '';
+        $jumlah = 0;
         foreach ($data['volume'] as $index => $val) {
-            if (!isset($val)) {
+            // Validasi data volume dan harga_satuan
+            if (!isset($val) || !isset($data['harga_satuan'][$index])) {
                 throw new \InvalidArgumentException("Kolom 'volume' dan 'harga_satuan' harus disertakan");
             }
-
+    
+            // Hanya lakukan cek pagu sekali
+            if ($cek == 0) {
+                // Query untuk mendapatkan data paguanggaran
+                $pagu = $model
+                    ->where('kode_item', $data['kode_item'][$index]) // Kolom yang diperiksa
+                    ->get()
+                    ->getResultArray();
+    
+                if (count($pagu) > 0) {
+                    $lokasi = $pagu[0]['kode_item']; // Pastikan kolom ini sesuai dengan tabel
+                    $cek = 1;
+                }
+            }
+    
+            // Menyiapkan data yang akan diolah
             $processedData[] = [
                 'tanggal' => $data['tanggal'],
                 'perihal' => $data['perihal'],
@@ -62,9 +82,29 @@ class ModelPencairanPembinaan extends Model
                 'harga_satuan' => $data['harga_satuan'][$index],
                 'jumlah' => $data['volume'][$index] * $data['harga_satuan'][$index],
             ];
+    
+            // Menghitung total jumlah
+            $jumlah += $data['volume'][$index] * $data['harga_satuan'][$index];
         }
-        // return true;
-        return $this->insertBatch($processedData);
+    
+        // Cek apakah data pagu ditemukan
+        if ($cek == 1) {
+            $pagu = $model->where('kode_item', $lokasi)->get()->getResultArray();
+    
+            if (!empty($pagu) && $pagu[0]['jumlah_pagu'] >= $jumlah) {
+                // Jika saldo mencukupi, update jumlah_realisasi
+                $model->where('kode_item', $lokasi)
+                    ->set('jumlah_terpakai', "jumlah_terpakai + $jumlah", false) // false untuk raw query
+                    ->update();
+    
+                // Simpan data batch
+                return $this->db->table('pencairan_pembinaan')->insertBatch($processedData);
+            } else {
+                throw new \InvalidArgumentException('Sisa Pagu tidak cukup');
+            }
+        } else {
+            throw new \InvalidArgumentException('Pagu tidak ditemukan untuk kode barang yang diberikan');
+        }
     }
 
     public function updateData(int $id, array $data): bool
@@ -93,6 +133,13 @@ class ModelPencairanPembinaan extends Model
 
     public function get_detail($kode)
     {
-        return $this->select('pencairan_pembinaan.*, akun_pembinaan.nama_item, akun_pembinaan.akun')->join('akun_pembinaan', 'akun_pembinaan.kode_item = pencairan_pembinaan.kode_item')->where('pencairan_pembinaan.no_kwitansi', $kode)->findAll();
+        $sql = "
+        SELECT pencairan_pembinaan.*, item.nama_item
+        FROM pencairan_pembinaan
+        INNER JOIN item ON item.kode_item = pencairan_pembinaan.kode_item
+        WHERE pencairan_pembinaan.no_kwitansi = ?
+    ";
+
+    return $this->db->query($sql, [$kode])->getResult();
     }
 }
