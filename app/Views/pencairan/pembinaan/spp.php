@@ -158,82 +158,39 @@
                 </tr>
             </table>
 
-            <table border="1" style="border-collapse: collapse; width: 100%; text-align: left;">
-    <thead>
-        <tr>
-            <th rowspan="2">KEGIATAN</th>
-            <th rowspan="2">PAGU DALAM DIPA</th>
-            <th rowspan="2">SPP S.D BULAN LALU</th>
-            <th rowspan="2">SPP BULAN INI</th>
-            <th rowspan="2">JUMLAH SPP S.D BULAN INI</th>
-            <th rowspan="2">SISA</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td colspan="6"><strong>CCL.051 - Penambahan Layanan Internet, Instalasi, Jaringan dan Langganan Vsat</strong></td>
-        </tr>
-        <tr>
-            <td style="padding-left: 20px;">051 - Pelaksanaan</td>
-            <td>47,000,000</td>
-            <td>38,035,280</td>
-            <td>4,027,080</td>
-            <td>42,062,360</td>
-            <td>4,937,640</td>
-        </tr>
-        <tr>
-            <td style="padding-left: 40px;">051.0A - Langganan Jaringan Internet</td>
-            <td>47,000,000</td>
-            <td>38,035,280</td>
-            <td>4,027,080</td>
-            <td>42,062,360</td>
-            <td>4,937,640</td>
-        </tr>
-        <tr>
-            <td style="padding-left: 60px;">522191 - Belanja Jasa Lainnya</td>
-            <td>47,000,000</td>
-            <td>38,035,280</td>
-            <td>4,027,080</td>
-            <td>42,062,360</td>
-            <td>4,937,640</td>
-        </tr>
-        <tr>
-            <td style="padding-left: 80px;">000116 - Layanan Internet Kantor</td>
-            <td>47,000,000</td>
-            <td>38,035,280</td>
-            <td>4,027,080</td>
-            <td>42,062,360</td>
-            <td>4,937,640</td>
-        </tr>
-        <tr>
-            <td colspan="6"><strong>EBA.962 - Layanan Umum</strong></td>
-        </tr>
-        <tr>
-            <td style="padding-left: 20px;">053 - Layanan Dukungan Manajemen Satker</td>
-            <td>88,400,000</td>
-            <td>39,135,760</td>
-            <td>9,975,000</td>
-            <td>49,110,760</td>
-            <td>39,289,240</td>
-        </tr>
-        <tr>
-            <td style="padding-left: 40px;">053.0A - Pengadaan, Cetak dan Jilid</td>
-            <td>88,400,000</td>
-            <td>39,135,760</td>
-            <td>9,975,000</td>
-            <td>49,110,760</td>
-            <td>39,289,240</td>
-        </tr>
-        <tr>
-            <td style="padding-left: 60px;">521211 - Belanja Bahan</td>
-            <td>88,400,000</td>
-            <td>39,135,760</td>
-            <td>9,975,000</td>
-            <td>49,110,760</td>
-            <td>39,289,240</td>
-        </tr>
-    </tbody>
-</table>
+            <table class="table table-striped table-md" id="myTable">
+                        <thead>
+                            <tr class="text-center">
+                                <th>NO</th>
+                                <th>Kegiatan</th>
+                                <th>Pagu</th>
+                                <th>Realisasi</th>
+                                <th>Sisa Pagu</th>
+                                <th>Persentase (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $no = 1; ?> <!-- Inisialisasi nomor urut -->
+                            <?php foreach ($dtrealisasi_anggaran as $key => $value) : ?>
+                            <tr>
+                                <td class="text-center"><?= $no++ ?></td> <!-- Nomor urut otomatis -->
+                                <td class="text-center"><?= $value->nama_sub_output ?> </td>
+                                <td><?= number_format((float)$value->jumlah_pagu, 0, ',', '.') ?></td> <!-- Format jumlah pagu -->
+                                <td><?= number_format((float)$value->jumlah_terpakai, 0, ',', '.') ?></td> <!-- Format jumlah terpakai -->
+                                <td><?= number_format((float)$value->jumlah_pagu - (float)$value->jumlah_terpakai, 0, ',', '.') ?></td> <!-- Sisa pagu -->
+                                <td>
+                                    <?php
+                                    $persentase = 0;
+                                    if ((float)$value->jumlah_pagu > 0) {
+                                        $persentase = ((float)$value->jumlah_terpakai / (float)$value->jumlah_pagu) * 100;
+                                    }
+                                    echo number_format($persentase, 2, ',', '.') . '%'; 
+                                    ?>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
 
         </div>
 
