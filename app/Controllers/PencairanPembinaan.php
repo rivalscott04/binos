@@ -97,7 +97,7 @@ class PencairanPembinaan extends ResourceController
     $akun = $builderakun->get()->getResult();
 
     // Ambil data Nota Dinas
-    $builderNotaDinas = $this->db->table('nota_dinas'); // Ganti 'nota_dinas' sesuai nama tabel Anda
+    $builderNotaDinas = $this->db->table('pencairan_pembinaan'); // Ganti 'nota_dinas' sesuai nama tabel Anda
     $builderNotaDinas->where('no_kwitansi', $data['nota']);
     $notaDinas = $builderNotaDinas->get()->getRow(); // Ambil satu baris data
 
