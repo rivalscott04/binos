@@ -1,6 +1,6 @@
-<?= $this->extend('layout/backend') ?>;
+<?= $this->extend('layout/backend') ?>
 
-<?= $this->section('content') ?>;
+<?= $this->section('content') ?>
 <style>
     form#prints {
         display: inline-block;
