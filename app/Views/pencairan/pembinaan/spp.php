@@ -182,12 +182,7 @@ function terbilang($angka)
                     <td>Untuk Keperluan</td>
                     <td>:</td>
                     <td>
-                        <?php
-                            $kegiatan = implode(', ', array_map(function ($item) {
-                            return $item->nama_item . ' - ' . $item->rincian;}, $data));
-                             echo $kegiatan;
-                             var_dump($kegiatan);
-                        ?>
+                        masih misteri
                     </td>
                 </tr>
                 <tr>
