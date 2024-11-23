@@ -183,10 +183,18 @@ function terbilang($angka)
                     <td>:</td>
                     <td><td>:</td>
 <td>
-    <?php foreach ($data as $index => $item): ?>
-        <?= $item->nama_item . ' - ' . $item->rincian ?>
-        <?= $index < count($data) - 1 ? ', ' : '' ?> <!-- Tambahkan koma kecuali pada elemen terakhir -->
-    <?php endforeach; ?>
+<td>
+    <?php
+    $kegiatanGabungan = implode(', ', array_map(function($item) {
+        if (is_object($item)) {
+            return $item->nama_item . ' - ' . $item->rincian;
+        }
+        return ''; // Kembalikan string kosong jika bukan objek
+    }, $data));
+    echo $kegiatanGabungan;
+    ?>
+</td>
+
 </td>
 </td>
                 </tr>
