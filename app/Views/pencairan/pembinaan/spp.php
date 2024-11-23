@@ -109,7 +109,7 @@
                 <tr>
                     <td style="width: 150px">Nomor</td>
                     <td style="width: 5px">:</td>
-                    <td>BERDASARKAN NOTA DINAS</td>
+                    <td>ND-<?= $isi[0]->no_surat ?>/N.2.10.1/Cu.1/<?= $isi[0]->tgl_surat ?></td>
                 </tr>
                 <tr>
                     <td>Tanggal</td>
@@ -124,7 +124,7 @@
                 <tr>
                     <td>Jenis Pembayaran </td>
                     <td>:</td>
-                    <td><?= $akun[0]->kode_akun. " | ".$akun[0]->nama_akun ?></td>
+                    <td><?= $akun[0]->kode_akun . ' | ' . $akun[0]->nama_akun ?></td>
                 </tr>
             </table>
             <p style="margin-top: 20px;">
@@ -148,7 +148,11 @@
                     <td style="width: 15px;">2.</td>
                     <td>Untuk Keperluan</td>
                     <td>:</td>
-                    <td>BERDASARKAN RINCIAN YANG DIMASUKAN </td>
+                    <td>
+                        <?php foreach ($isi as $item): ?>
+                        <li><?= esc($item->nama_item) ?></li>
+                        <?php endforeach; ?>
+                    </td>
                 </tr>
                 <tr>
                     <td style="width: 15px;">3.</td>
@@ -159,40 +163,41 @@
             </table>
 
             <table class="table table-striped table-md" id="myTable">
-                    <thead>
-                        <tr style="background-color: #f2f2f2;">
-                            <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">No</th>
-                            <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">Nama Sub Output</th>
-                            <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">PAGU DALAM DIPA</th>
-                            <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">JUMLAH SPP S.D BULAN INI</th>
-                            <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">SISA PAGU</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $no = 1;
+                <thead>
+                    <tr style="background-color: #f2f2f2;">
+                        <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">No</th>
+                        <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">Nama Sub Output</th>
+                        <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">PAGU DALAM DIPA</th>
+                        <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">JUMLAH SPP S.D BULAN INI
+                        </th>
+                        <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">SISA PAGU</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $no = 1;
                         foreach ($dtrealisasi_anggaran as $key => $value) : ?>
-                            <tr>
-                                <td style="border: 1px solid #ccc; padding: 8px; text-align: center;"><?= $no++ ?></td>
-                                <!-- Nomor urut otomatis -->
-                                <td style="border: 1px solid #ccc; padding: 8px;"><?= $value->nama_sub_output ?></td>
-                                <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
-                                    <?= number_format((float)$value->jumlah_pagu, 0, ',', '.') ?>
-                                </td>
-                                <!-- Format jumlah pagu -->
-                                <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
-                                    <?= number_format((float)$value->jumlah_terpakai, 0, ',', '.') ?>
-                                </td>
-                                <!-- Format jumlah terpakai -->
-                                <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
-                                    <?= number_format((float)$value->jumlah_pagu - (float)$value->jumlah_terpakai, 0, ',', '.') ?>
-                                </td>
-                                <!-- Sisa pagu -->
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-
+                    <tr>
+                        <td style="border: 1px solid #ccc; padding: 8px; text-align: center;"><?= $no++ ?></td>
+                        <!-- Nomor urut otomatis -->
+                        <td style="border: 1px solid #ccc; padding: 8px;"><?= $value->nama_sub_output ?></td>
+                        <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
+                            <?= number_format((float) $value->jumlah_pagu, 0, ',', '.') ?>
+                        </td>
+                        <!-- Format jumlah pagu -->
+                        <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
+                            <?= number_format((float) $value->jumlah_terpakai, 0, ',', '.') ?>
+                        </td>
+                        <!-- Format jumlah terpakai -->
+                        <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
+                            <?= number_format((float) $value->jumlah_pagu - (float) $value->jumlah_terpakai, 0, ',', '.') ?>
+                        </td>
+                        <!-- Sisa pagu -->
+                    </tr>
+                    <?php endforeach; ?>
                 </tbody>
+            </table>
+
+            </tbody>
             </table>
 
         </div>

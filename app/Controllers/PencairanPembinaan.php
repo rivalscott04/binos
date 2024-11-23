@@ -94,8 +94,10 @@ class PencairanPembinaan extends ResourceController
         $builderakun->groupBy('pencairan_pembinaan.no_kwitansi, akun.kode_akun, akun.nama_akun'); // Tambahkan GROUP BY
         $akun = $builderakun->get()->getResult();
 
+        
+        $isi = $this->pencairanPembinaanModel->get_detail($data['nota']);
+
         if ($data['jenis'] == 'nodis') {
-            $isi = $this->pencairanPembinaanModel->get_detail($data['nota']);
             return view('pencairan/pembinaan/nodis', compact('data', 'isi', 'sekarang', 'akun'));
         } elseif ($data['jenis'] == 'sptjm') {
             return view('pencairan/pembinaan/sptjm', compact('data', 'sekarang', 'akun'));
@@ -106,7 +108,7 @@ class PencairanPembinaan extends ResourceController
             $builder->join('item', 'paguanggaran.kode_item = item.kode_item', 'left'); // Melakukan join LEFT dengan item
             $query = $builder->get(); // Menjalankan query
             $dtrealisasi_anggaran = $query->getResult();
-            return view('pencairan/pembinaan/spp', compact('data', 'sekarang', 'akun', 'dtrealisasi_anggaran'));
+            return view('pencairan/pembinaan/spp', compact('data', 'isi', 'sekarang', 'akun', 'dtrealisasi_anggaran'));
         }
         // var_dump($cek);
     }

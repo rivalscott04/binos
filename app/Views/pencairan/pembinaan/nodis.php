@@ -159,7 +159,7 @@
                     <td>Tanggal</td>
                     <td>:</td>
                     <td>
-                        <?= $data[0]->tgl_surat ?? 'kosong' ?>
+                        <?= $isi[0]->tanggal ?? 'kosong' ?>
                     </td>
                 </tr>
                 <tr>
