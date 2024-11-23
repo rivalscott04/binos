@@ -176,9 +176,7 @@ function terbilang($angka)
                     <td>:</td>
                     </td>
                     <td>
-                    <?php $jumlah = 4200360; // Contoh data
-                            echo terbilang($jumlah) . " rupiah";
-                    die();?>
+                    <?= number_format($akun[0]->total_jumlah, 0, ',', '.') ?> (<?= terbilang($akun[0]->total_jumlah) ?> rupiah)
                     </td>
                 </tr>
                 <tr>
