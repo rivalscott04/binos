@@ -181,8 +181,6 @@ function terbilang($angka)
                     <td style="width: 15px;">2.</td>
                     <td>Untuk Keperluan</td>
                     <td>:</td>
-                    <td><td>:</td>
-<td>
 <td>
     <?php
     $kegiatanGabungan = implode(', ', array_map(function($item) {
