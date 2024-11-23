@@ -78,40 +78,50 @@ class PencairanPembinaan extends ResourceController
     }
 
     public function prints($id = null)
-    {
-        $sekarang = $this->formatTanggalIndonesia(date('d-m-Y'));
-        $data = $this->request->getGet();
-        // var_dump($data);
-        $cek = $this->pencairanPembinaanModel
-            ->where('no_kwitansi', $data['nota'])
-            ->set(['no_surat' => $data['nomor'], 'tgl_surat' => $data['tanggal']])
-            ->update(); //updateNomor($data['nota'], $data['no']);
+{
+    $sekarang = $this->formatTanggalIndonesia(date('d-m-Y'));
+    $data = $this->request->getGet();
 
-        $builderakun = $this->db->table('pencairan_pembinaan');
-        $builderakun->select('pencairan_pembinaan.no_kwitansi, SUM(pencairan_pembinaan.jumlah) as total_jumlah, akun.kode_akun, akun.nama_akun');
-        $builderakun->join('akun', 'pencairan_pembinaan.akun = akun.kode_akun', 'left');
-        $builderakun->where('pencairan_pembinaan.no_kwitansi', $data['nota']);
-        $builderakun->groupBy('pencairan_pembinaan.no_kwitansi, akun.kode_akun, akun.nama_akun'); // Tambahkan GROUP BY
-        $akun = $builderakun->get()->getResult();
+    // Update nomor dan tanggal Nota Dinas
+    $this->pencairanPembinaanModel
+        ->where('no_kwitansi', $data['nota'])
+        ->set(['no_surat' => $data['nomor'], 'tgl_surat' => $data['tanggal']])
+        ->update();
 
-        
+    // Ambil data Akun
+    $builderakun = $this->db->table('pencairan_pembinaan');
+    $builderakun->select('pencairan_pembinaan.no_kwitansi, SUM(pencairan_pembinaan.jumlah) as total_jumlah, akun.kode_akun, akun.nama_akun');
+    $builderakun->join('akun', 'pencairan_pembinaan.akun = akun.kode_akun', 'left');
+    $builderakun->where('pencairan_pembinaan.no_kwitansi', $data['nota']);
+    $builderakun->groupBy('pencairan_pembinaan.no_kwitansi, akun.kode_akun, akun.nama_akun');
+    $akun = $builderakun->get()->getResult();
+
+    // Ambil data Nota Dinas
+    $builderNotaDinas = $this->db->table('pencairan_pembinaan'); // Ganti 'nota_dinas' sesuai nama tabel Anda
+    $builderNotaDinas->where('no_kwitansi', $data['nota']);
+    $notaDinas = $builderNotaDinas->get()->getRow(); // Ambil satu baris data
+
+    // Kondisi berdasarkan jenis
+    if ($data['jenis'] == 'nodis') {
         $isi = $this->pencairanPembinaanModel->get_detail($data['nota']);
+        return view('pencairan/pembinaan/nodis', compact('data', 'isi', 'sekarang', 'akun'));
+    } elseif ($data['jenis'] == 'sptjm') {
+        return view('pencairan/pembinaan/sptjm', compact('data', 'sekarang', 'akun'));
+    } elseif ($data['jenis'] == 'spp') {
+        $isi = $this->pencairanPembinaanModel->get_detail($data['nota']);
+        // Ambil data dari paguanggaran
+        $builder = $this->db->table('paguanggaran');
+        $builder->select('paguanggaran.*, suboutput.nama_sub_output, item.nama_item');
+        $builder->join('suboutput', 'paguanggaran.kode_sub_output = suboutput.kode_sub_output', 'left');
+        $builder->join('item', 'paguanggaran.kode_item = item.kode_item', 'left');
+        $query = $builder->get();
+        $dtrealisasi_anggaran = $query->getResult();
 
-        if ($data['jenis'] == 'nodis') {
-            return view('pencairan/pembinaan/nodis', compact('data', 'isi', 'sekarang', 'akun'));
-        } elseif ($data['jenis'] == 'sptjm') {
-            return view('pencairan/pembinaan/sptjm', compact('data', 'sekarang', 'akun'));
-        } elseif ($data['jenis'] == 'spp') {
-            $builder = $this->db->table('paguanggaran');
-            $builder->select('paguanggaran.*, suboutput.nama_sub_output, item.nama_item'); // Memilih kolom dari tabel paguanggaran, suboutput, dan item
-            $builder->join('suboutput', 'paguanggaran.kode_sub_output = suboutput.kode_sub_output', 'left'); // Melakukan join LEFT dengan suboutput
-            $builder->join('item', 'paguanggaran.kode_item = item.kode_item', 'left'); // Melakukan join LEFT dengan item
-            $query = $builder->get(); // Menjalankan query
-            $dtrealisasi_anggaran = $query->getResult();
-            return view('pencairan/pembinaan/spp', compact('data', 'isi', 'sekarang', 'akun', 'dtrealisasi_anggaran'));
-        }
-        // var_dump($cek);
+        // Kirim data Nota Dinas ke view
+        return view('pencairan/pembinaan/spp', compact('data', 'sekarang', 'akun', 'dtrealisasi_anggaran', 'notaDinas'));
     }
+}
+
 
     public function akun()
     {

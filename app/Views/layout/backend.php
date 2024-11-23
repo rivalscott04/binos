@@ -16,6 +16,7 @@
     <!-- <small>Debug CSS Style: <?= base_url('template/assets/css/style.css') ?></small> -->
     <link rel="stylesheet" href="<?= base_url('template/assets/css/components.css') ?>">
     <!-- <small>Debug CSS Components: <?= base_url('template/assets/css/components.css') ?></small> -->
+
 </head>
 
 <body>
@@ -25,11 +26,11 @@
             <div class="navbar-bg"></div>
             <nav class="navbar navbar-expand-lg main-navbar">
                 <form class="form-inline mr-auto">
-                    <ul class="navbar-nav mr-3 mt-4">
+                    <ul class="navbar-nav ">
                         <li>
                             <a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a>
                         </li>
-                        <h3 class="text text-white"> Penyerapan Anggaran - KEJARI MATARAM </h3>
+                        <h3 class="text text-white ml-2 mt-1" style="font-size: 20px;"> Penyerapan Anggaran KEJARI MATARAM </h3>
                     </ul>
                 </form>
                 <ul class="navbar-nav navbar-right">

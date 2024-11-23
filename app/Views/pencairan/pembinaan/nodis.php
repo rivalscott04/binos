@@ -141,7 +141,7 @@
 
         <hr />
 
-        <div  class="_main">
+        <div class="_main">
             <p class="_center" style="margin-bottom: 0px;">NOTA DINAS</p>
             <p class="_center" style="margin-top: 0px;">NOMOR : ND-<?= $isi[0]->no_surat ?? 'kosong' ?>/N.2.10.1/Cu.1/<?= $isi[0]->tgl_surat ?? 'kosong' ?></p>
             <table>
@@ -180,10 +180,7 @@
             </table>
 
             <p style="margin-top: 20px; font-size: 14px;">Sehubungan dengan telah dilaksanakan kegiatan Pembinaan bulan
-                 <?php
-                        setlocale(LC_TIME, 'id_ID.UTF-8');
-                        echo strftime('%B %Y');
-                ?>
+                <?= isset($isi[0]->tanggal) ? strftime('%B %Y', strtotime($isi[0]->tanggal)) : 'kosong' ?>
                 dengan ini kami mengajukan permohonan biaya pelaksanaannya sesuai dengan ketentuan yang berlaku. Apabila
                 Bapak Berkenan mohon untuk ditindaklanjuti :</p>
             <table class="table">
@@ -218,13 +215,14 @@
         </p>
 
 
-        <div class="signature">
-            <p>Kepala Sub Bagian Pembinaan</p>
-            <img src="<?= base_url('template/assets/img/key.png') ?>" alt="Logo"
-                style="width: 100px; height: auto;">
-            <p style="text-decoration: underline;"><strong>Junaedi, S.H., M.H.</strong></p>
-            <p>Adi Wira NIP.196812311989031011</p>
+        <div class="signature" style="text-align: center;">
+                <p style="margin: 0;">Kepala Sub Bagian Pembinaan</p>
+                <img src="<?= base_url('template/assets/img/key.png') ?>" alt="Logo" style="width: 130px; height: auto; margin: 0;">
+                <p style="text-decoration: underline; margin: 5px 0;"><strong>Junaedi, S.H., M.H.</strong></p>
+                <p style="margin: 0;">Adi Wira NIP.196812311989031011</p>
         </div>
+
+
 
         <table>
             <p>Tembusan :</p>

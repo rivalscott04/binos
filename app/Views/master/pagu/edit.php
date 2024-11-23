@@ -1,4 +1,4 @@
-INI TEMPAT EDIT<?= $this->extend('layout/backend') ?>;
+INI TEMPAT EDIT<?= $this->extend('layout/backend') ?>
 
 <?= $this->section('content') ?>;
 

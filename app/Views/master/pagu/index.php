@@ -1,6 +1,6 @@
-<?= $this->extend('layout/backend') ?>;
+<?= $this->extend('layout/backend') ?>
 
-<?= $this->section('content') ?>;
+<?= $this->section('content') ?>
 
 <section class="section">
     <div class="section-header">
@@ -53,6 +53,7 @@
                                 <th>NO</th>
                                 <th>KEGIATAN</th>
                                 <th>KODE ITEM</th>
+                                <th>NAMA ITEM</th>
                                 <th>JUMLAH PAGU</th>
                                 <th>JUMLAH TERPAKAI</th>
                                 <th>AKSI</th>
@@ -61,11 +62,14 @@
                         <tbody>
                             <?php foreach ($dtakun_pagu as $key => $value) : ?>
                             <tr>
-                                <td><?= '-' ?></td>
+                            <td><?= $key + 1 ?></td>
                                 <td class="text text-center"><?= $value->nama_sub_output ?> </td>
+                                <td class="text text-center"><?= $value->kode_item ?> </td>
                                 <td><?= $value->nama_item ?></td>
-                                <td><?= $value->jumlah_pagu ?> </td>
-                                <td><?= $value->jumlah_terpakai ?> </td>
+                                <td><?= number_format($value->jumlah_pagu, 0, ',', '.') ?> </td>
+                                <!-- Format ribuan untuk jumlah pagu -->
+                                <td><?= number_format($value->jumlah_terpakai, 0, ',', '.') ?> </td>
+                                <!-- Format ribuan untuk jumlah terpakai -->
                                 <td class="text text-center">
                                     <!-- EDIT -->
                                     <a href="<?= site_url('master/pagu/' . $value->id . '/edit') ?>"

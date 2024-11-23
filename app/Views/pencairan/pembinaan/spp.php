@@ -102,6 +102,50 @@
 
 <body class="A4">
 
+<?php
+function terbilang($angka)
+{
+    // Pastikan input adalah angka
+    if (!is_numeric($angka)) {
+        return "Input bukan angka";
+    }
+
+    $angka = abs($angka);
+    $terbilang = [
+        "", "satu", "dua", "tiga", "empat", "lima",
+        "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas"
+    ];
+
+    $hasil = "";
+    if ($angka < 12) {
+        $hasil = " " . $terbilang[$angka];
+    } elseif ($angka < 20) {
+        $hasil = terbilang($angka - 10) . " belas";
+    } elseif ($angka < 100) {
+        $hasil = terbilang(floor($angka / 10)) . " puluh " . terbilang($angka % 10);
+    } elseif ($angka < 200) {
+        $hasil = "seratus " . terbilang($angka - 100);
+    } elseif ($angka < 1000) {
+        $hasil = terbilang(floor($angka / 100)) . " ratus " . terbilang($angka % 100);
+    } elseif ($angka < 2000) {
+        $hasil = "seribu " . terbilang($angka - 1000);
+    } elseif ($angka < 1000000) {
+        $hasil = terbilang(floor($angka / 1000)) . " ribu " . terbilang($angka % 1000);
+    } elseif ($angka < 1000000000) {
+        $hasil = terbilang(floor($angka / 1000000)) . " juta " . terbilang($angka % 1000000);
+    } elseif ($angka < 1000000000000) {
+        $hasil = terbilang(floor($angka / 1000000000)) . " miliar " . terbilang(fmod($angka, 1000000000));
+    } else {
+        $hasil = "Angka terlalu besar";
+    }
+
+    return trim($hasil);
+}
+
+
+?>
+
+
     <div class="sheet padding-10mm">
         <div class="_main">
             <p class="_center" style="text-decoration: underline; ">SURAT PERINTAH PEMBAYARAN (SPP)</p> <br>
@@ -109,16 +153,17 @@
                 <tr>
                     <td style="width: 150px">Nomor</td>
                     <td style="width: 5px">:</td>
+<<<<<<< HEAD
                     <td>ND-<?= $isi[0]->no_surat ?>/N.2.10.1/Cu.1/<?= $isi[0]->tgl_surat ?></td>
+=======
+                    <td>ND-<?= $isi[0]->no_surat ?? 'kosong' ?>/N.2.10.1/Cu.1/<?= $isi[0]->tgl_surat ?? 'kosong' ?></td>
+>>>>>>> 598ad6f6ea7724a42bbb153e9a44b76df102982c
                 </tr>
                 <tr>
                     <td>Tanggal</td>
                     <td>:</td>
                     <td>
-                        <?php
-                        setlocale(LC_TIME, 'id_ID.UTF-8');
-                        echo strftime('%d %B %Y');
-                        ?>
+                    <?= isset($isi[0]->tanggal) ? strftime('%d %B %Y', strtotime($isi[0]->tanggal)) : 'kosong' ?>
                     </td>
                 </tr>
                 <tr>
@@ -142,7 +187,10 @@
                     <td style="width: 15px;">1.</td>
                     <td>Jumlah Pembayaran yang diterima</td>
                     <td>:</td>
-                    <td>RP. <?= $akun[0]->total_jumlah ?></td>
+                    </td>
+                    <td>
+                    <?= number_format($akun[0]->total_jumlah, 0, ',', '.') ?> (<?= terbilang($akun[0]->total_jumlah) ?> rupiah)
+                    </td>
                 </tr>
                 <tr>
                     <td style="width: 15px;">2.</td>
