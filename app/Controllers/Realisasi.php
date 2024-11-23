@@ -33,6 +33,5 @@ class Realisasi extends BaseController
         );
         $result = $query->getResultArray();
         // echo $result[0];
-        var_dump(Count($result) > 0);
     }
 }
