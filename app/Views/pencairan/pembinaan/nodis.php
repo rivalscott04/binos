@@ -159,10 +159,7 @@
                     <td>Tanggal</td>
                     <td>:</td>
                     <td>
-                        <?php
-                        setlocale(LC_TIME, 'id_ID.UTF-8');
-                        echo strftime('%d %B %Y');
-                        ?>
+                        <?= $data[0]->tanggal ?? 'kosong' ?>
                     </td>
                 </tr>
                 <tr>
