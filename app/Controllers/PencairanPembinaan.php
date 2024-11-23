@@ -180,24 +180,27 @@ function terbilang($angka)
     ];
 
     if ($angka < 12) {
-        return $terbilang[$angka];
+        $hasil = $terbilang[$angka];
     } elseif ($angka < 20) {
-        return $terbilang($angka - 10) . " belas";
+        $hasil = $terbilang($angka - 10) . " belas";
     } elseif ($angka < 100) {
-        return $terbilang(floor($angka / 10)) . " puluh " . $terbilang($angka % 10);
+        $hasil = $terbilang(floor($angka / 10)) . " puluh " . $terbilang($angka % 10);
     } elseif ($angka < 200) {
-        return "seratus " . $terbilang($angka - 100);
+        $hasil = "seratus " . $terbilang($angka - 100);
     } elseif ($angka < 1000) {
-        return $terbilang(floor($angka / 100)) . " ratus " . $terbilang($angka % 100);
+        $hasil = $terbilang(floor($angka / 100)) . " ratus " . $terbilang($angka % 100);
     } elseif ($angka < 2000) {
-        return "seribu " . $terbilang($angka - 1000);
+        $hasil = "seribu " . $terbilang($angka - 1000);
     } elseif ($angka < 1000000) {
-        return $terbilang(floor($angka / 1000)) . " ribu " . $terbilang($angka % 1000);
+        $hasil = $terbilang(floor($angka / 1000)) . " ribu " . $terbilang($angka % 1000);
     } elseif ($angka < 1000000000) {
-        return $terbilang(floor($angka / 1000000)) . " juta " . $terbilang($angka % 1000000);
+        $hasil = $terbilang(floor($angka / 1000000)) . " juta " . $terbilang($angka % 1000000);
     } elseif ($angka < 1000000000000) {
-        return $terbilang(floor($angka / 1000000000)) . " miliar " . $terbilang(fmod($angka, 1000000000));
+        $hasil = $terbilang(floor($angka / 1000000000)) . " miliar " . $terbilang(fmod($angka, 1000000000));
     } else {
-        return "Angka terlalu besar";
+        $hasil = "Angka terlalu besar";
     }
+
+    echo "Debug: $angka -> $hasil<br>";
+    return trim($hasil);
 }
