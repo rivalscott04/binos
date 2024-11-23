@@ -180,11 +180,8 @@
             </table>
 
             <p style="margin-top: 20px; font-size: 14px;">Sehubungan dengan telah dilaksanakan kegiatan Pembinaan bulan
-                 <?php
-                        setlocale(LC_TIME, 'id_ID.UTF-8');
-                        echo strftime('%B %Y');
-                ?>
-                dengan ini kami mengajukan permohonan biaya pelaksanaannya sesuai dengan ketentuan yang berlaku. Apabila
+            <?= isset($isi[0]->tanggal) ? strftime('%B', strtotime($isi[0]->tanggal)) : 'kosong' ?>
+            ni kami mengajukan permohonan biaya pelaksanaannya sesuai dengan ketentuan yang berlaku. Apabila
                 Bapak Berkenan mohon untuk ditindaklanjuti :</p>
             <table class="table">
                 <tr class="tr">
