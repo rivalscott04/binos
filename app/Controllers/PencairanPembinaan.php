@@ -118,7 +118,7 @@ class PencairanPembinaan extends ResourceController
         $dtrealisasi_anggaran = $query->getResult();
 
         // Kirim data Nota Dinas ke view
-        return view('pencairan/pembinaan/spp', compact('data', 'sekarang', 'akun', 'dtrealisasi_anggaran', 'notaDinas'));
+        return view('pencairan/pembinaan/spp', compact('data', 'sekarang', 'akun', 'isi', 'dtrealisasi_anggaran', 'notaDinas'));
     }
 }
 
