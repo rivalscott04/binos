@@ -90,7 +90,7 @@ class PencairanPembinaan extends ResourceController
 
     // Ambil data Akun
     $builderakun = $this->db->table('pencairan_pembinaan');
-    $builderakun->select('pencairan_pembinaan.no_kwitansi, SUM(pencairan_pembinaan.jumlah) as total_jumlah, akun.kode_akun, akun.nama_akun');
+    $builderakun->select('pencairan_pembinaan.no_kwitansi, SUM(pencairan_pembinaan.jumlah) as total_jumlah, akun.kode_akun, akun.nama_akun, pencairan_pembinaan.tanggal');
     $builderakun->join('akun', 'pencairan_pembinaan.akun = akun.kode_akun', 'left');
     $builderakun->where('pencairan_pembinaan.no_kwitansi', $data['nota']);
     $builderakun->groupBy('pencairan_pembinaan.no_kwitansi, akun.kode_akun, akun.nama_akun');

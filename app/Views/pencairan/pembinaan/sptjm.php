@@ -99,7 +99,8 @@
         <table class="_head">
             <tr>
                 <td class="logo">
-                    <img src="<?= base_url('template/assets/img/logo.png') ?>" alt="Logo" style="width: 100px; height: auto;">
+                    <img src="<?= base_url('template/assets/img/logo.png') ?>" alt="Logo"
+                        style="width: 100px; height: auto;">
                 </td>
                 <td class="_center">
                     <p class="subtitle">KEJAKSAAN REPUBLIK INDONESIA</p>
@@ -137,10 +138,17 @@
                     <td>:</td>
                     <td>Kejaksaan Negeri Mataram</td>
                 </tr>
+                <?php
+                $date = '2024-11-22'; 
+                setlocale(LC_TIME, 'id_ID.UTF-8'); // Pastikan locale 'id_ID.UTF-8' tersedia di server Anda
+                
+                $dateObj = new \DateTime($date);
+                $tanggal  = strftime("%d %B %Y", $dateObj->getTimestamp());
+                ?>
                 <tr>
                     <td>Tanggal</td>
                     <td>:</td>
-                    <td>11 November 2024</td>
+                    <td><?= $tanggal ?? '' ?></td>
                 </tr>
             </table>
 
@@ -148,8 +156,8 @@
             <table>
                 <tr>
                     <td style="width: 15px; text-align: left; vertical-align: top;">1</td>
-                    <td style="text-align: justify;">Perhitungan Anggaran Kegiatan Sebesar (MASUKAN NOMINAL DARI JUMLAH
-                        NODIS) telah dihitung dengan benar.</td>
+                    <td style="text-align: justify;">Perhitungan Anggaran Kegiatan Sebesar Rp.
+                        <?= $akun[0]->total_jumlah ?> telah dihitung dengan benar.</td>
                 </tr>
                 <tr>
                     <td style="width: 15px; text-align: left; vertical-align: top;">2</td>
