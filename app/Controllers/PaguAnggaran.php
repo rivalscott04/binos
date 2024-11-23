@@ -95,7 +95,7 @@ class PaguAnggaran extends BaseController
     public function edit($id = null)
     {
         $builder = $this->db->table('paguanggaran');
-        $query = $builder->get();
+        $query = $builder->where('id',$id)->get();
         $pagu = $query->getResult();
         $builder2 = $this->db->table('suboutput');
         $query2 = $builder2->get();
