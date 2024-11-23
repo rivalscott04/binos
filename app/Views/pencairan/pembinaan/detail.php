@@ -93,7 +93,7 @@
 
                         </tbody>
                     </table>
-                    <p>Sehubungan dengan telah dilaksanakannya kegiatan Bidang Pembinaan bulan <?= $data[0]->tanggal ?? 'kosong' ?> dengan ini kami mengajukan permohonan biaya pelaksanaannya sesuai dengan ketentuan
+                    <p>Sehubungan dengan telah dilaksanakannya kegiatan Bidang Pembinaan bulan <?= isset($data[0]->tanggal) ? strftime('%B %Y', strtotime($data[0]->tanggal)) : 'kosong' ?> dengan ini kami mengajukan permohonan biaya pelaksanaannya sesuai dengan ketentuan
                         yang berlaku. Apabila bapak berkenan mohon untuk ditindaklanjuti:
                     </p>
                 </div>
