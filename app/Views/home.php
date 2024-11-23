@@ -15,7 +15,7 @@
             <div class="container">
         <div class="card">
             <!-- Ganti "path-to-image.jpg" dengan URL atau path ke gambar Anda -->
-            <img src="<?= base_url('img/dashboard.png') ?>" alt="Sistem Informasi Penyerapan Anggaran">
+            <img src="<?= base_url('template/assets/img/dashboard.png') ?>" alt="Sistem Informasi Penyerapan Anggaran">
         </div>
     </div>
         </div>
