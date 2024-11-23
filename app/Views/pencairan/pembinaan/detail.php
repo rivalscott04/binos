@@ -76,7 +76,7 @@
                             </tr>
                             <tr>
                                 <th>Tanggal</th>
-                                <td>: <?= isset($data[0]->tanggal) ? strftime('%H %B %Y', strtotime($data[0]->tanggal)) : 'kosong' ?></td>
+                                <td>: <?= isset($data[0]->tanggal) ? strftime('%d %B %Y', strtotime($data[0]->tanggal)) : 'kosong' ?></td>
                             </tr>
                             <tr>
                                 <th>Sifat</th>
