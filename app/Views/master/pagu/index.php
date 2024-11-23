@@ -54,7 +54,7 @@
                                 <th>KEGIATAN</th>
                                 <th>KODE ITEM</th>
                                 <th>JUMLAH PAGU</th>
-                                <th>JUM;AH TERPAKAI</th>
+                                <th>JUMLAH TERPAKAI</th>
                                 <th>AKSI</th>
                             </tr>
                         </thead>
