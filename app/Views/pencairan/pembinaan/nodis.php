@@ -132,7 +132,7 @@
 
         <table class="_head">
             <tr>
-                <td class="_centere1">
+                <td class="_center">
                     <p class="subtitle">KEJAKSAAN NEGERI MATARAM</p>
                     <p class="title">SUB BAGIAN PEMBINAAN</p>
                 </td>
