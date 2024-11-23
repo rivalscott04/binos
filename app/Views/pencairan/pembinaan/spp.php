@@ -139,7 +139,8 @@
                     <td style="width: 15px;">1.</td>
                     <td>Jumlah Pembayaran yang diterima</td>
                     <td>:</td>
-                    <td>RP. <?= $akun[0]->total_jumlah ?></td>
+                    <td>RP. <?= $akun[0]->total_jumlah ?> (<?= terbilang($akun[0]->total_jumlah) ?> rupiah)
+                    </td>
                 </tr>
                 <tr>
                     <td style="width: 15px;">2.</td>
