@@ -141,7 +141,7 @@
 
         <hr />
 
-        <div  class="_main">
+        <div class="_main">
             <p class="_center" style="margin-bottom: 0px;">NOTA DINAS</p>
             <p class="_center" style="margin-top: 0px;">NOMOR : ND-<?= $isi[0]->no_surat ?? 'kosong' ?>/N.2.10.1/Cu.1/<?= $isi[0]->tgl_surat ?? 'kosong' ?></p>
             <table>
@@ -159,7 +159,7 @@
                     <td>Tanggal</td>
                     <td>:</td>
                     <td>
-                    <?= isset($isi[0]->tanggal) ? strftime('%d %B %Y', strtotime($isi[0]->tanggal)) : 'kosong' ?>
+                        <?= isset($isi[0]->tanggal) ? strftime('%d %B %Y', strtotime($isi[0]->tanggal)) : 'kosong' ?>
                     </td>
                 </tr>
                 <tr>
@@ -180,8 +180,8 @@
             </table>
 
             <p style="margin-top: 20px; font-size: 14px;">Sehubungan dengan telah dilaksanakan kegiatan Pembinaan bulan
-            <?= isset($isi[0]->tanggal) ? strftime('%B %Y', strtotime($isi[0]->tanggal)) : 'kosong' ?>
-            dengan ini kami mengajukan permohonan biaya pelaksanaannya sesuai dengan ketentuan yang berlaku. Apabila
+                <?= isset($isi[0]->tanggal) ? strftime('%B %Y', strtotime($isi[0]->tanggal)) : 'kosong' ?>
+                dengan ini kami mengajukan permohonan biaya pelaksanaannya sesuai dengan ketentuan yang berlaku. Apabila
                 Bapak Berkenan mohon untuk ditindaklanjuti :</p>
             <table class="table">
                 <tr class="tr">
@@ -217,7 +217,7 @@
 
         <div class="signature">
             <p style="margin-bottom: 5px;">Kepala Sub Bagian Pembinaan</p>
-            <img src="<?= base_url('template/assets/img/key.png') ?>" alt="Logo" style="width: 100px; height: auto; margin: 5px 0;">
+            <img src="<?= base_url('template/assets/img/key.png') ?>" alt="Logo" style="width: 130px; height: auto; margin: 5px 0;">
             <p style="text-decoration: underline; margin-top: 5px;"><strong>Junaedi, S.H., M.H.</strong></p>
             <p style="margin-top: 2px;">Adi Wira NIP.196812311989031011</p>
         </div>
