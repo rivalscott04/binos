@@ -92,6 +92,46 @@
     </style>
 </head>
 
+<?php
+function terbilang($angka)
+{
+    // Pastikan input adalah angka
+    if (!is_numeric($angka)) {
+        return "Input bukan angka";
+    }
+
+    $angka = abs($angka);
+    $terbilang = [
+        "", "satu", "dua", "tiga", "empat", "lima",
+        "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas"
+    ];
+
+    $hasil = "";
+    if ($angka < 12) {
+        $hasil = " " . $terbilang[$angka];
+    } elseif ($angka < 20) {
+        $hasil = terbilang($angka - 10) . " belas";
+    } elseif ($angka < 100) {
+        $hasil = terbilang(floor($angka / 10)) . " puluh " . terbilang($angka % 10);
+    } elseif ($angka < 200) {
+        $hasil = "seratus " . terbilang($angka - 100);
+    } elseif ($angka < 1000) {
+        $hasil = terbilang(floor($angka / 100)) . " ratus " . terbilang($angka % 100);
+    } elseif ($angka < 2000) {
+        $hasil = "seribu " . terbilang($angka - 1000);
+    } elseif ($angka < 1000000) {
+        $hasil = terbilang(floor($angka / 1000)) . " ribu " . terbilang($angka % 1000);
+    } elseif ($angka < 1000000000) {
+        $hasil = terbilang(floor($angka / 1000000)) . " juta " . terbilang($angka % 1000000);
+    } elseif ($angka < 1000000000000) {
+        $hasil = terbilang(floor($angka / 1000000000)) . " miliar " . terbilang(fmod($angka, 1000000000));
+    } else {
+        $hasil = "Angka terlalu besar";
+    }
+
+    return trim($hasil);
+}
+?>
 <body class="A4">
 
     <div class="sheet padding-10mm">
@@ -157,7 +197,7 @@
                 <tr>
                     <td style="width: 15px; text-align: left; vertical-align: top;">1</td>
                     <td style="text-align: justify;">Perhitungan Anggaran Kegiatan Sebesar <strong>Rp.
-                    <?= number_format($akun[0]->total_jumlah, 0, ',', '.') ?></strong> telah dihitung dengan benar.</td>
+                    <?= number_format($akun[0]->total_jumlah, 0, ',', '.') ?> </strong>(<?= terbilang($akun[0]->total_jumlah) ?>) telah dihitung dengan benar.</td>
                 </tr>
                 <tr>
                     <td style="width: 15px; text-align: left; vertical-align: top;">2</td>
