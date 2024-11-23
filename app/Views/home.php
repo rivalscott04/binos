@@ -25,7 +25,7 @@
 .hero-banner img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Gambar penuh tanpa distorsi */
+    object-fit: contain; /* Gambar penuh tanpa distorsi */
 }
 
 .hero-text {
