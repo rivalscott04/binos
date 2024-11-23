@@ -109,7 +109,7 @@
                 <tr>
                     <td style="width: 150px">Nomor</td>
                     <td style="width: 5px">:</td>
-                    <td>ND-<?= $isi[0]->no_surat ?? 'kosong' ?>/N.2.10.1/Cu.1/<?= $isi[0]->tgl_surat ?? 'kosong' ?></td>
+                    <td>ND-<?= $data[0]->no_surat ?? 'kosong' ?>/N.2.10.1/Cu.1/<?= $data[0]->tgl_surat ?? 'kosong' ?></td>
                 </tr>
                 <tr>
                     <td>Tanggal</td>
