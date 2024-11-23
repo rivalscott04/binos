@@ -5,9 +5,9 @@
 <section class="section">
     <div class="hero-banner">
         <img src="<?= base_url('template/assets/img/welcome.png') ?>" alt="Selamat Datang di Sistem Informasi Penyerapan Anggaran">
-        <div class="hero-text">
+        <!-- <div class="hero-text">
             <p>Sistem Informasi Penyerapan Anggaran Kejaksaan Negeri Mataram</p>
-        </div>
+        </div> -->
     </div>
 </section>
 
@@ -39,7 +39,7 @@
     border-radius: 8px;
 
     /* Tambahkan variabel opacity */
-    --hero-text-bg-opacity: 0.5; /* Nilai default opacity */
+    --hero-text-bg-opacity: 0.8; /* Nilai default opacity */
     background-color: rgba(0, 0, 0, var(--hero-text-bg-opacity)); /* Background transparan */
 }
 
