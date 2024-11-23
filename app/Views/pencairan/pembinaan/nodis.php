@@ -216,12 +216,12 @@
 
 
         <div class="signature">
-            <p>Kepala Sub Bagian Pembinaan</p>
-            <img src="<?= base_url('template/assets/img/key.png') ?>" alt="Logo"
-                style="width: 100px; height: auto;">
-            <p style="text-decoration: underline;"><strong>Junaedi, S.H., M.H.</strong></p>
-            <p>Adi Wira NIP.196812311989031011</p>
+            <p style="margin-bottom: 5px;">Kepala Sub Bagian Pembinaan</p>
+            <img src="<?= base_url('template/assets/img/key.png') ?>" alt="Logo" style="width: 100px; height: auto; margin: 5px 0;">
+            <p style="text-decoration: underline; margin-top: 5px;"><strong>Junaedi, S.H., M.H.</strong></p>
+            <p style="margin-top: 2px;">Adi Wira NIP.196812311989031011</p>
         </div>
+
 
         <table>
             <p>Tembusan :</p>
