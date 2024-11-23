@@ -181,7 +181,14 @@ function terbilang($angka)
                     <td style="width: 15px;">2.</td>
                     <td>Untuk Keperluan</td>
                     <td>:</td>
-                    <td><?= $item->nama_item . " - " . $item->rincian ?></td>
+                    <td><td>:</td>
+<td>
+    <?php foreach ($data as $index => $item): ?>
+        <?= $item->nama_item . ' - ' . $item->rincian ?>
+        <?= $index < count($data) - 1 ? ', ' : '' ?> <!-- Tambahkan koma kecuali pada elemen terakhir -->
+    <?php endforeach; ?>
+</td>
+</td>
                 </tr>
                 <tr>
                     <td style="width: 15px;">3.</td>
