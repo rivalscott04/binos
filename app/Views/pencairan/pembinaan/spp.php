@@ -115,10 +115,10 @@
                     <td>Tanggal</td>
                     <td>:</td>
                     <td>
-                    <?php
+                        <?php
                         setlocale(LC_TIME, 'id_ID.UTF-8');
                         echo strftime('%d %B %Y');
-                    ?>
+                        ?>
                     </td>
                 </tr>
                 <tr>
@@ -159,38 +159,45 @@
             </table>
 
             <table class="table table-striped table-md" id="myTable">
-                        <thead>
-                            <tr class="text-center">
-                                <th>NO</th>
-                                <th>Kegiatan</th>
-                                <th>Pagu</th>
-                                <th>Realisasi</th>
-                                <th>Sisa Pagu</th>
-                                <th>Persentase (%)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $no = 1; ?> <!-- Inisialisasi nomor urut -->
-                            <?php foreach ($dtrealisasi_anggaran as $key => $value) : ?>
-                            <tr>
-                                <td class="text-center"><?= $no++ ?></td> <!-- Nomor urut otomatis -->
-                                <td class="text-center"><?= $value->nama_sub_output ?> </td>
-                                <td><?= number_format((float)$value->jumlah_pagu, 0, ',', '.') ?></td> <!-- Format jumlah pagu -->
-                                <td><?= number_format((float)$value->jumlah_terpakai, 0, ',', '.') ?></td> <!-- Format jumlah terpakai -->
-                                <td><?= number_format((float)$value->jumlah_pagu - (float)$value->jumlah_terpakai, 0, ',', '.') ?></td> <!-- Sisa pagu -->
-                                <td>
-                                    <?php
-                                    $persentase = 0;
-                                    if ((float)$value->jumlah_pagu > 0) {
-                                        $persentase = ((float)$value->jumlah_terpakai / (float)$value->jumlah_pagu) * 100;
-                                    }
-                                    echo number_format($persentase, 2, ',', '.') . '%'; 
-                                    ?>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                <thead>
+                    <tr style="background-color: #f2f2f2;">
+                        <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">No</th>
+                        <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">Nama Sub Output</th>
+                        <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">Jumlah Pagu</th>
+                        <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">Jumlah Terpakai</th>
+                        <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">Sisa Pagu</th>
+                        <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">Persentase</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $no=1;
+                    foreach ($dtrealisasi_anggaran as $key => $value) : ?>
+                    <tr>
+                        <td style="border: 1px solid #ccc; padding: 8px; text-align: center;"><?= $no++ ?></td>
+                        <!-- Nomor urut otomatis -->
+                        <td style="border: 1px solid #ccc; padding: 8px;"><?= $value->nama_sub_output ?> </td>
+                        <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
+                            <?= number_format((float) $value->jumlah_pagu, 0, ',', '.') ?></td>
+                        <!-- Format jumlah pagu -->
+                        <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
+                            <?= number_format((float) $value->jumlah_terpakai, 0, ',', '.') ?></td>
+                        <!-- Format jumlah terpakai -->
+                        <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
+                            <?= number_format((float) $value->jumlah_pagu - (float) $value->jumlah_terpakai, 0, ',', '.') ?>
+                        </td> <!-- Sisa pagu -->
+                        <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
+                            <?php
+                            $persentase = 0;
+                            if ((float) $value->jumlah_pagu > 0) {
+                                $persentase = ((float) $value->jumlah_terpakai / (float) $value->jumlah_pagu) * 100;
+                            }
+                            echo number_format($persentase, 2, ',', '.') . '%';
+                            ?>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
 
         </div>
 

@@ -28,7 +28,7 @@ class PencairanPembinaan extends ResourceController
         $data['dtpencairan_pembinaan'] = $this->pencairanPembinaanModel->findAll();
         return view('pencairan/pembinaan/new', $data);
     }
-    public function detail($id =null)
+    public function detail($id = null)
     {
         $data['data'] = $this->pencairanPembinaanModel->get_detail($id);
         // var_dump($data['data'][0]->no_surat);
@@ -62,32 +62,44 @@ class PencairanPembinaan extends ResourceController
         return redirect()->back()->with('error', 'Gagal menghapus data.');
     }
 
-    public function edit ($id = null) {
+    public function edit($id = null)
+    {
         $data['dtpencairan_pembinaan'] = $this->pencairanPembinaanModel->findAll();
         return $this->response->setJSON($data);
     }
 
-    public function update ($id = null) {
+    public function update($id = null)
+    {
         $data = $this->request->getPost();
-        if ($id && $this->pencairanPembinaanModel->updateData($id,$data)) {
+        if ($id && $this->pencairanPembinaanModel->updateData($id, $data)) {
             return redirect()->to(site_url('/pencairan/pembinaan/index'))->with('success', 'Data Berhasil Diubah');
         }
         return redirect()->back()->with('error', 'Gagal mengubah data.');
     }
 
-    public function prints($id = null) {
+    public function prints($id = null)
+    {
         $sekarang = $this->formatTanggalIndonesia(date('d-m-Y'));
         $data = $this->request->getGet();
         // var_dump($data);
-        $cek = $this->pencairanPembinaanModel->where('no_kwitansi', $data['nota'])->set(['no_surat' => $data['nomor'], 'tgl_surat' => $data['tanggal']])->update();//updateNomor($data['nota'], $data['no']);
-        
-        if($data['jenis'] == 'nodis') {
+        $cek = $this->pencairanPembinaanModel
+            ->where('no_kwitansi', $data['nota'])
+            ->set(['no_surat' => $data['nomor'], 'tgl_surat' => $data['tanggal']])
+            ->update(); //updateNomor($data['nota'], $data['no']);
+
+        if ($data['jenis'] == 'nodis') {
             $isi = $this->pencairanPembinaanModel->get_detail($data['nota']);
-            return view('pencairan/pembinaan/nodis', compact('data', 'isi','sekarang'));
-        } elseif ($data['jenis'] == 'sptjm'){
+            return view('pencairan/pembinaan/nodis', compact('data', 'isi', 'sekarang'));
+        } elseif ($data['jenis'] == 'sptjm') {
             return view('pencairan/pembinaan/sptjm', compact('data', 'sekarang'));
-        }elseif ($data['jenis'] == 'spp') {
-            return view('pencairan/pembinaan/spp', compact('data', 'sekarang'));
+        } elseif ($data['jenis'] == 'spp') {
+            $builder = $this->db->table('paguanggaran');
+            $builder->select('paguanggaran.*, suboutput.nama_sub_output, item.nama_item'); // Memilih kolom dari tabel paguanggaran, suboutput, dan item
+            $builder->join('suboutput', 'paguanggaran.kode_sub_output = suboutput.kode_sub_output', 'left'); // Melakukan join LEFT dengan suboutput
+            $builder->join('item', 'paguanggaran.kode_item = item.kode_item', 'left'); // Melakukan join LEFT dengan item
+            $query = $builder->get(); // Menjalankan query
+            $dtrealisasi_anggaran = $query->getResult();
+            return view('pencairan/pembinaan/spp', compact('data', 'sekarang', 'dtrealisasi_anggaran'));
         }
         // var_dump($cek);
     }
