@@ -52,6 +52,7 @@
                             <tr class="text-center">
                                 <th>NO</th>
                                 <th>Kegiatan</th>
+                                <th>Uraian Kegitan</th>
                                 <th>Pagu</th>
                                 <th>Realisasi</th>
                                 <th>Sisa Pagu</th>
@@ -64,6 +65,7 @@
                             <tr>
                                 <td class="text-center"><?= $no++ ?></td> <!-- Nomor urut otomatis -->
                                 <td class="text-center"><?= $value->nama_sub_output ?> </td>
+                                <td class="text-center"><?= $value->nama_item ?> </td>
                                 <td><?= number_format((float)$value->jumlah_pagu, 0, ',', '.') ?></td> <!-- Format jumlah pagu -->
                                 <td><?= number_format((float)$value->jumlah_terpakai, 0, ',', '.') ?></td> <!-- Format jumlah terpakai -->
                                 <td><?= number_format((float)$value->jumlah_pagu - (float)$value->jumlah_terpakai, 0, ',', '.') ?></td> <!-- Sisa pagu -->
