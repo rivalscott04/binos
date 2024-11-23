@@ -179,6 +179,7 @@ function terbilang($angka)
         "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas"
     ];
 
+    
     $hasil = "";
     if ($angka < 12) {
         $hasil = " " . $terbilang[$angka];
