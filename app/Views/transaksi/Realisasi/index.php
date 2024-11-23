@@ -59,25 +59,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($dtrealisasi_anggaran as $key => $value) : ?>
-                            <tr>
-                                <td><?= '-' ?></td>
-                                <td class="text text-center"><?= $value->nama_sub_output ?> </td>
-                                <td><?= $value->jumlah_pagu ?></td>
-                                <td><?= $value->jumlah_terpakai ?> </td>
-                                <td><?= $value->jumlah_pagu - $value->jumlah_terpakai ?></td>
-                                <td>
-                                    <?php
-                                    $persentase = 0;
-                                    if ($value->jumlah_pagu > 0) {
-                                        $persentase = ($value->jumlah_terpakai / $value->jumlah_pagu) * 100;
-                                    }
-                                    echo number_format($persentase, 2, ',', '.') . '%'; 
-                                    ?>
-                                </td>
-
-                            </tr>
-                            <?php endforeach; ?>
+                        <?php foreach ($dtrealisasi_anggaran as $key => $value) : ?>
+                        <tr>
+                            <td><?= '-' ?></td>
+                            <td class="text text-center"><?= $value->nama_sub_output ?> </td>
+                            <td><?= number_format((float)$value->jumlah_pagu, 0, ',', '.') ?></td> <!-- Jumlah pagu dengan format ribuan -->
+                            <td><?= number_format((float)$value->jumlah_terpakai, 0, ',', '.') ?> </td> <!-- Jumlah terpakai dengan format ribuan -->
+                            <td><?= number_format((float)$value->jumlah_pagu - (float)$value->jumlah_terpakai, 0, ',', '.') ?></td> <!-- Sisa pagu dengan format ribuan -->
+                            <td>
+                                <?php
+                                $persentase = 0;
+                                if ((float)$value->jumlah_pagu > 0) {
+                                    $persentase = ((float)$value->jumlah_terpakai / (float)$value->jumlah_pagu) * 100;
+                                }
+                                echo number_format($persentase, 2, ',', '.') . '%'; 
+                                ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
