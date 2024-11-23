@@ -53,6 +53,7 @@
                                 <th>NO</th>
                                 <th>KEGIATAN</th>
                                 <th>KODE ITEM</th>
+                                <th>NAMA ITEM</th>
                                 <th>JUMLAH PAGU</th>
                                 <th>JUMLAH TERPAKAI</th>
                                 <th>AKSI</th>
@@ -63,6 +64,7 @@
                             <tr>
                             <td><?= $key + 1 ?></td>
                                 <td class="text text-center"><?= $value->nama_sub_output ?> </td>
+                                <td class="text text-center"><?= $value->kode_item ?> </td>
                                 <td><?= $value->nama_item ?></td>
                                 <td><?= number_format($value->jumlah_pagu, 0, ',', '.') ?> </td>
                                 <!-- Format ribuan untuk jumlah pagu -->
