@@ -15,7 +15,7 @@
 .hero-banner {
     position: relative;
     width: 100%;
-    height: 60vh; /* Tinggi banner, sesuaikan kebutuhan */
+    height: 100vh; /* Tinggi banner, sesuaikan kebutuhan */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,7 +25,7 @@
 .hero-banner img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Gambar penuh tanpa distorsi */
+    object-fit: contain; /* Gambar penuh tanpa distorsi */
 }
 
 .hero-text {

@@ -27,7 +27,7 @@
 
         ._centere {
             text-align: center;
-            padding-left: 190px;
+            padding-left: 90px;
         }
 
         ._right {
@@ -141,7 +141,7 @@
 
         <hr />
 
-        <div class="_main">
+        <di  class="_main">
             <p class="_center" style="margin-bottom: 0px;">NOTA DINAS</p>
             <p class="_center" style="margin-top: 0px;">NOMOR : ND-<?= $isi[0]->no_surat ?? 'kosong' ?>/N.2.10.1/Cu.1/<?= $isi[0]->tgl_surat ?? 'kosong' ?></p>
             <table>
@@ -182,10 +182,11 @@
                 </tr>
             </table>
 
-            <p style="margin-top: 20px; font-size: 14px;">Sehubungan dengan telah dilaksanakan kegiatan Pembinaan bulan <?php
-                                                                                                                        setlocale(LC_TIME, 'id_ID.UTF-8');
-                                                                                                                        echo strftime('%B %Y');
-                                                                                                                        ?>
+            <p style="margin-top: 20px; font-size: 14px;">Sehubungan dengan telah dilaksanakan kegiatan Pembinaan bulan
+                 <?php
+                        setlocale(LC_TIME, 'id_ID.UTF-8');
+                        echo strftime('%B %Y');
+                ?>
                 dengan ini kami mengajukan permohonan biaya pelaksanaannya sesuai dengan ketentuan yang berlaku. Apabila
                 Bapak Berkenan mohon untuk ditindaklanjuti :</p>
             <table class="table">
@@ -215,7 +216,6 @@
             </table>
         </div>
         </table>
-
         <p style="margin-top: 20px; font-size: 14px;">
             Demikian untuk dimaklumi selanjutnya mohon petunjuk.
         </p>
