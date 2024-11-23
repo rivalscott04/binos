@@ -47,9 +47,9 @@
             </div>
             <div class="card-body p-4">
                 <div class="table-responsive">
-                    <table class="table table-striped table-md" id="myTable">
+                <table class="table table-striped table-md" id="myTable">
                         <thead>
-                            <tr class="text text-center">
+                            <tr class="text-center">
                                 <th>NO</th>
                                 <th>Kegiatan</th>
                                 <th>Pagu</th>
@@ -59,24 +59,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($dtrealisasi_anggaran as $key => $value) : ?>
-                        <tr>
-                            <td><?= '-' ?></td>
-                            <td class="text text-center"><?= $value->nama_sub_output ?> </td>
-                            <td><?= number_format((float)$value->jumlah_pagu, 0, ',', '.') ?></td> <!-- Jumlah pagu dengan format ribuan -->
-                            <td><?= number_format((float)$value->jumlah_terpakai, 0, ',', '.') ?> </td> <!-- Jumlah terpakai dengan format ribuan -->
-                            <td><?= number_format((float)$value->jumlah_pagu - (float)$value->jumlah_terpakai, 0, ',', '.') ?></td> <!-- Sisa pagu dengan format ribuan -->
-                            <td>
-                                <?php
-                                $persentase = 0;
-                                if ((float)$value->jumlah_pagu > 0) {
-                                    $persentase = ((float)$value->jumlah_terpakai / (float)$value->jumlah_pagu) * 100;
-                                }
-                                echo number_format($persentase, 2, ',', '.') . '%'; 
-                                ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
+                            <?php $no = 1; ?> <!-- Inisialisasi nomor urut -->
+                            <?php foreach ($dtrealisasi_anggaran as $key => $value) : ?>
+                            <tr>
+                                <td class="text-center"><?= $no++ ?></td> <!-- Nomor urut otomatis -->
+                                <td class="text-center"><?= $value->nama_sub_output ?> </td>
+                                <td><?= number_format((float)$value->jumlah_pagu, 0, ',', '.') ?></td> <!-- Format jumlah pagu -->
+                                <td><?= number_format((float)$value->jumlah_terpakai, 0, ',', '.') ?></td> <!-- Format jumlah terpakai -->
+                                <td><?= number_format((float)$value->jumlah_pagu - (float)$value->jumlah_terpakai, 0, ',', '.') ?></td> <!-- Sisa pagu -->
+                                <td>
+                                    <?php
+                                    $persentase = 0;
+                                    if ((float)$value->jumlah_pagu > 0) {
+                                        $persentase = ((float)$value->jumlah_terpakai / (float)$value->jumlah_pagu) * 100;
+                                    }
+                                    echo number_format($persentase, 2, ',', '.') . '%'; 
+                                    ?>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
