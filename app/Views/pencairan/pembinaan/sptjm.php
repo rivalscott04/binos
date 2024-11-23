@@ -157,7 +157,7 @@
                 <tr>
                     <td style="width: 15px; text-align: left; vertical-align: top;">1</td>
                     <td style="text-align: justify;">Perhitungan Anggaran Kegiatan Sebesar Rp.
-                        <?= $akun[0]->total_jumlah ?> telah dihitung dengan benar.</td>
+                    <?= number_format($akun[0]->total_jumlah, 0, ',', '.') ?> telah dihitung dengan benar.</td>
                 </tr>
                 <tr>
                     <td style="width: 15px; text-align: left; vertical-align: top;">2</td>
