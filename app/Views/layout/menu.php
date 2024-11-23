@@ -25,6 +25,11 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i> <span>Pencairan Anggaran</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="<?= base_url('pencairan/pembinaan/index') ?>">Pembinaan</a></li>
+                    <li><a class="nav-link" href=#>Intelijen</a></li>
+                    <li><a class="nav-link" href=#>Pidana Umum</a></li>
+                    <li><a class="nav-link" href=#>Pidana Khusus</a></li>
+                    <li><a class="nav-link" href=#">Datun</a></li>
+                    <li><a class="nav-link" href=#>PAPBB</a></li>
                 </ul>
             </li>
             <li class="menu-header">TRANSAKSI</li>
@@ -32,11 +37,6 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i> <span>Penyerapan Anggaran</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="<?= base_url('transaksi/realisasi/index') ?>">Realisasi</a></li>
-                    <li><a class="nav-link" href=#>Intelijen</a></li>
-                    <li><a class="nav-link" href=#>Pidana Umum</a></li>
-                    <li><a class="nav-link" href=#?>">Pidana Khusus</a></li>
-                    <li><a class="nav-link" href=#">Datun</a></li>
-                    <li><a class="nav-link" href=#>PAPBB</a></li>
                 </ul>
             </li>
             <li class="menu-header">Account</li>
