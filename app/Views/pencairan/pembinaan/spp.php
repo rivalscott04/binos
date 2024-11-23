@@ -174,7 +174,7 @@ function terbilang($angka)
                     <td style="width: 15px;">1.</td>
                     <td>Jumlah Pembayaran yang diterima</td>
                     <td>:</td>
-                    <td>RP. <?= $akun[0]->total_jumlah ?> (<?= terbilang($akun[0]->total_jumlah) ?> rupiah)
+                    <td>RP. <?= number_format($akun[0]->total_jumlah, 0, ',', '.') ?> (<?= terbilang($akun[0]->total_jumlah) ?> rupiah) rupiah)
                     </td>
                 </tr>
                 <tr>
