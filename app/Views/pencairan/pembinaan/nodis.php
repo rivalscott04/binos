@@ -25,9 +25,9 @@
             padding-left: 20px;
         }
 
-        ._centere1 {
+        ._centere {
             text-align: center;
-            padding-left: 200px;
+            padding-left: 90px;
         }
 
         ._right {
@@ -132,7 +132,7 @@
 
         <table class="_head">
             <tr>
-                <td class="_center">
+                <td class="_centere">
                     <p class="subtitle">KEJAKSAAN NEGERI MATARAM</p>
                     <p class="title">SUB BAGIAN PEMBINAAN</p>
                 </td>
