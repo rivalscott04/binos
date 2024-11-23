@@ -102,6 +102,41 @@
 
 <body class="A4">
 
+<?php
+function terbilang($angka)
+{
+    $angka = abs($angka);
+    $terbilang = [
+        "", "satu", "dua", "tiga", "empat", "lima",
+        "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas"
+    ];
+    $hasil = "";
+    if ($angka < 12) {
+        $hasil = " " . $terbilang[$angka];
+    } elseif ($angka < 20) {
+        $hasil = terbilang($angka - 10) . " belas";
+    } elseif ($angka < 100) {
+        $hasil = terbilang(floor($angka / 10)) . " puluh" . terbilang($angka % 10);
+    } elseif ($angka < 200) {
+        $hasil = " seratus" . terbilang($angka - 100);
+    } elseif ($angka < 1000) {
+        $hasil = terbilang(floor($angka / 100)) . " ratus" . terbilang($angka % 100);
+    } elseif ($angka < 2000) {
+        $hasil = " seribu" . terbilang($angka - 1000);
+    } elseif ($angka < 1000000) {
+        $hasil = terbilang(floor($angka / 1000)) . " ribu" . terbilang($angka % 1000);
+    } elseif ($angka < 1000000000) {
+        $hasil = terbilang(floor($angka / 1000000)) . " juta" . terbilang($angka % 1000000);
+    } elseif ($angka < 1000000000000) {
+        $hasil = terbilang(floor($angka / 1000000000)) . " miliar" . terbilang(fmod($angka, 1000000000));
+    } else {
+        $hasil = "Angka terlalu besar";
+    }
+    return trim($hasil);
+}
+?>
+
+
     <div class="sheet padding-10mm">
         <div class="_main">
             <p class="_center" style="text-decoration: underline; ">SURAT PERINTAH PEMBAYARAN (SPP)</p> <br>
