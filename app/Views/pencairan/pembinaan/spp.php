@@ -109,16 +109,13 @@
                 <tr>
                     <td style="width: 150px">Nomor</td>
                     <td style="width: 5px">:</td>
-                    <td>BERDASARKAN NOTA DINAS</td>
+                    <td>ND-<?= $isi[0]->no_surat ?? 'kosong' ?>/N.2.10.1/Cu.1/<?= $isi[0]->tgl_surat ?? 'kosong' ?></td>
                 </tr>
                 <tr>
                     <td>Tanggal</td>
                     <td>:</td>
                     <td>
-                        <?php
-                        setlocale(LC_TIME, 'id_ID.UTF-8');
-                        echo strftime('%d %B %Y');
-                        ?>
+                    <?= isset($data[0]->tanggal) ? strftime('%d %B %Y', strtotime($data[0]->tanggal)) : 'kosong' ?>
                     </td>
                 </tr>
                 <tr>
