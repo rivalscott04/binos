@@ -159,38 +159,38 @@
             </table>
 
             <table class="table table-striped table-md" id="myTable">
-    <thead>
-        <tr style="background-color: #f2f2f2;">
-            <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">No</th>
-            <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">Nama Sub Output</th>
-            <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">Jumlah Pagu</th>
-            <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">Jumlah Terpakai</th>
-            <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">Sisa Pagu</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php $no = 1;
-        foreach ($dtrealisasi_anggaran as $key => $value) : ?>
-            <tr>
-                <td style="border: 1px solid #ccc; padding: 8px; text-align: center;"><?= $no++ ?></td>
-                <!-- Nomor urut otomatis -->
-                <td style="border: 1px solid #ccc; padding: 8px;"><?= $value->nama_sub_output ?></td>
-                <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
-                    <?= number_format((float)$value->jumlah_pagu, 0, ',', '.') ?>
-                </td>
-                <!-- Format jumlah pagu -->
-                <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
-                    <?= number_format((float)$value->jumlah_terpakai, 0, ',', '.') ?>
-                </td>
-                <!-- Format jumlah terpakai -->
-                <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
-                    <?= number_format((float)$value->jumlah_pagu - (float)$value->jumlah_terpakai, 0, ',', '.') ?>
-                </td>
-                <!-- Sisa pagu -->
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+                    <thead>
+                        <tr style="background-color: #f2f2f2;">
+                            <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">No</th>
+                            <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">Nama Sub Output</th>
+                            <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">PAGU DALAM DIPA</th>
+                            <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">JUMLAH SPP S.D BULAN INI</th>
+                            <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">SISA PAGU</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $no = 1;
+                        foreach ($dtrealisasi_anggaran as $key => $value) : ?>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; text-align: center;"><?= $no++ ?></td>
+                                <!-- Nomor urut otomatis -->
+                                <td style="border: 1px solid #ccc; padding: 8px;"><?= $value->nama_sub_output ?></td>
+                                <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
+                                    <?= number_format((float)$value->jumlah_pagu, 0, ',', '.') ?>
+                                </td>
+                                <!-- Format jumlah pagu -->
+                                <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
+                                    <?= number_format((float)$value->jumlah_terpakai, 0, ',', '.') ?>
+                                </td>
+                                <!-- Format jumlah terpakai -->
+                                <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
+                                    <?= number_format((float)$value->jumlah_pagu - (float)$value->jumlah_terpakai, 0, ',', '.') ?>
+                                </td>
+                                <!-- Sisa pagu -->
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
 
                 </tbody>
             </table>
