@@ -61,11 +61,13 @@
                         <tbody>
                             <?php foreach ($dtakun_pagu as $key => $value) : ?>
                             <tr>
-                                <td><?= '-' ?></td>
+                            <td><?= $key + 1 ?></td>
                                 <td class="text text-center"><?= $value->nama_sub_output ?> </td>
                                 <td><?= $value->nama_item ?></td>
-                                <td><?= $value->jumlah_pagu ?> </td>
-                                <td><?= $value->jumlah_terpakai ?> </td>
+                                <td><?= number_format($value->jumlah_pagu, 0, ',', '.') ?> </td>
+                                <!-- Format ribuan untuk jumlah pagu -->
+                                <td><?= number_format($value->jumlah_terpakai, 0, ',', '.') ?> </td>
+                                <!-- Format ribuan untuk jumlah terpakai -->
                                 <td class="text text-center">
                                     <!-- EDIT -->
                                     <a href="<?= site_url('master/pagu/' . $value->id . '/edit') ?>"
