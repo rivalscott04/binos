@@ -27,7 +27,7 @@
 
         ._centere {
             text-align: center;
-            padding-left: 190px;
+            padding-left: 210px;
         }
 
         ._right {
@@ -141,7 +141,7 @@
 
         <hr />
 
-        <div class="_main">
+        <di  class="_main">
             <p class="_center" style="margin-bottom: 0px;">NOTA DINAS</p>
             <p class="_center" style="margin-top: 0px;">NOMOR : ND-<?= $isi[0]->no_surat ?? 'kosong' ?>/N.2.10.1/Cu.1/<?= $isi[0]->tgl_surat ?? 'kosong' ?></p>
             <table>
