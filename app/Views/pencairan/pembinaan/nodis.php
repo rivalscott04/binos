@@ -27,7 +27,7 @@
 
         ._centere {
             text-align: center;
-            padding-left: 200px;
+            padding-left: 190px;
         }
 
         ._right {
