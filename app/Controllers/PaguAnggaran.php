@@ -34,7 +34,6 @@ class PaguAnggaran extends BaseController
         $query = $builder->get(); // Menjalankan query
         $data['dtakun_pagu'] = $query->getResult(); // Mendapatkan hasil query dalam bentuk objek
         
-        var_dump($data['dtakun_pagu']);
         // $data['dtakun_output'] = $this->objOutput->AmbilRelasi();
         return view('master/pagu/index', $data);
     }
