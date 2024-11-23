@@ -181,20 +181,14 @@ function terbilang($angka)
                     <td style="width: 15px;">2.</td>
                     <td>Untuk Keperluan</td>
                     <td>:</td>
-<td>
-    <?php
-    $kegiatanGabungan = implode(', ', array_map(function($item) {
-        if (is_object($item)) {
-            return $item->nama_item . ' - ' . $item->rincian;
-        }
-        return ''; // Kembalikan string kosong jika bukan objek
-    }, $data));
-    echo $kegiatanGabungan;
-    ?>
-</td>
-
-</td>
-</td>
+                    <td>
+                        <?php
+                            $kegiatan = implode(', ', array_map(function ($item) {
+                            return $item->nama_item . ' - ' . $item->rincian;}, $data));
+                             echo $kegiatan;
+                             var_dump($kegiatan);
+                        ?>
+                    </td>
                 </tr>
                 <tr>
                     <td style="width: 15px;">3.</td>
