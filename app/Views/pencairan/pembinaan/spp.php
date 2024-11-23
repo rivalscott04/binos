@@ -122,9 +122,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Jenis Pembayaran</td>
+                    <td>Jenis Pembayaran </td>
                     <td>:</td>
-                    <td>TAMPILKAN KODE AKUN BERDASARKAN NODIS </td>
+                    <td><?= $akun[0]->kode_akun. " | ".$akun[0]->nama_akun ?></td>
                 </tr>
             </table>
             <p style="margin-top: 20px;">
@@ -142,7 +142,7 @@
                     <td style="width: 15px;">1.</td>
                     <td>Jumlah Pembayaran yang diterima</td>
                     <td>:</td>
-                    <td>RP. SESUAI JUMLAH NODIS (RUPIAH)</td>
+                    <td>RP. <?= $akun[0]->total_jumlah ?></td>
                 </tr>
                 <tr>
                     <td style="width: 15px;">2.</td>

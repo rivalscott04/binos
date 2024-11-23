@@ -87,11 +87,18 @@ class PencairanPembinaan extends ResourceController
             ->set(['no_surat' => $data['nomor'], 'tgl_surat' => $data['tanggal']])
             ->update(); //updateNomor($data['nota'], $data['no']);
 
+        $builderakun = $this->db->table('pencairan_pembinaan');
+        $builderakun->select('pencairan_pembinaan.no_kwitansi, SUM(pencairan_pembinaan.jumlah) as total_jumlah, akun.kode_akun, akun.nama_akun');
+        $builderakun->join('akun', 'pencairan_pembinaan.akun = akun.kode_akun', 'left');
+        $builderakun->where('pencairan_pembinaan.no_kwitansi', $data['nota']);
+        $builderakun->groupBy('pencairan_pembinaan.no_kwitansi, akun.kode_akun, akun.nama_akun'); // Tambahkan GROUP BY
+        $akun = $builderakun->get()->getResult();
+
         if ($data['jenis'] == 'nodis') {
             $isi = $this->pencairanPembinaanModel->get_detail($data['nota']);
-            return view('pencairan/pembinaan/nodis', compact('data', 'isi', 'sekarang'));
+            return view('pencairan/pembinaan/nodis', compact('data', 'isi', 'sekarang', 'akun'));
         } elseif ($data['jenis'] == 'sptjm') {
-            return view('pencairan/pembinaan/sptjm', compact('data', 'sekarang'));
+            return view('pencairan/pembinaan/sptjm', compact('data', 'sekarang', 'akun'));
         } elseif ($data['jenis'] == 'spp') {
             $builder = $this->db->table('paguanggaran');
             $builder->select('paguanggaran.*, suboutput.nama_sub_output, item.nama_item'); // Memilih kolom dari tabel paguanggaran, suboutput, dan item
@@ -99,7 +106,7 @@ class PencairanPembinaan extends ResourceController
             $builder->join('item', 'paguanggaran.kode_item = item.kode_item', 'left'); // Melakukan join LEFT dengan item
             $query = $builder->get(); // Menjalankan query
             $dtrealisasi_anggaran = $query->getResult();
-            return view('pencairan/pembinaan/spp', compact('data', 'sekarang', 'dtrealisasi_anggaran'));
+            return view('pencairan/pembinaan/spp', compact('data', 'sekarang', 'akun', 'dtrealisasi_anggaran'));
         }
         // var_dump($cek);
     }
@@ -107,9 +114,13 @@ class PencairanPembinaan extends ResourceController
     public function akun()
     {
         // $akunt = model(ModelAkunPembinaan::class);
-        $akun = new ModelAkunPembinaan();
+        // $akun = new ModelAkunPembinaan();
         // var_dump($akun->getAllAkun());
-        return $this->response->setJSON($akun->getAllAkun());
+
+        $builder = $this->db->table('akun');
+        $query = $builder->get();
+        $data = $query->getResultArray();
+        return $this->response->setJSON($data);
     }
 
     public function item()

@@ -210,7 +210,7 @@ function FormSelectAkun(Nomor) {
     //ambil datanya disini
         $.getJSON('/PencairanPembinaan/akun',function(data){
             $.each(data, function(key,value){
-                output.push('<option value="' + value.akun + '">' + value.akun + '</option>');
+                output.push('<option value="' + value.kode_akun + '">' + value.kode_akun + '|' + value.nama_akun + '</option>');
             }); 
         $('#akun' + Nomor).html(output.join(''));
     });
@@ -222,7 +222,7 @@ function FormSelectItem(Nomor) {
     //ambil datanya disini
         $.getJSON('/PencairanPembinaan/item',function(data){
             $.each(data, function(key,value){
-                output.push('<option value="' + value.kode_item + '">' + value.kode_item + '|' + value.nama_item + '</option>');
+                output.push('<option value="' + value.kode_item + '">' + value.kode_item + ' | ' + value.nama_item + '</option>');
             });
         $('#kode_item' + Nomor).html(output.join(''));
     });
