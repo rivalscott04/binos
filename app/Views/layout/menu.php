@@ -1,14 +1,23 @@
+<style>
+    .logo {
+        width: 25%;
+        height: 10vh;
+        margin-top: 15px;
+    }
+</style>
+
 <div class="main-sidebar" tabindex="1" style="overflow: hidden; outline: none;">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <h5 class="text tex mt-3">"BINOS"</h5>
+            <img src="<?= base_url('template/assets/img/logo.png') ?>" alt="Selamat Datang di Sistem Informasi Penyerapan Anggaran" class="logo">
+            <h5 class="text tex mt-2 mb-0">"BINOS"</h5>
             <p class="text text-warning">Pembinaan, On Your Service</p>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="<?= base_url('/') ?>">BIN</a>
         </div>
         <ul class="sidebar-menu">
-            <li class="menu-header">BERANDA</li>
+            <li class="menu-header mt-2">BERANDA</li>
             <li class="nav-item dropdown">
                 <a href="<?= base_url('/') ?>" class="nav-link"><i class="fa-solid fa-house"></i><span>Beranda</span></a>
             </li>
