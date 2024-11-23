@@ -6,23 +6,27 @@
     <div class="hero-banner">
         <img src="<?= base_url('template/assets/img/welcome.png') ?>" alt="Selamat Datang di Sistem Informasi Penyerapan Anggaran">
         <div class="hero-text">
-            <h1>Selamat Datang</h1>
             <p>Sistem Informasi Penyerapan Anggaran Kejaksaan Negeri Mataram</p>
         </div>
     </div>
 </section>
 
 <style>
-    .hero-banner {
-        position: relative;
-        width: 100%;
-        height: 60vh; /* Tinggi banner, sesuaikan kebutuhan */
-        background: #f8f9fa;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-    }
+   .hero-banner {
+    position: relative;
+    width: 100%;
+    height: 60vh; /* Tinggi banner, sesuaikan kebutuhan */
+    background: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    /* Tambahkan variabel opacity */
+    --background-opacity: 0.5; /* Nilai default opacity */
+    background-color: rgba(0, 0, 0, var(--background-opacity)); /* Warna latar belakang dengan opacity */
+}
+
 
     .hero-banner img {
         width: 100%;
