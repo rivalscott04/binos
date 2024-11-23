@@ -4,7 +4,7 @@
 
 <section class="section">
     <div class="hero-banner">
-        <img src="<?= base_url('template/assets/img/welcome.png') ?>" alt="Selamat Datang di Sistem Informasi Penyerapan Anggaran">
+        <img src="<?= base_url('template/assets/img/home.png') ?>" alt="Selamat Datang di Sistem Informasi Penyerapan Anggaran">
         <!-- <div class="hero-text">
             <p>Sistem Informasi Penyerapan Anggaran Kejaksaan Negeri Mataram</p>
         </div> -->
