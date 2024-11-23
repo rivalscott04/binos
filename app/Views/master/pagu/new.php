@@ -41,7 +41,7 @@
                         <input type="number" class="form-control" name="jumlah_pagu" placeholder="0" required>
                     </div>
                     <div class="form-group">
-                        <label>JUMLAH Terpakai</label>
+                        <label>JUMLAH TERPAKAI</label>
                         <input type="number" class="form-control" name="jumlah_terpakai" placeholder="0" required>
                     </div>
                     <div class="form-group">
