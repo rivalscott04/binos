@@ -72,7 +72,7 @@
                                     if ($value->jumlah_pagu > 0) {
                                         $persentase = ($value->jumlah_terpakai / $value->jumlah_pagu) * 100;
                                     }
-                                    echo number_format($persentase, 2) . '%'; 
+                                    echo number_format($persentase, 2, ',', '.') . '%'; 
                                     ?>
                                 </td>
 
