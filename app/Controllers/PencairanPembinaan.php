@@ -203,7 +203,3 @@ function terbilang($angka)
     }
     return trim($hasil);
 }
-
-
-
-$builderakun = $this->db->table('pencairan_pembinaan');
