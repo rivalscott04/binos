@@ -153,11 +153,7 @@ function terbilang($angka)
                 <tr>
                     <td style="width: 150px">Nomor</td>
                     <td style="width: 5px">:</td>
-<<<<<<< HEAD
                     <td>ND-<?= $isi[0]->no_surat ?>/N.2.10.1/Cu.1/<?= $isi[0]->tgl_surat ?></td>
-=======
-                    <td>ND-<?= $isi[0]->no_surat ?? 'kosong' ?>/N.2.10.1/Cu.1/<?= $isi[0]->tgl_surat ?? 'kosong' ?></td>
->>>>>>> 598ad6f6ea7724a42bbb153e9a44b76df102982c
                 </tr>
                 <tr>
                     <td>Tanggal</td>
@@ -197,8 +193,8 @@ function terbilang($angka)
                     <td>Untuk Keperluan</td>
                     <td>:</td>
                     <td>
-                        <?php foreach ($isi as $item): ?>
-                        <li><?= esc($item->nama_item) ?></li>
+                        <?php $i=0; foreach ($isi as $item): ?>
+                          <?php echo $i==0 ? '':', ' ?> <?= esc($item->nama_item)?>
                         <?php endforeach; ?>
                     </td>
                 </tr>
