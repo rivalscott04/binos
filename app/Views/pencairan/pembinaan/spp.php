@@ -181,23 +181,7 @@ function terbilang($angka)
                     <td style="width: 15px;">2.</td>
                     <td>Untuk Keperluan</td>
                     <td>:</td>
-    <td>
-        <?php 
-        $uraian_kegiatan = []; // Array untuk menyimpan semua nama_item
-        foreach ($data as $item): 
-            $uraian_kegiatan[] = $item->nama_item; // Simpan nama_item ke array
-        ?>
-        </td>
-            <td><?= $item->nama_item ?></td>
-            <td><?= $item->rincian ?></td>
-        </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
-
-<!-- Menampilkan Uraian Kegiatan Dipisahkan Koma -->
-<p><strong>Uraian Kegiatan:</strong> <?= implode(', ', $uraian_kegiatan) ?></p>
-</td>
+                    <td><?= $item->nama_item . " - " . $item->rincian ?></td>
                 </tr>
                 <tr>
                     <td style="width: 15px;">3.</td>
