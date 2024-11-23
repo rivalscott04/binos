@@ -108,6 +108,7 @@ class PencairanPembinaan extends ResourceController
     } elseif ($data['jenis'] == 'sptjm') {
         return view('pencairan/pembinaan/sptjm', compact('data', 'sekarang', 'akun'));
     } elseif ($data['jenis'] == 'spp') {
+        $isi = $this->pencairanPembinaanModel->get_detail($data['nota']);
         // Ambil data dari paguanggaran
         $builder = $this->db->table('paguanggaran');
         $builder->select('paguanggaran.*, suboutput.nama_sub_output, item.nama_item');
