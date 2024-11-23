@@ -12,59 +12,57 @@
 </section>
 
 <style>
-   .hero-banner {
+.hero-banner {
     position: relative;
     width: 100%;
     height: 60vh; /* Tinggi banner, sesuaikan kebutuhan */
-    background: #f8f9fa;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-
-    /* Tambahkan variabel opacity */
-    --background-opacity: 0.5; /* Nilai default opacity */
-    background-color: rgba(0, 0, 0, var(--background-opacity)); /* Warna latar belakang dengan opacity */
 }
 
+.hero-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Gambar penuh tanpa distorsi */
+}
 
-    .hero-banner img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; /* Gambar penuh tanpa distorsi */
-    }
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
 
-    .hero-text {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        color: white;
-        background-color: rgba(0, 0, 0, 0.5); /* Background transparan */
-        padding: 20px;
-        border-radius: 8px;
-    }
+    /* Tambahkan variabel opacity */
+    --hero-text-bg-opacity: 0.5; /* Nilai default opacity */
+    background-color: rgba(0, 0, 0, var(--hero-text-bg-opacity)); /* Background transparan */
+}
 
+.hero-text h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
     .hero-text h1 {
-        font-size: 2.5rem;
-        margin: 0;
+        font-size: 2rem;
     }
 
     .hero-text p {
-        font-size: 1.2rem;
-        margin-top: 10px;
+        font-size: 1rem;
     }
+}
 
-    @media (max-width: 768px) {
-        .hero-text h1 {
-            font-size: 2rem;
-        }
-
-        .hero-text p {
-            font-size: 1rem;
-        }
-    }
 </style>
 
 <?= $this->endSection() ?>;
