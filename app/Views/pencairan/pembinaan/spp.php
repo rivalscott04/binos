@@ -225,7 +225,7 @@ function terbilang($angka)
                         <td style="border: 1px solid #ccc; padding: 8px; text-align: center;"><?= $no++ ?></td>
                         <!-- Nomor urut otomatis -->
                         <td style="border: 1px solid #ccc; padding: 8px;"><?= $value->nama_sub_output ?></td>
-                        <td style="border: 1px solid #ccc; padding: 8px;"><?= $value->nama_kegiatan ?></td>
+                        <td style="border: 1px solid #ccc; padding: 8px;"><?= $value->nama_item ?></td>
                         <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
                             <?= number_format((float) $value->jumlah_pagu, 0, ',', '.') ?>
                         </td>
