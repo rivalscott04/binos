@@ -210,7 +210,8 @@ function terbilang($angka)
                 <thead>
                     <tr style="background-color: #f2f2f2;">
                         <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">No</th>
-                        <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">Nama Sub Output</th>
+                        <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">Nama Kegiatain</th>
+                        <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">Uraian Kegiatan</th>
                         <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">PAGU DALAM DIPA</th>
                         <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">JUMLAH SPP S.D BULAN INI
                         </th>
@@ -224,6 +225,7 @@ function terbilang($angka)
                         <td style="border: 1px solid #ccc; padding: 8px; text-align: center;"><?= $no++ ?></td>
                         <!-- Nomor urut otomatis -->
                         <td style="border: 1px solid #ccc; padding: 8px;"><?= $value->nama_sub_output ?></td>
+                        <td style="border: 1px solid #ccc; padding: 8px;"><?= $value->nama_kegiatan ?></td>
                         <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
                             <?= number_format((float) $value->jumlah_pagu, 0, ',', '.') ?>
                         </td>
