@@ -185,7 +185,7 @@ function terbilang($angka)
                     <td>:</td>
                     </td>
                     <td>
-                    <?= number_format($akun[0]->total_jumlah, 0, ',', '.') ?> (<?= terbilang($akun[0]->total_jumlah) ?> rupiah)
+                    Rp <?= number_format($akun[0]->total_jumlah, 0, ',', '.') ?> (<?= terbilang($akun[0]->total_jumlah) ?> rupiah)
                     </td>
                 </tr>
                 <tr>
@@ -194,7 +194,7 @@ function terbilang($angka)
                     <td>:</td>
                     <td>
                         <?php $i=0; foreach ($isi as $item): ?>
-                          <?php echo $i==0 ? '':', ' ?> <?= esc($item->nama_item)?>
+                        <?php echo $i==0 ? '':', ' ?> <?= esc($item->nama_item)?>
                         <?php endforeach; ?>
                     </td>
                 </tr>
