@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="<?= base_url('template/assets/css/paper.min.css') ?>">
     <style>
         @page {
-            size: A4;
-            margin: 0;
+            size: F4;
+            margin: 20mm;
         }
 
         body {
