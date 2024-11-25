@@ -159,7 +159,7 @@
                     <td>Tanggal</td>
                     <td>:</td>
                     <td>
-                        <?= $isi[0]->tanggal ?? 'kosong' ?>
+                    <?= isset($isi[0]->tanggal) ? strftime('%d %B %Y', strtotime($isi[0]->tanggal)) : 'kosong' ?>
                     </td>
                 </tr>
                 <tr>
