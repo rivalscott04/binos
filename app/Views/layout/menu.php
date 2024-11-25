@@ -11,7 +11,7 @@
         <div class="sidebar-brand">
             <img src="<?= base_url('template/assets/img/logo.png') ?>" alt="Selamat Datang di Sistem Informasi Penyerapan Anggaran" class="logo">
             <h5 class="text tex mt-2 mb-0">"BINOS"</h5>
-            <p class="text text-warning">Pembinaan, On Your Service</p>
+            <p class="text text-warning">Pembinaan, At Your Service</p>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="<?= base_url('/') ?>">BIN</a>
