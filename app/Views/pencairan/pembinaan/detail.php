@@ -50,13 +50,13 @@
                                         id="prints" style="display: inline-block;">
                                         <span>ND-</span>
 
-                                        <input type="number" class="form-control" name="nomor" placeholder="isi angka" value="<?= $data[0]->no_surat?>"
-                                            style="display: inline-block; width: 120px; vertical-align: middle; margin-right: 5px;"
-                                            required>
+                                        <input type="number" class="form-control" name="nomor" placeholder="isi angka"
+                                            value="<?= isset($data[0]->no_surat) ? $data[0]->no_surat : '' ?>"
+                                            style="display: inline-block; width: 120px; vertical-align: middle; margin-right: 5px;" required>
 
                                         <span>/N.2.10.1/Cu.1/</span>
 
-                                        <input type="text" class="form-control" name="tanggal" placeholder="contoh 10/2024" value="<?= $data[0]->tgl_surat?>"
+                                        <input type="text" class="form-control" name="tanggal" placeholder="contoh 10/2024" value="<?= isset($data[0]->tgl_surat) ? $data[0]->tgl_surat : '' ?>"
                                             pattern="\d{2}/\d{4}" title="Format: MM/YYYY (contoh: 10/2024)"
                                             style="display: inline-block; width: 100px; vertical-align: middle; margin-left: 5px;"
                                             required>
@@ -111,18 +111,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php 
-            $no = 1; // Counter untuk nomor
-            foreach ($data as $item): ?>
-                            <tr>
-                                <td><?= $no++ ?></td>
-                                <td><?= $item->akun ?></td>
-                                <td><?= $item->nama_item ?></td>
-                                <td><?= $item->rincian ?></td>
-                                <td><?= $item->volume ?></td>
-                                <td><?= number_format($item->harga_satuan, 0, ',', '.') ?></td>
-                                <td><?= number_format($item->jumlah, 0, ',', '.') ?></td>
-                            </tr>
+                            <?php
+                            $no = 1; // Counter untuk nomor
+                            foreach ($data as $item): ?>
+                                <tr>
+                                    <td><?= $no++ ?></td>
+                                    <td><?= $item->akun ?></td>
+                                    <td><?= $item->nama_item ?></td>
+                                    <td><?= $item->rincian ?></td>
+                                    <td><?= $item->volume ?></td>
+                                    <td><?= number_format($item->harga_satuan, 0, ',', '.') ?></td>
+                                    <td><?= number_format($item->jumlah, 0, ',', '.') ?></td>
+                                </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>

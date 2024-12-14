@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2024 at 06:54 AM
+-- Generation Time: Dec 14, 2024 at 04:49 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,16 +18,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sipa`
+-- Database: `ci4`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `akun_akun`
+-- Table structure for table `akun`
 --
 
-CREATE TABLE `akun_akun` (
+CREATE TABLE `akun` (
   `id_akun` int(100) UNSIGNED NOT NULL,
   `no_akun` int(100) UNSIGNED NOT NULL,
   `kode_akun` varchar(100) NOT NULL,
@@ -41,42 +41,13 @@ CREATE TABLE `akun_akun` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `akun_akun`
+-- Dumping data for table `akun`
 --
 
-INSERT INTO `akun_akun` (`id_akun`, `no_akun`, `kode_akun`, `nama_akun`, `no_subkomponen`, `no_komponen`, `no_suboutput`, `no_output`, `no_kegiatan`, `no_program`) VALUES
-(1, 1, '521211', 'Belanja Bahan', 1, 1, 1, 1, 1, 1),
-(2, 2, '524111', 'Belanja Perjalanan Dinas', 1, 1, 1, 1, 1, 1),
-(3, 3, '524113', 'Belanja Perjalanan Dinas Dalam Kota', 1, 1, 1, 1, 1, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `akun_item`
---
-
-CREATE TABLE `akun_item` (
-  `id_item` int(100) UNSIGNED NOT NULL,
-  `no_item` int(100) UNSIGNED NOT NULL,
-  `kode_item` varchar(100) NOT NULL,
-  `nama_item` varchar(500) NOT NULL,
-  `no_akun` int(100) UNSIGNED NOT NULL,
-  `no_subkomponen` int(100) UNSIGNED NOT NULL,
-  `no_komponen` int(100) UNSIGNED NOT NULL,
-  `no_suboutput` int(100) UNSIGNED NOT NULL,
-  `no_output` int(100) UNSIGNED NOT NULL,
-  `no_kegiatan` int(100) UNSIGNED NOT NULL,
-  `no_program` int(100) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `akun_item`
---
-
-INSERT INTO `akun_item` (`id_item`, `no_item`, `kode_item`, `nama_item`, `no_akun`, `no_subkomponen`, `no_komponen`, `no_suboutput`, `no_output`, `no_kegiatan`, `no_program`) VALUES
-(1, 1, '000001', 'Pengadaan ATK', 1, 2, 1, 1, 1, 1, 1),
-(2, 2, '000273', 'Uang Harian Kegiatan Lid/Pam/Gal', 2, 1, 1, 1, 1, 1, 1),
-(4, 3, '000004', 'Uang Harian Kegiatan Lid/Pam/Gal', 3, 3, 1, 1, 1, 1, 1);
+INSERT INTO `akun` (`id_akun`, `no_akun`, `kode_akun`, `nama_akun`, `no_subkomponen`, `no_komponen`, `no_suboutput`, `no_output`, `no_kegiatan`, `no_program`) VALUES
+(1, 1, '522191', 'Belanja Bahan', 1, 1, 1, 1, 1, 1),
+(2, 2, '522191', 'Belanja Perjalanan Dinas', 1, 1, 1, 1, 1, 1),
+(3, 3, '522191', 'Belanja Perjalanan Dinas Dalam Kota', 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -241,50 +212,6 @@ INSERT INTO `akun_subkomponen` (`id_subkomponen`, `no_subkomponen`, `kode_subkom
 -- --------------------------------------------------------
 
 --
--- Table structure for table `akun_suboutput`
---
-
-CREATE TABLE `akun_suboutput` (
-  `id_suboutput` int(100) UNSIGNED NOT NULL,
-  `no_suboutput` int(100) UNSIGNED NOT NULL,
-  `kode_suboutput` varchar(100) NOT NULL,
-  `nama_suboutput` varchar(500) NOT NULL,
-  `no_output` int(100) UNSIGNED NOT NULL,
-  `no_kegiatan` int(100) UNSIGNED NOT NULL,
-  `no_program` int(100) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `akun_suboutput`
---
-
-INSERT INTO `akun_suboutput` (`id_suboutput`, `no_suboutput`, `kode_suboutput`, `nama_suboutput`, `no_output`, `no_kegiatan`, `no_program`) VALUES
-(1, 1, 'BKA.052', 'Kegiatan / Operasi Intelijen Penyidikan, Pengamanan, dan Penggalangan di Kejaksaan Tinggi/ Kejaksaan Negeri/ Cabang Kejaksaan Negeri', 1, 1, 1),
-(2, 2, 'BKA.056', 'Pemantauan PEMILU (Legislatif, Pemilihan Presiden, Pemilihan Kepala Daerah)', 1, 1, 1),
-(3, 3, 'BKA.054', 'Kegiatan Pengawasan Aliran Kepercayaan Masyarakat Di Kejaksaan Tinggi/Kejaksaan Negeri/Cabang Kejaksaan Negeri', 1, 1, 1),
-(5, 4, 'BKB.058', 'Kampanye Anti Korupsi di Kejaksaan Tinggi / Kejaksaan Negeri / Cabang Kejaksaan Negeri', 2, 1, 1),
-(6, 5, 'BAB.U55', 'Lembaga Yang Telah Diberi Penerangan Hukum pada Kejaksaan Tinggi / Kejaksaan Negeri / Cabang Kejaksaan Negeri', 3, 2, 1),
-(7, 6, 'QAA.057', 'Penyuluhan Hukum Di Kejaksaan Tinggi / Kejaksaan Negeri / Cabang Kejaksaan Negeri', 5, 2, 1),
-(8, 7, 'BCE.051', 'Perkara Pidana Umum Dalam Tahap Pra Penuntutan pada Kejaksaan Tinggi / Kejaksaan Negeri / Cabang Kejaksaan Negeri', 6, 3, 1),
-(9, 8, 'BCE.052', 'Perkara Pidana Umum Dalam Tahap Pra Penuntutan dan Penuntutan pada Kejaksaan Negeri / Cabang Kejaksaan Negeri', 6, 3, 1),
-(10, 9, 'BCE.054', 'Perkara Tindak Pidana Umum Dalam Tahap Upaya Hukum dan Pelaksanaan Eksekusi di Kejaksaan Negeri / Cabang Kejaksaan Negeri', 6, 3, 1),
-(11, 10, 'BCE.062', 'Pelaksanaan eksekusi perkara Tindak Pidana Korupsi, Tindak Pidana Khusus Lainnya terpidana tidak ditahan dalam Rumah Tahanan di kejaksaan Tinggi/Kejaksaan Negeri/Cabang Kejaksaan Negeri', 6, 3, 1),
-(12, 11, 'BCE.063', 'Pelaksanaan eksekusi perkara Tindak Pidana Korupsi, Tindak Pidana Khusus Lainnya terpidana ditahan dalam Rumah Tahanan di kejaksaan Tinggi/Kejaksaan Negeri/Cabang Kejaksaan Negeri', 6, 3, 1),
-(13, 12, 'BCE.065', 'Perkara Perdata dan Tata Usaha Negara yang diselesaikan di Kejaksaan Tinggi/Kejaksaan Negeri/Cabang Kejaksaan Negeri', 6, 3, 1),
-(14, 13, 'BCE.066', 'Layanan Informasi dan Pelayanan Hukum Gratis di Kejaksaan Tinggi/Kejaksaan Negeri', 6, 3, 1),
-(15, 14, 'BCE.067', 'Pertimbangan Hukum/Penampingan Hukum/Bantuan Hukum yang dilakukan di Kejaksaan Tinggi/Kejaksaan Negeri', 6, 3, 1),
-(16, 15, 'BCE.073', 'Pemeliharaan, Pemusnahan, Penyelesaian barang bukti/sitaan/rampasan', 6, 3, 1),
-(17, 16, 'BCE.U50', 'Restorative Justice perkara Tindak Pidana Umum Pada Kejaksaan Negeri/ Cabang Kejaksaan Negeri', 1, 1, 1),
-(18, 17, 'BCE.U51', 'Perkara Tindak Pidana Korupsi dan Pencucian Uang Pada Tahap Penyelidikan Di Kejaksaan Tinggi/Kejaksaan Negeri/Cabang Kejaksaan Negeri', 6, 3, 1),
-(19, 18, 'BCE.U53', 'Perkara Tindak Pidana Korupsi dan Pencucian Uang pada Tahap Penyidikan di Kejaksaan Tinggi/Kejaksaan Negeri/Cabang Kejaksaan Negeri', 6, 3, 1),
-(20, 19, 'BCE.U56', 'Perkara Tindak Pidana Korupsi dan Tindak Pidana Khusus Lainnya pada Tahap Pra Penuntutan dan Penuntutan di Kejaksaan Negeri/Cabang Kejaksaan Negeri Wilayah I', 6, 3, 1),
-(21, 20, 'CCL.051', 'Penambahan Layanan Internet, Instalasi, Jaringan dan Langganan Vsat', 7, 4, 2),
-(22, 21, 'EBA.962', 'Layanan Umum', 7, 4, 2),
-(23, 22, 'EBA.994', 'Layanan Perkantoran', 7, 4, 2);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `isi_pembinaan`
 --
 
@@ -301,6 +228,35 @@ CREATE TABLE `isi_pembinaan` (
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `item`
+--
+
+CREATE TABLE `item` (
+  `id_item` int(100) UNSIGNED NOT NULL,
+  `no_item` int(100) UNSIGNED NOT NULL,
+  `kode_item` varchar(100) NOT NULL,
+  `nama_item` varchar(500) NOT NULL,
+  `no_akun` int(100) UNSIGNED NOT NULL,
+  `no_subkomponen` int(100) UNSIGNED NOT NULL,
+  `no_komponen` int(100) UNSIGNED NOT NULL,
+  `no_suboutput` int(100) UNSIGNED NOT NULL,
+  `no_output` int(100) UNSIGNED NOT NULL,
+  `no_kegiatan` int(100) UNSIGNED NOT NULL,
+  `no_program` int(100) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `item`
+--
+
+INSERT INTO `item` (`id_item`, `no_item`, `kode_item`, `nama_item`, `no_akun`, `no_subkomponen`, `no_komponen`, `no_suboutput`, `no_output`, `no_kegiatan`, `no_program`) VALUES
+(1, 1, '000001', 'Pengadaan ATK', 1, 2, 1, 1, 1, 1, 1),
+(2, 2, '000002', 'Uang Harian Kegiatan Lid/Pam/Gal', 2, 1, 1, 1, 1, 1, 1),
+(4, 3, '000004', 'Uang Harian Kegiatan Lid/Pam/Gal', 3, 3, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -336,7 +292,39 @@ INSERT INTO `migrations` (`id`, `version`, `class`, `group`, `namespace`, `time`
 (92, '2024-11-14-061011', 'App\\Database\\Migrations\\CreateNilai', 'default', 'App', 1731806628, 7),
 (93, '2024-11-15-233507', 'App\\Database\\Migrations\\CreateAkunPembinaan', 'default', 'App', 1731806628, 7),
 (94, '2024-11-16-231752', 'App\\Database\\Migrations\\CreatePencairanPembinaan', 'default', 'App', 1731806628, 7),
-(95, '2024-11-17-000828', 'App\\Database\\Migrations\\CreateIsiPembinaan', 'default', 'App', 1731806628, 7);
+(95, '2024-11-17-000828', 'App\\Database\\Migrations\\CreateIsiPembinaan', 'default', 'App', 1731806628, 7),
+(97, '2024-12-13-121617', 'App\\Database\\Migrations\\AddNoSuratToPencairanPembinaan', 'default', 'App', 1734094814, 8),
+(98, '2024-12-13-125745', 'App\\Database\\Migrations\\CreatePaguanggaranTable', 'default', 'App', 1734099671, 9),
+(100, '2024-12-14-040308', 'App\\Database\\Migrations\\ChangeNoSuratTypeToVarchar', 'default', 'App', 1734149213, 10),
+(101, '2024-12-14-055157', 'App\\Database\\Migrations\\AddForeignKeyToPaguanggaran', 'default', 'App', 1734155571, 11),
+(102, '2024-12-14-064021', 'App\\Database\\Migrations\\ChangeKodeItemAtPencairanPembinaanTableToVarchar', 'default', 'App', 1734158502, 12);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `paguanggaran`
+--
+
+CREATE TABLE `paguanggaran` (
+  `id_paguanggaran` int(10) UNSIGNED NOT NULL,
+  `kode_suboutput` int(100) UNSIGNED NOT NULL,
+  `kode_item` int(100) UNSIGNED NOT NULL,
+  `jumlah` int(100) NOT NULL DEFAULT 0,
+  `tahun` year(4) NOT NULL,
+  `keterangan` text DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `paguanggaran`
+--
+
+INSERT INTO `paguanggaran` (`id_paguanggaran`, `kode_suboutput`, `kode_item`, `jumlah`, `tahun`, `keterangan`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 1, 100, '2024', 'Keterangan', NULL, NULL, NULL),
+(2, 2, 4, 200, '2024', 'Keterangan', NULL, NULL, NULL),
+(3, 3, 4, 450, '2024', 'Keterangan', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -367,24 +355,70 @@ CREATE TABLE `pencairan_pembinaan` (
   `tanggal` date DEFAULT NULL,
   `perihal` varchar(500) NOT NULL,
   `akun` int(11) UNSIGNED NOT NULL,
-  `kode_item` int(11) UNSIGNED NOT NULL,
+  `kode_item` varchar(255) DEFAULT NULL,
   `rincian` text NOT NULL,
   `volume` int(15) NOT NULL,
   `harga_satuan` int(15) NOT NULL,
   `jumlah` float NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `deleted_at` datetime DEFAULT NULL
+  `deleted_at` datetime DEFAULT NULL,
+  `no_surat` varchar(255) DEFAULT NULL,
+  `tgl_surat` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pencairan_pembinaan`
 --
 
-INSERT INTO `pencairan_pembinaan` (`id_pencairan_pembinaan`, `no_kwitansi`, `tanggal`, `perihal`, `akun`, `kode_item`, `rincian`, `volume`, `harga_satuan`, `jumlah`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(2, '0001', '2024-11-17', 'pembayaran', 522191, 116, '1 bulan ', 1, 300000, 300000, NULL, NULL, NULL),
-(3, '0002', '2024-11-17', 'boleh', 522191, 116, '1 bulan ', 1, 200000, 200000, NULL, NULL, NULL),
-(4, '0003', '2024-11-17', 'BB', 522191, 116, 'BEBS', 1, 20000, 20000, NULL, NULL, NULL);
+INSERT INTO `pencairan_pembinaan` (`id_pencairan_pembinaan`, `no_kwitansi`, `tanggal`, `perihal`, `akun`, `kode_item`, `rincian`, `volume`, `harga_satuan`, `jumlah`, `created_at`, `updated_at`, `deleted_at`, `no_surat`, `tgl_surat`) VALUES
+(2, '0005', '2024-11-17', 'pembayaran', 522191, '000001', '1 bulan ', 1, 300000, 300000, NULL, '2024-12-14 15:31:23', NULL, '100', '10/2024'),
+(3, '0002', '2024-11-17', 'boleh', 522191, '000002', '1 bulan ', 1, 200000, 200000, NULL, NULL, NULL, NULL, NULL),
+(4, '0003', '2024-11-17', 'BB', 522191, '000004', 'BEBS', 1, 20000, 20000, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `suboutput`
+--
+
+CREATE TABLE `suboutput` (
+  `id_suboutput` int(100) UNSIGNED NOT NULL,
+  `no_suboutput` int(100) UNSIGNED NOT NULL,
+  `kode_suboutput` varchar(100) NOT NULL,
+  `nama_suboutput` varchar(500) NOT NULL,
+  `no_output` int(100) UNSIGNED NOT NULL,
+  `no_kegiatan` int(100) UNSIGNED NOT NULL,
+  `no_program` int(100) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `suboutput`
+--
+
+INSERT INTO `suboutput` (`id_suboutput`, `no_suboutput`, `kode_suboutput`, `nama_suboutput`, `no_output`, `no_kegiatan`, `no_program`) VALUES
+(1, 1, 'BKA.052', 'Kegiatan / Operasi Intelijen Penyidikan, Pengamanan, dan Penggalangan di Kejaksaan Tinggi/ Kejaksaan Negeri/ Cabang Kejaksaan Negeri', 1, 1, 1),
+(2, 2, 'BKA.056', 'Pemantauan PEMILU (Legislatif, Pemilihan Presiden, Pemilihan Kepala Daerah)', 1, 1, 1),
+(3, 3, 'BKA.054', 'Kegiatan Pengawasan Aliran Kepercayaan Masyarakat Di Kejaksaan Tinggi/Kejaksaan Negeri/Cabang Kejaksaan Negeri', 1, 1, 1),
+(5, 4, 'BKB.058', 'Kampanye Anti Korupsi di Kejaksaan Tinggi / Kejaksaan Negeri / Cabang Kejaksaan Negeri', 2, 1, 1),
+(6, 5, 'BAB.U55', 'Lembaga Yang Telah Diberi Penerangan Hukum pada Kejaksaan Tinggi / Kejaksaan Negeri / Cabang Kejaksaan Negeri', 3, 2, 1),
+(7, 6, 'QAA.057', 'Penyuluhan Hukum Di Kejaksaan Tinggi / Kejaksaan Negeri / Cabang Kejaksaan Negeri', 5, 2, 1),
+(8, 7, 'BCE.051', 'Perkara Pidana Umum Dalam Tahap Pra Penuntutan pada Kejaksaan Tinggi / Kejaksaan Negeri / Cabang Kejaksaan Negeri', 6, 3, 1),
+(9, 8, 'BCE.052', 'Perkara Pidana Umum Dalam Tahap Pra Penuntutan dan Penuntutan pada Kejaksaan Negeri / Cabang Kejaksaan Negeri', 6, 3, 1),
+(10, 9, 'BCE.054', 'Perkara Tindak Pidana Umum Dalam Tahap Upaya Hukum dan Pelaksanaan Eksekusi di Kejaksaan Negeri / Cabang Kejaksaan Negeri', 6, 3, 1),
+(11, 10, 'BCE.062', 'Pelaksanaan eksekusi perkara Tindak Pidana Korupsi, Tindak Pidana Khusus Lainnya terpidana tidak ditahan dalam Rumah Tahanan di kejaksaan Tinggi/Kejaksaan Negeri/Cabang Kejaksaan Negeri', 6, 3, 1),
+(12, 11, 'BCE.063', 'Pelaksanaan eksekusi perkara Tindak Pidana Korupsi, Tindak Pidana Khusus Lainnya terpidana ditahan dalam Rumah Tahanan di kejaksaan Tinggi/Kejaksaan Negeri/Cabang Kejaksaan Negeri', 6, 3, 1),
+(13, 12, 'BCE.065', 'Perkara Perdata dan Tata Usaha Negara yang diselesaikan di Kejaksaan Tinggi/Kejaksaan Negeri/Cabang Kejaksaan Negeri', 6, 3, 1),
+(14, 13, 'BCE.066', 'Layanan Informasi dan Pelayanan Hukum Gratis di Kejaksaan Tinggi/Kejaksaan Negeri', 6, 3, 1),
+(15, 14, 'BCE.067', 'Pertimbangan Hukum/Penampingan Hukum/Bantuan Hukum yang dilakukan di Kejaksaan Tinggi/Kejaksaan Negeri', 6, 3, 1),
+(16, 15, 'BCE.073', 'Pemeliharaan, Pemusnahan, Penyelesaian barang bukti/sitaan/rampasan', 6, 3, 1),
+(17, 16, 'BCE.U50', 'Restorative Justice perkara Tindak Pidana Umum Pada Kejaksaan Negeri/ Cabang Kejaksaan Negeri', 1, 1, 1),
+(18, 17, 'BCE.U51', 'Perkara Tindak Pidana Korupsi dan Pencucian Uang Pada Tahap Penyelidikan Di Kejaksaan Tinggi/Kejaksaan Negeri/Cabang Kejaksaan Negeri', 6, 3, 1),
+(19, 18, 'BCE.U53', 'Perkara Tindak Pidana Korupsi dan Pencucian Uang pada Tahap Penyidikan di Kejaksaan Tinggi/Kejaksaan Negeri/Cabang Kejaksaan Negeri', 6, 3, 1),
+(20, 19, 'BCE.U56', 'Perkara Tindak Pidana Korupsi dan Tindak Pidana Khusus Lainnya pada Tahap Pra Penuntutan dan Penuntutan di Kejaksaan Negeri/Cabang Kejaksaan Negeri Wilayah I', 6, 3, 1),
+(21, 20, 'CCL.051', 'Penambahan Layanan Internet, Instalasi, Jaringan dan Langganan Vsat', 7, 4, 2),
+(22, 21, 'EBA.962', 'Layanan Umum', 7, 4, 2),
+(23, 22, 'EBA.994', 'Layanan Perkantoran', 7, 4, 2);
 
 -- --------------------------------------------------------
 
@@ -434,18 +468,11 @@ INSERT INTO `tbl_transaksi_pembinaan` (`id_transaksi`, `no_kwitansi`, `tanggal`,
 --
 
 --
--- Indexes for table `akun_akun`
+-- Indexes for table `akun`
 --
-ALTER TABLE `akun_akun`
+ALTER TABLE `akun`
   ADD PRIMARY KEY (`id_akun`),
   ADD KEY `akun_akun_no_program_foreign` (`no_program`);
-
---
--- Indexes for table `akun_item`
---
-ALTER TABLE `akun_item`
-  ADD PRIMARY KEY (`id_item`),
-  ADD KEY `akun_item_no_program_foreign` (`no_program`);
 
 --
 -- Indexes for table `akun_kegiatan`
@@ -488,13 +515,6 @@ ALTER TABLE `akun_subkomponen`
   ADD KEY `akun_subkomponen_no_program_foreign` (`no_program`);
 
 --
--- Indexes for table `akun_suboutput`
---
-ALTER TABLE `akun_suboutput`
-  ADD PRIMARY KEY (`id_suboutput`),
-  ADD KEY `akun_suboutput_no_program_foreign` (`no_program`);
-
---
 -- Indexes for table `isi_pembinaan`
 --
 ALTER TABLE `isi_pembinaan`
@@ -502,10 +522,25 @@ ALTER TABLE `isi_pembinaan`
   ADD KEY `isi_pembinaan_id_pencairan_pembinaan_foreign` (`id_pencairan_pembinaan`);
 
 --
+-- Indexes for table `item`
+--
+ALTER TABLE `item`
+  ADD PRIMARY KEY (`id_item`),
+  ADD KEY `akun_item_no_program_foreign` (`no_program`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `paguanggaran`
+--
+ALTER TABLE `paguanggaran`
+  ADD PRIMARY KEY (`id_paguanggaran`),
+  ADD KEY `paguanggaran_kode_sub_output_foreign` (`kode_suboutput`),
+  ADD KEY `paguanggaran_kode_item_foreign` (`kode_item`);
 
 --
 -- Indexes for table `pembinaan1`
@@ -518,6 +553,13 @@ ALTER TABLE `pembinaan1`
 --
 ALTER TABLE `pencairan_pembinaan`
   ADD PRIMARY KEY (`id_pencairan_pembinaan`);
+
+--
+-- Indexes for table `suboutput`
+--
+ALTER TABLE `suboutput`
+  ADD PRIMARY KEY (`id_suboutput`),
+  ADD KEY `akun_suboutput_no_program_foreign` (`no_program`);
 
 --
 -- Indexes for table `tbl_nilai_pembinaan`
@@ -537,16 +579,10 @@ ALTER TABLE `tbl_transaksi_pembinaan`
 --
 
 --
--- AUTO_INCREMENT for table `akun_akun`
+-- AUTO_INCREMENT for table `akun`
 --
-ALTER TABLE `akun_akun`
+ALTER TABLE `akun`
   MODIFY `id_akun` int(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `akun_item`
---
-ALTER TABLE `akun_item`
-  MODIFY `id_item` int(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `akun_kegiatan`
@@ -585,22 +621,28 @@ ALTER TABLE `akun_subkomponen`
   MODIFY `id_subkomponen` int(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `akun_suboutput`
---
-ALTER TABLE `akun_suboutput`
-  MODIFY `id_suboutput` int(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
-
---
 -- AUTO_INCREMENT for table `isi_pembinaan`
 --
 ALTER TABLE `isi_pembinaan`
   MODIFY `id_isi_pembinaan` int(6) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `item`
+--
+ALTER TABLE `item`
+  MODIFY `id_item` int(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+
+--
+-- AUTO_INCREMENT for table `paguanggaran`
+--
+ALTER TABLE `paguanggaran`
+  MODIFY `id_paguanggaran` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pembinaan1`
@@ -613,6 +655,12 @@ ALTER TABLE `pembinaan1`
 --
 ALTER TABLE `pencairan_pembinaan`
   MODIFY `id_pencairan_pembinaan` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `suboutput`
+--
+ALTER TABLE `suboutput`
+  MODIFY `id_suboutput` int(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `tbl_nilai_pembinaan`
@@ -631,16 +679,10 @@ ALTER TABLE `tbl_transaksi_pembinaan`
 --
 
 --
--- Constraints for table `akun_akun`
+-- Constraints for table `akun`
 --
-ALTER TABLE `akun_akun`
+ALTER TABLE `akun`
   ADD CONSTRAINT `akun_akun_no_program_foreign` FOREIGN KEY (`no_program`) REFERENCES `akun_program` (`id_program`);
-
---
--- Constraints for table `akun_item`
---
-ALTER TABLE `akun_item`
-  ADD CONSTRAINT `akun_item_no_program_foreign` FOREIGN KEY (`no_program`) REFERENCES `akun_program` (`id_program`);
 
 --
 -- Constraints for table `akun_kegiatan`
@@ -667,37 +709,35 @@ ALTER TABLE `akun_subkomponen`
   ADD CONSTRAINT `akun_subkomponen_no_program_foreign` FOREIGN KEY (`no_program`) REFERENCES `akun_program` (`id_program`);
 
 --
--- Constraints for table `akun_suboutput`
---
-ALTER TABLE `akun_suboutput`
-  ADD CONSTRAINT `akun_suboutput_no_program_foreign` FOREIGN KEY (`no_program`) REFERENCES `akun_program` (`id_program`);
-
---
 -- Constraints for table `isi_pembinaan`
 --
 ALTER TABLE `isi_pembinaan`
   ADD CONSTRAINT `isi_pembinaan_id_pencairan_pembinaan_foreign` FOREIGN KEY (`id_pencairan_pembinaan`) REFERENCES `pencairan_pembinaan` (`id_pencairan_pembinaan`);
 
 --
+-- Constraints for table `item`
+--
+ALTER TABLE `item`
+  ADD CONSTRAINT `akun_item_no_program_foreign` FOREIGN KEY (`no_program`) REFERENCES `akun_program` (`id_program`);
+
+--
+-- Constraints for table `paguanggaran`
+--
+ALTER TABLE `paguanggaran`
+  ADD CONSTRAINT `paguanggaran_kode_item_foreign` FOREIGN KEY (`kode_item`) REFERENCES `item` (`id_item`),
+  ADD CONSTRAINT `paguanggaran_kode_sub_output_foreign` FOREIGN KEY (`kode_suboutput`) REFERENCES `suboutput` (`id_suboutput`);
+
+--
+-- Constraints for table `suboutput`
+--
+ALTER TABLE `suboutput`
+  ADD CONSTRAINT `akun_suboutput_no_program_foreign` FOREIGN KEY (`no_program`) REFERENCES `akun_program` (`id_program`);
+
+--
 -- Constraints for table `tbl_nilai_pembinaan`
 --
 ALTER TABLE `tbl_nilai_pembinaan`
   ADD CONSTRAINT `tbl_nilai_pembinaan_id_transaksi_foreign` FOREIGN KEY (`id_transaksi`) REFERENCES `tbl_transaksi_pembinaan` (`id_transaksi`);
-
-CREATE TABLE `paguanggaran` (
-  `id_paguanggaran` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  `kode_sub_output` INT UNSIGNED,
-  `kode_item` INT UNSIGNED,
-  `jumlah` DECIMAL(15, 2) DEFAULT 0,
-  `tahun` YEAR NOT NULL,
-  `keterangan` TEXT NULL,
-  `created_at` DATETIME NULL,
-  `updated_at` DATETIME NULL,
-  `deleted_at` DATETIME NULL,
-  FOREIGN KEY (`kode_sub_output`) REFERENCES `akunsuboutput`(`id_suboutput`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`kode_item`) REFERENCES `item`(`id_item`) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

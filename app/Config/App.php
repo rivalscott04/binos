@@ -199,4 +199,8 @@ class App extends BaseConfig
      * @see http://www.w3.org/TR/CSP/
      */
     public bool $CSPEnabled = false;
+
+    public $displayErrors = true;  // Menampilkan error di browser
+    public $logErrors = true;      // Menyimpan error ke log
+
 }

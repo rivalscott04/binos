@@ -55,7 +55,7 @@ class ModelPencairanPembinaan extends Model
             if (!isset($val) || !isset($data['harga_satuan'][$index])) {
                 throw new \InvalidArgumentException("Kolom 'volume' dan 'harga_satuan' harus disertakan");
             }
-    
+
             // Hanya lakukan cek pagu sekali
             if ($cek == 0) {
                 // Query untuk mendapatkan data paguanggaran
@@ -63,13 +63,13 @@ class ModelPencairanPembinaan extends Model
                     ->where('kode_item', $data['kode_item'][$index]) // Kolom yang diperiksa
                     ->get()
                     ->getResultArray();
-    
+
                 if (count($pagu) > 0) {
                     $lokasi = $pagu[0]['kode_item']; // Pastikan kolom ini sesuai dengan tabel
                     $cek = 1;
                 }
             }
-    
+
             // Menyiapkan data yang akan diolah
             $processedData[] = [
                 'tanggal' => $data['tanggal'],
@@ -82,21 +82,21 @@ class ModelPencairanPembinaan extends Model
                 'harga_satuan' => $data['harga_satuan'][$index],
                 'jumlah' => $data['volume'][$index] * $data['harga_satuan'][$index],
             ];
-    
+
             // Menghitung total jumlah
             $jumlah += $data['volume'][$index] * $data['harga_satuan'][$index];
         }
-    
+
         // Cek apakah data pagu ditemukan
         if ($cek == 1) {
             $pagu = $model->where('kode_item', $lokasi)->get()->getResultArray();
-    
+
             if (!empty($pagu) && ($pagu[0]['jumlah_terpakai'] + $jumlah) <= $pagu[0]['jumlah_pagu']) {
                 // Jika saldo mencukupi, update jumlah_realisasi
                 $model->where('kode_item', $lokasi)
                     ->set('jumlah_terpakai', "jumlah_terpakai + $jumlah", false) // false untuk raw query
                     ->update();
-    
+
                 // Simpan data batch
                 return $this->db->table('pencairan_pembinaan')->insertBatch($processedData);
             } else {
@@ -136,10 +136,11 @@ class ModelPencairanPembinaan extends Model
         $sql = "
         SELECT pencairan_pembinaan.*, item.nama_item
         FROM pencairan_pembinaan
-        INNER JOIN item ON item.kode_item = pencairan_pembinaan.kode_item
+        LEFT JOIN item ON item.kode_item = pencairan_pembinaan.kode_item
         WHERE pencairan_pembinaan.no_kwitansi = ?
-    ";
+        ";
 
-    return $this->db->query($sql, [$kode])->getResult();
+        $result = $this->db->query($sql, [$kode])->getResult();
+        return $result;
     }
 }

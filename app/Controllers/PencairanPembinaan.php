@@ -3,14 +3,15 @@
 namespace App\Controllers;
 
 use App\Models\ModelPencairanPembinaan;
-use App\Models\ModelAkunPembinaan;
 use CodeIgniter\RESTful\ResourceController;
+use CodeIgniter\Database\Exceptions\DatabaseException;
 
 class PencairanPembinaan extends ResourceController
 {
+    protected $pencairanPembinaanModel;
     protected $db;
-    private $pencairanPembinaanModel;
 
+    // Dependency Injection untuk ModelPencairanPembinaan
     public function __construct()
     {
         $this->pencairanPembinaanModel = new ModelPencairanPembinaan();
@@ -19,129 +20,199 @@ class PencairanPembinaan extends ResourceController
 
     public function index(): string
     {
-        $data['dtpencairan_pembinaan'] = $this->pencairanPembinaanModel->findAll();
-        return view('pencairan/pembinaan/index', $data);
+        try {
+            $data['dtpencairan_pembinaan'] = $this->pencairanPembinaanModel->findAll();
+            return view('pencairan/pembinaan/index', $data);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal mengambil data: ' . $e->getMessage());
+        }
     }
 
     public function new(): string
     {
-        $data['dtpencairan_pembinaan'] = $this->pencairanPembinaanModel->findAll();
-        return view('pencairan/pembinaan/new', $data);
+        try {
+            $data['dtpencairan_pembinaan'] = $this->pencairanPembinaanModel->findAll();
+            return view('pencairan/pembinaan/new', $data);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal mengambil data: ' . $e->getMessage());
+        }
     }
-    public function detail($id = null)
+
+    public function detail($kode = null)
     {
-        $data['data'] = $this->pencairanPembinaanModel->get_detail($id);
-        // var_dump($data['data'][0]->no_surat);
-        // var_dump($data['data'][0]['tanggal']);
-        // var_dump($data['data']);
-        return view('pencairan/pembinaan/detail', $data);
+        try {
+            // Pastikan kode yang diterima valid
+            if ($kode === null) {
+                throw new \Exception('Kode tidak ditemukan');
+            }
+
+            // Debugging: Log kode yang diterima
+            if (ENVIRONMENT === 'development') {
+                log_message('debug', 'Kode yang diterima: ' . $kode);
+            }
+
+            // Ambil data berdasarkan kode (no_kwitansi)
+            $data['data'] = $this->pencairanPembinaanModel->get_detail($kode);
+
+            // Debugging: Log data yang ditemukan
+            if (ENVIRONMENT === 'development') {
+                log_message('debug', 'Data yang ditemukan: ' . json_encode($data['data']));
+            }
+
+            // Pastikan data tersedia
+            if (empty($data['data'])) {
+                throw new \Exception('Data tidak ditemukan');
+            }
+
+            return view('pencairan/pembinaan/detail', $data);
+        } catch (\Exception $e) {
+            // Tampilkan pesan error jika terjadi masalah
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     public function create()
     {
-        $data = $this->request->getPost(); // Ambil data dari form
-        // Debugging untuk memastikan data diterima
-        if (!$data) {
-            log_message('error', 'Data tidak ditemukan: ' . json_encode($this->request->getPost()));
+        $data = $this->request->getPost();
+
+        // Pastikan data diterima dengan benar
+        if (empty($data)) {
             return redirect()->back()->with('error', 'Data tidak ditemukan atau format tidak sesuai.');
         }
 
         try {
+            // Pastikan insert berhasil
             $this->pencairanPembinaanModel->insertBatchWithCalculation($data);
             return redirect()->to(site_url('/pencairan/pembinaan/index'))->with('success', 'Data Berhasil Disimpan');
+        } catch (DatabaseException $e) {
+            return redirect()->back()->with('error', 'Database error: ' . $e->getMessage());
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
         }
     }
 
     public function delete($id = null)
     {
-        if ($id && $this->pencairanPembinaanModel->delete($id)) {
-            return redirect()->to(site_url('/pencairan/pembinaan/index'))->with('success', 'Data Berhasil Dihapus');
+        if (!$id) {
+            return redirect()->back()->with('error', 'ID tidak valid');
         }
-        return redirect()->back()->with('error', 'Gagal menghapus data.');
+
+        try {
+            // Pastikan data ada sebelum dihapus
+            if (!$this->pencairanPembinaanModel->find($id)) {
+                return redirect()->back()->with('error', 'Data tidak ditemukan.');
+            }
+
+            if ($this->pencairanPembinaanModel->delete($id)) {
+                return redirect()->to(site_url('/pencairan/pembinaan/index'))->with('success', 'Data Berhasil Dihapus');
+            } else {
+                throw new \Exception('Gagal menghapus data.');
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     public function edit($id = null)
     {
-        $data['dtpencairan_pembinaan'] = $this->pencairanPembinaanModel->findAll();
-        return $this->response->setJSON($data);
+        try {
+            $data['dtpencairan_pembinaan'] = $this->pencairanPembinaanModel->findAll();
+            return $this->response->setJSON($data);
+        } catch (\Exception $e) {
+            return $this->response->setJSON(['error' => 'Gagal mengambil data: ' . $e->getMessage()]);
+        }
     }
 
     public function update($id = null)
     {
         $data = $this->request->getPost();
-        if ($id && $this->pencairanPembinaanModel->updateData($id, $data)) {
-            return redirect()->to(site_url('/pencairan/pembinaan/index'))->with('success', 'Data Berhasil Diubah');
+
+        if (!$id) {
+            return redirect()->back()->with('error', 'ID tidak valid');
         }
-        return redirect()->back()->with('error', 'Gagal mengubah data.');
+
+        try {
+            // Pastikan data valid sebelum diupdate
+            if (!$this->pencairanPembinaanModel->find($id)) {
+                return redirect()->back()->with('error', 'ID tidak ditemukan.');
+            }
+
+            if ($this->pencairanPembinaanModel->updateData($id, $data)) {
+                return redirect()->to(site_url('/pencairan/pembinaan/index'))->with('success', 'Data Berhasil Diubah');
+            } else {
+                throw new \Exception('Gagal mengubah data.');
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     public function prints($id = null)
-{
-    $sekarang = $this->formatTanggalIndonesia(date('d-m-Y'));
-    $data = $this->request->getGet();
-
-    // Update nomor dan tanggal Nota Dinas
-    $this->pencairanPembinaanModel
-        ->where('no_kwitansi', $data['nota'])
-        ->set(['no_surat' => $data['nomor'], 'tgl_surat' => $data['tanggal']])
-        ->update();
-
-    // Ambil data Akun
-    $builderakun = $this->db->table('pencairan_pembinaan');
-    $builderakun->select('pencairan_pembinaan.no_kwitansi, SUM(pencairan_pembinaan.jumlah) as total_jumlah, akun.kode_akun, akun.nama_akun, pencairan_pembinaan.tanggal');
-    $builderakun->join('akun', 'pencairan_pembinaan.akun = akun.kode_akun', 'left');
-    $builderakun->where('pencairan_pembinaan.no_kwitansi', $data['nota']);
-    $builderakun->groupBy('pencairan_pembinaan.no_kwitansi, akun.kode_akun, akun.nama_akun');
-    $akun = $builderakun->get()->getResult();
-
-    // Ambil data Nota Dinas
-    $builderNotaDinas = $this->db->table('pencairan_pembinaan'); // Ganti 'nota_dinas' sesuai nama tabel Anda
-    $builderNotaDinas->where('no_kwitansi', $data['nota']);
-    $notaDinas = $builderNotaDinas->get()->getRow(); // Ambil satu baris data
-
-    // Kondisi berdasarkan jenis
-    if ($data['jenis'] == 'nodis') {
-        $isi = $this->pencairanPembinaanModel->get_detail($data['nota']);
-        return view('pencairan/pembinaan/nodis', compact('data', 'isi', 'sekarang', 'akun'));
-    } elseif ($data['jenis'] == 'sptjm') {
-        return view('pencairan/pembinaan/sptjm', compact('data', 'sekarang', 'akun'));
-    } elseif ($data['jenis'] == 'spp') {
-        $isi = $this->pencairanPembinaanModel->get_detail($data['nota']);
-        // Ambil data dari paguanggaran
-        $builder = $this->db->table('paguanggaran');
-        $builder->select('paguanggaran.*, suboutput.nama_sub_output, item.nama_item');
-        $builder->join('suboutput', 'paguanggaran.kode_sub_output = suboutput.kode_sub_output', 'left');
-        $builder->join('item', 'paguanggaran.kode_item = item.kode_item', 'left');
-        $query = $builder->get();
-        $dtrealisasi_anggaran = $query->getResult();
-
-        // Kirim data Nota Dinas ke view
-        return view('pencairan/pembinaan/spp', compact('data', 'sekarang', 'akun', 'isi', 'dtrealisasi_anggaran', 'notaDinas'));
-    }
-}
-
-
-    public function akun()
     {
-        // $akunt = model(ModelAkunPembinaan::class);
-        // $akun = new ModelAkunPembinaan();
-        // var_dump($akun->getAllAkun());
+        try {
+            $sekarang = $this->formatTanggalIndonesia(date('d-m-Y'));
+            $data = $this->request->getGet();
 
-        $builder = $this->db->table('akun');
-        $query = $builder->get();
-        $data = $query->getResultArray();
-        return $this->response->setJSON($data);
-    }
+            // Validasi parameter
+            if (empty($data['nota']) || empty($data['nomor']) || empty($data['tanggal']) || empty($data['jenis'])) {
+                throw new \Exception('Parameter tidak lengkap. Pastikan semua input tersedia.');
+            }
 
-    public function item()
-    {
-        // $akun = model(ModelAkunPembinaan::class);
-        $builder = $this->db->table('item');
-        $query = $builder->get();
-        $data = $query->getResultArray();
-        return $this->response->setJSON($data);
+            // Validasi data Nota Dinas
+            $notaDinas = $this->db->table('pencairan_pembinaan')
+                ->where('no_kwitansi', $data['nota'])
+                ->get()
+                ->getRow();
+
+            if (!$notaDinas) {
+                throw new \Exception('Data Nota Dinas tidak ditemukan');
+            }
+
+            // Update nomor dan tanggal Nota Dinas
+            $this->pencairanPembinaanModel
+                ->where('no_kwitansi', $data['nota'])
+                ->set(['no_surat' => $data['nomor'], 'tgl_surat' => $data['tanggal']])
+                ->update();
+
+            // Ambil data Akun
+            $akun = $this->db->table('pencairan_pembinaan')
+                ->select('pencairan_pembinaan.no_kwitansi, SUM(pencairan_pembinaan.jumlah) as total_jumlah, akun.kode_akun, akun.nama_akun')
+                ->join('akun', 'pencairan_pembinaan.akun = akun.kode_akun', 'left')
+                ->where('pencairan_pembinaan.no_kwitansi', $data['nota'])
+                ->groupBy(['pencairan_pembinaan.no_kwitansi', 'akun.kode_akun', 'akun.nama_akun'])
+                ->get()
+                ->getResult();
+
+            if (empty($akun)) {
+                throw new \Exception('Data Akun tidak ditemukan');
+            }
+
+            // Jenis cetakan
+            switch ($data['jenis']) {
+                case 'nodis':
+                    $isi = $this->pencairanPembinaanModel->get_detail($data['nota']);
+                    return view('pencairan/pembinaan/nodis', compact('data', 'isi', 'sekarang', 'akun'));
+                case 'sptjm':
+                    return view('pencairan/pembinaan/sptjm', compact('data', 'sekarang', 'akun'));
+                case 'spp':
+                    $isi = $this->pencairanPembinaanModel->get_detail($data['nota']);
+                    $dtrealisasi_anggaran = $this->db->table('paguanggaran')
+                        ->select('paguanggaran.*, suboutput.nama_suboutput, item.nama_item')
+                        ->join('suboutput', 'paguanggaran.kode_suboutput = suboutput.id_suboutput', 'left')
+                        ->join('item', 'paguanggaran.kode_item = item.kode_item', 'left')
+                        ->get()
+                        ->getResult();
+
+                    return view('pencairan/pembinaan/spp', compact('data', 'sekarang', 'akun', 'isi', 'dtrealisasi_anggaran', 'notaDinas'));
+                default:
+                    throw new \Exception('Jenis cetakan tidak valid');
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+
+        log_message('debug', 'Data diterima: ' . json_encode($data));
+        log_message('debug', 'Nota Dinas: ' . $data['nota']);
     }
 
     public function formatTanggalIndonesia($tanggal)
@@ -158,14 +229,14 @@ class PencairanPembinaan extends ResourceController
             9 => 'September',
             10 => 'Oktober',
             11 => 'November',
-            12 => 'Desember',
+            12 => 'Desember'
         ];
 
-        $tanggalObj = new \DateTime($tanggal); // Pastikan format inputnya valid
-        $hari = $tanggalObj->format('j'); // Hari (tanpa leading zero)
-        $bulanIndo = $bulan[(int) $tanggalObj->format('n')]; // Bulan dalam Bahasa Indonesia
-        $tahun = $tanggalObj->format('Y'); // Tahun
+        $tanggalObj = \DateTime::createFromFormat('d-m-Y', $tanggal);
+        if (!$tanggalObj) {
+            throw new \Exception("Format tanggal tidak valid. Harap gunakan format d-m-Y.");
+        }
 
-        return "$hari $bulanIndo $tahun";
+        return $tanggalObj->format('j') . ' ' . $bulan[(int) $tanggalObj->format('n')] . ' ' . $tanggalObj->format('Y');
     }
 }
