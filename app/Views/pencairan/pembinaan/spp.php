@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="<?= base_url('template/assets/css/paper.min.css') ?>">
     <style>
         @page {
-            size: 210mm 330mm;
+            size: F4;
             /* Legal size */
             margin: 20mm;
             margin-bottom: 0;
@@ -26,7 +26,6 @@
             margin: 0 auto;
             padding: 20mm;
             background: white;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
             page-break-inside: avoid;
             /* Prevent content splitting */
             page-break-after: always;
@@ -219,7 +218,7 @@
             </table>
 
             <?php
-            $max_per_page = 2; // Maksimal data per halaman
+            $max_per_page = 3; // Maksimal data per halaman
             $total_data = count($dtrealisasi_anggaran); // Total data
             $total_pages = ceil($total_data / $max_per_page); // Hitung jumlah halaman
             ?>
