@@ -54,7 +54,7 @@ class CreatePaguanggaranTable extends Migration
         // Menambahkan primary key
         $this->forge->addKey('id_paguanggaran', true);
 
-        $this->forge->addForeignKey('kode_sub_output', 'akun_suboutput', 'id_suboutput');
+        $this->forge->addForeignKey('kode_suboutput', 'akun_suboutput', 'id_suboutput');
         $this->forge->addForeignKey('kode_item', 'item', 'id_item');
 
 

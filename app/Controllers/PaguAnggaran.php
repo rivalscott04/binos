@@ -28,24 +28,23 @@ class PaguAnggaran extends BaseController
     public function index()
     {
         $builder = $this->db->table('paguanggaran');
-        $builder->select('paguanggaran.*, suboutput.nama_sub_output, item.nama_item'); // Memilih kolom dari tabel paguanggaran, suboutput, dan item
-        $builder->join('suboutput', 'paguanggaran.kode_sub_output = suboutput.kode_sub_output', 'left'); // Melakukan join LEFT dengan suboutput
+        $builder->select('paguanggaran.*, suboutput.nama_suboutput, item.nama_item'); // Memilih kolom dari tabel paguanggaran, suboutput, dan item
+        $builder->join('suboutput', 'paguanggaran.kode_suboutput = suboutput.kode_suboutput', 'left'); // Melakukan join LEFT dengan suboutput
         $builder->join('item', 'paguanggaran.kode_item = item.kode_item', 'left'); // Melakukan join LEFT dengan item
         $query = $builder->get(); // Menjalankan query
         $data['dtakun_pagu'] = $query->getResult(); // Mendapatkan hasil query dalam bentuk objek
-        
-        // $data['dtakun_output'] = $this->objOutput->AmbilRelasi();
+
         return view('master/pagu/index', $data);
     }
 
     /**
      * Return the properties of a resource object.
      *
-     * @param int|string|null $id
+     * @param int|string|null $id_paguanggaran
      *
      * @return ResponseInterface
      */
-    public function show($id = null)
+    public function show($id_paguanggaran = null)
     {
         //
     }
@@ -62,7 +61,7 @@ class PaguAnggaran extends BaseController
 
         $builder2 = $this->db->table('suboutput');
         $query2 = $builder2->get();
-        $data['dtakun_kegiatan'] = $query2->getResult();//$this->objKegiatan->findAll();
+        $data['dtakun_kegiatan'] = $query2->getResult(); //$this->objKegiatan->findAll();
         $data['dtakun_program'] = $query->getResult();
         return view('master/pagu/new', $data);
     }
@@ -76,7 +75,7 @@ class PaguAnggaran extends BaseController
     {
         $data = $this->request->getPost();
         $data = [
-            'kode_sub_output' => $this->request->getVar('kode_sub_output'),
+            'kode_suboutput' => $this->request->getVar('kode_suboutput'),
             'kode_item' => $this->request->getVar('kode_item'),
             'jumlah_pagu' => $this->request->getVar('jumlah_pagu'),
             'jumlah_terpakai' => $this->request->getVar('jumlah_terpakai'),
@@ -88,27 +87,25 @@ class PaguAnggaran extends BaseController
     /**
      * Return the editable properties of a resource object.
      *
-     * @param int|string|null $id
+     * @param int|string|null $id_paguanggaran
      *
      * @return ResponseInterface
      */
-    public function edit($id = null)
+    public function edit($id_paguanggaran = null)
     {
         $builder = $this->db->table('paguanggaran');
-        $query = $builder->where('id',$id)->get();
+        $query = $builder->where('id_paguanggaran', $id_paguanggaran)->get();
         $pagu = $query->getResult();
         $builder2 = $this->db->table('suboutput');
         $query2 = $builder2->get();
         $suboutput = $query2->getResult();
-        var_dump($pagu);
-        // $akunoutput = $this->objOutput->find($id);
 
-        if (Count($pagu)>0) {
+        if (Count($pagu) > 0) {
             $builder = $this->db->table('item');
             $query = $builder->get();
             $data['dtakun_kegiatan'] = $suboutput;
             $data['dtakun_program'] = $query->getResult();
-            $data['pagu'] = $pagu ;
+            $data['pagu'] = $pagu;
             return view('master/pagu/edit', $data);
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
@@ -118,21 +115,21 @@ class PaguAnggaran extends BaseController
     /**
      * Add or update a model resource, from "posted" properties.
      *
-     * @param int|string|null $id
+     * @param int|string|null $id_paguanggaran
      *
      * @return ResponseInterface
      */
-    public function update($id = null)
+    public function update($id_paguanggaran = null)
     {
         $data = [
-            'kode_sub_output' => $this->request->getVar('kode_sub_output'),
+            'kode_suboutput' => $this->request->getVar('kode_suboutput'),
             'kode_item' => $this->request->getVar('kode_item'),
             'jumlah_pagu' => $this->request->getVar('jumlah_pagu'),
             'jumlah_terpakai' => $this->request->getVar('jumlah_terpakai'),
         ];
         $this->db
             ->table('paguanggaran')
-            ->where(['id' => $id])
+            ->where(['id_paguanggaran' => $id_paguanggaran])
             ->update($data);
         return redirect()->to(site_url('/master/pagu/index'))->with('success', 'Data Berhasil Disimpan');
     }
@@ -140,15 +137,15 @@ class PaguAnggaran extends BaseController
     /**
      * Delete the designated resource object from the model.
      *
-     * @param int|string|null $id
+     * @param int|string|null $id_paguanggaran
      *
      * @return ResponseInterface
      */
-    public function delete($id = null)
+    public function delete($id_paguanggaran = null)
     {
         $this->db
             ->table('paguanggaran')
-            ->where(['id' => $id])
+            ->where(['id_paguanggaran' => $id_paguanggaran])
             ->delete();
         return redirect()->to(site_url('master/pagu/index'))->with('success', 'Data Berhasil Dihapus');
     }

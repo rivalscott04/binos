@@ -10,21 +10,21 @@
     <div class="section-body">
         <!-- INI UNTUK MENANGKAP SESSION SUCCESS DENGAN BAWAAN WITH DI  -->
         <?php if (session()->getFlashdata('success')) : ?>
-        <div class="alert alert-success alert-dismissible show fade">
-            <div class="alert-body">
-                <button class="close" data-dismis="">x</button>
-                <?= session()->getFlashdata('success') ?>
+            <div class="alert alert-success alert-dismissible show fade">
+                <div class="alert-body">
+                    <button class="close" data-dismis="">x</button>
+                    <?= session()->getFlashdata('success') ?>
+                </div>
             </div>
-        </div>
         <?php endif; ?>
         <!-- INI UNTUK MENANGKAP SESSION ERROR DENGAN BAWAAN WITH DI  -->
         <?php if (session()->getFlashdata('error')) : ?>
-        <div class="alert alert-danger alert-dismissible show fade">
-            <div class="alert-body">
-                <button class="close" data-dismis="">x</button>
-                <?= session()->getFlashdata('error') ?>
+            <div class="alert alert-danger alert-dismissible show fade">
+                <div class="alert-body">
+                    <button class="close" data-dismis="">x</button>
+                    <?= session()->getFlashdata('error') ?>
+                </div>
             </div>
-        </div>
         <?php endif; ?>
         <div class="card">
             <div class="card-header">
@@ -47,7 +47,7 @@
             </div>
             <div class="card-body p-4">
                 <div class="table-responsive">
-                <table class="table table-striped table-md" id="myTable">
+                    <table class="table table-striped table-md" id="myTable">
                         <thead>
                             <tr class="text-center">
                                 <th>NO</th>
@@ -62,23 +62,23 @@
                         <tbody>
                             <?php $no = 1; ?> <!-- Inisialisasi nomor urut -->
                             <?php foreach ($dtrealisasi_anggaran as $key => $value) : ?>
-                            <tr>
-                                <td class="text-center"><?= $no++ ?></td> <!-- Nomor urut otomatis -->
-                                <td class="text-center"><?= $value->nama_sub_output ?> </td>
-                                <td class="text-center"><?= $value->nama_item ?> </td>
-                                <td><?= number_format((float)$value->jumlah_pagu, 0, ',', '.') ?></td> <!-- Format jumlah pagu -->
-                                <td><?= number_format((float)$value->jumlah_terpakai, 0, ',', '.') ?></td> <!-- Format jumlah terpakai -->
-                                <td><?= number_format((float)$value->jumlah_pagu - (float)$value->jumlah_terpakai, 0, ',', '.') ?></td> <!-- Sisa pagu -->
-                                <td>
-                                    <?php
-                                    $persentase = 0;
-                                    if ((float)$value->jumlah_pagu > 0) {
-                                        $persentase = ((float)$value->jumlah_terpakai / (float)$value->jumlah_pagu) * 100;
-                                    }
-                                    echo number_format($persentase, 2, ',', '.') . '%'; 
-                                    ?>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td class="text-center"><?= $no++ ?></td> <!-- Nomor urut otomatis -->
+                                    <td class="text-center"><?= $value->nama_suboutput ?> </td>
+                                    <td class="text-center"><?= $value->nama_item ?> </td>
+                                    <td><?= number_format((float)$value->jumlah_pagu, 0, ',', '.') ?></td> <!-- Format jumlah pagu -->
+                                    <td><?= number_format((float)$value->jumlah_terpakai, 0, ',', '.') ?></td> <!-- Format jumlah terpakai -->
+                                    <td><?= number_format((float)$value->jumlah_pagu - (float)$value->jumlah_terpakai, 0, ',', '.') ?></td> <!-- Sisa pagu -->
+                                    <td>
+                                        <?php
+                                        $persentase = 0;
+                                        if ((float)$value->jumlah_pagu > 0) {
+                                            $persentase = ((float)$value->jumlah_terpakai / (float)$value->jumlah_pagu) * 100;
+                                        }
+                                        echo number_format($persentase, 2, ',', '.') . '%';
+                                        ?>
+                                    </td>
+                                </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>

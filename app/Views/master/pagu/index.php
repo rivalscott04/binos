@@ -10,21 +10,21 @@
     <div class="section-body">
         <!-- INI UNTUK MENANGKAP SESSION SUCCESS DENGAN BAWAAN WITH DI  -->
         <?php if (session()->getFlashdata('success')) : ?>
-        <div class="alert alert-success alert-dismissible show fade">
-            <div class="alert-body">
-                <button class="close" data-dismis="">x</button>
-                <?= session()->getFlashdata('success') ?>
+            <div class="alert alert-success alert-dismissible show fade">
+                <div class="alert-body">
+                    <button class="close" data-dismis="">x</button>
+                    <?= session()->getFlashdata('success') ?>
+                </div>
             </div>
-        </div>
         <?php endif; ?>
         <!-- INI UNTUK MENANGKAP SESSION ERROR DENGAN BAWAAN WITH DI  -->
         <?php if (session()->getFlashdata('error')) : ?>
-        <div class="alert alert-danger alert-dismissible show fade">
-            <div class="alert-body">
-                <button class="close" data-dismis="">x</button>
-                <?= session()->getFlashdata('error') ?>
+            <div class="alert alert-danger alert-dismissible show fade">
+                <div class="alert-body">
+                    <button class="close" data-dismis="">x</button>
+                    <?= session()->getFlashdata('error') ?>
+                </div>
             </div>
-        </div>
         <?php endif; ?>
         <div class="card">
             <div class="card-header">
@@ -61,31 +61,31 @@
                         </thead>
                         <tbody>
                             <?php foreach ($dtakun_pagu as $key => $value) : ?>
-                            <tr>
-                            <td><?= $key + 1 ?></td>
-                                <td class="text text-center"><?= $value->nama_sub_output ?> </td>
-                                <td class="text text-center"><?= $value->kode_item ?> </td>
-                                <td><?= $value->nama_item ?></td>
-                                <td><?= number_format($value->jumlah_pagu, 0, ',', '.') ?> </td>
-                                <!-- Format ribuan untuk jumlah pagu -->
-                                <td><?= number_format($value->jumlah_terpakai, 0, ',', '.') ?> </td>
-                                <!-- Format ribuan untuk jumlah terpakai -->
-                                <td class="text text-center">
-                                    <!-- EDIT -->
-                                    <a href="<?= site_url('master/pagu/' . $value->id . '/edit') ?>"
-                                        class="btn btn-warning"> <i class="fa-regular fa-pen-to-square"></i> </a>
-                                    <!-- DELETE -->
-                                    <form action="<?= site_url('master/pagu/index/' . $value->id) ?>"
-                                        method="post" id="del-<?= $value->id ?>" class="d-inline">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <?= csrf_field() ?>
-                                        <button class="btn btn-danger btn-small"
-                                            data-confrim="Hapus Data ... ? | Apakah Anda Yakin ... ?"
-                                            data-confirm-yes="Hapus(<?= $value->id ?>)"><i
-                                                class="fa-solid fa-trash"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td><?= $key + 1 ?></td>
+                                    <td class="text text-center"><?= $value->nama_suboutput ?> </td>
+                                    <td class="text text-center"><?= $value->kode_item ?> </td>
+                                    <td><?= $value->nama_item ?></td>
+                                    <td><?= number_format($value->jumlah_pagu, 0, ',', '.') ?> </td>
+                                    <!-- Format ribuan untuk jumlah pagu -->
+                                    <td><?= number_format($value->jumlah_terpakai, 0, ',', '.') ?> </td>
+                                    <!-- Format ribuan untuk jumlah terpakai -->
+                                    <td class="text text-center">
+                                        <!-- EDIT -->
+                                        <a href="<?= site_url('master/pagu/' . $value->id_paguanggaran . '/edit') ?>"
+                                            class="btn btn-warning"> <i class="fa-regular fa-pen-to-square"></i> </a>
+                                        <!-- DELETE -->
+                                        <form action="<?= site_url('master/pagu/index/' . $value->id_paguanggaran) ?>"
+                                            method="post" id="del-<?= $value->id_paguanggaran ?>" class="d-inline">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <?= csrf_field() ?>
+                                            <button class="btn btn-danger btn-small"
+                                                data-confrim="Hapus Data ... ? | Apakah Anda Yakin ... ?"
+                                                data-confirm-yes="Hapus(<?= $value->id_paguanggaran ?>)"><i
+                                                    class="fa-solid fa-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>

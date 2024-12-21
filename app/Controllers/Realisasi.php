@@ -17,18 +17,19 @@ class Realisasi extends BaseController
     public function index()
     {
         $builder = $this->db->table('paguanggaran');
-        $builder->select('paguanggaran.*, suboutput.nama_sub_output, item.nama_item'); // Memilih kolom dari tabel paguanggaran, suboutput, dan item
-        $builder->join('suboutput', 'paguanggaran.kode_sub_output = suboutput.kode_sub_output', 'left'); // Melakukan join LEFT dengan suboutput
+        $builder->select('paguanggaran.*, suboutput.nama_suboutput, item.nama_item'); // Memilih kolom dari tabel paguanggaran, suboutput, dan item
+        $builder->join('suboutput', 'paguanggaran.kode_suboutput = suboutput.kode_suboutput', 'left'); // Melakukan join LEFT dengan suboutput
         $builder->join('item', 'paguanggaran.kode_item = item.kode_item', 'left'); // Melakukan join LEFT dengan item
         $query = $builder->get(); // Menjalankan query
         $data['dtrealisasi_anggaran'] = $query->getResult(); // Mendapatkan hasil query dalam bentuk objek
 
-        return view('transaksi/Realisasi/index',$data);
+        return view('transaksi/Realisasi/index', $data);
     }
 
-    public function new(){
+    public function new()
+    {
         $query = $this->db->query(
-            "SELECT * FROM paguanggaran WHERE paguanggaran.kode_item = ?", 
+            "SELECT * FROM paguanggaran WHERE paguanggaran.kode_item = ?",
             ['000126']
         );
         $result = $query->getResultArray();

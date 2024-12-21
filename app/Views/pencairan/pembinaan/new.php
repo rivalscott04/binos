@@ -1,6 +1,6 @@
-<?= $this->extend('layout/backend') ?>;
+<?= $this->extend('layout/backend') ?>
 
-<?= $this->section('content') ?>;
+<?= $this->section('content') ?>
 
 <section class="section">
     <div class="section-header">
@@ -16,10 +16,6 @@
             <div class="card-body p-4">
                 <form method="post" action="<?= site_url('pencairan/pembinaan/index') ?>">
                     <?= csrf_field() ?>
-                    <!-- <div class="form-group">
-                        <label>NO KWITANSI</label>
-                        <input type="text" class="form-control" name="no_kwitansi" placeholder="No Kwitansi" required>
-                    </div> -->
                     <div class="form-group">
                         <label>TANGGAL</label>
                         <input type="date" class="form-control" name="tanggal" placeholder="Tanggal" required>
@@ -33,21 +29,26 @@
                         <table class="table table-bordered" id="tableLoop">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Kegiatan</th>
-                                    <th>Uraian Kegiatan</th>
-                                    <th>Rincian</th>
-                                    <th>Volume</th>
-                                    <th>Harga Satuan</th>
-                                    <th>Jumlah</th>
+                                    <th style="width: 5%">No</th>
+                                    <th style="width: 20%">Kegiatan</th>
+                                    <th style="width: 15%">Akun</th>
+                                    <th style="width: 10%">Kode Item</th>
+                                    <th style="width: 20%">Rincian</th>
+                                    <th style="width: 10%">Volume</th>
+                                    <th style="width: 10%">Harga Satuan</th>
+                                    <th style="width: 10%">Jumlah</th>
                                     <th>
-                                        <button class="btn btn-primary btn-sm btn-block" id="Barisbarupembinaan"><i class="fa fa-plus"></i></button>
+                                        <button type="button" class="btn btn-primary btn-sm btn-block" id="addRowButton">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <!-- di isi form dinamis yang dibuat dengan jQuery -->
+                            </thead>
+                            <tbody id="tableBody">
+                                <!-- Baris pertama akan ditambahkan oleh JavaScript -->
                             </tbody>
+
                         </table>
                     </div>
 
@@ -59,8 +60,13 @@
             </div>
         </div>
     </div>
-
-    </div>
 </section>
 
-<?= $this->endSection() ?>;
+<script type="application/json" id="kegiatan-akun-data">
+    <?= json_encode($kegiatan_akun) ?>
+</script>
+<script type="application/json" id="kode-item-data">
+    <?= json_encode($kode_item) ?>
+</script>
+
+<?= $this->endSection() ?>

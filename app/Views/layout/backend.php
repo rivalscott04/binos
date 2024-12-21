@@ -92,6 +92,8 @@
     <!-- <small>Debug JS Scripts: <?= base_url('template/assets/js/scripts.js') ?></small> -->
     <script src="<?= base_url('template/assets/js/custom.js') ?>"></script>
     <!-- <small>Debug JS Custom: <?= base_url('template/assets/js/custom.js') ?></small> -->
+
+
 </body>
 
 </html>

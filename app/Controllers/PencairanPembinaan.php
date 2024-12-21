@@ -24,6 +24,7 @@ class PencairanPembinaan extends ResourceController
             $data['dtpencairan_pembinaan'] = $this->pencairanPembinaanModel->findAll();
             return view('pencairan/pembinaan/index', $data);
         } catch (\Exception $e) {
+            log_message('error', 'Gagal mengambil data: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Gagal mengambil data: ' . $e->getMessage());
         }
     }
@@ -31,9 +32,15 @@ class PencairanPembinaan extends ResourceController
     public function new(): string
     {
         try {
-            $data['dtpencairan_pembinaan'] = $this->pencairanPembinaanModel->findAll();
+            $data['kegiatan_akun'] = $this->pencairanPembinaanModel->getKegiatanDanAkun();
+            $data['kode_item'] = $this->pencairanPembinaanModel->getKodeItem();
+
+            // Tambahkan log untuk debugging
+            log_message('debug', 'Data kegiatan dan uraian: ' . print_r($data['kegiatan_akun'], true));
+
             return view('pencairan/pembinaan/new', $data);
         } catch (\Exception $e) {
+            log_message('error', 'Gagal mengambil data: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Gagal mengambil data: ' . $e->getMessage());
         }
     }
@@ -47,17 +54,13 @@ class PencairanPembinaan extends ResourceController
             }
 
             // Debugging: Log kode yang diterima
-            if (ENVIRONMENT === 'development') {
-                log_message('debug', 'Kode yang diterima: ' . $kode);
-            }
+            log_message('debug', 'Kode yang diterima: ' . $kode);
 
             // Ambil data berdasarkan kode (no_kwitansi)
             $data['data'] = $this->pencairanPembinaanModel->get_detail($kode);
 
             // Debugging: Log data yang ditemukan
-            if (ENVIRONMENT === 'development') {
-                log_message('debug', 'Data yang ditemukan: ' . json_encode($data['data']));
-            }
+            log_message('debug', 'Data yang ditemukan: ' . json_encode($data['data']));
 
             // Pastikan data tersedia
             if (empty($data['data'])) {
@@ -66,7 +69,7 @@ class PencairanPembinaan extends ResourceController
 
             return view('pencairan/pembinaan/detail', $data);
         } catch (\Exception $e) {
-            // Tampilkan pesan error jika terjadi masalah
+            log_message('error', 'Gagal mengambil detail data: ' . $e->getMessage());
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
@@ -75,18 +78,23 @@ class PencairanPembinaan extends ResourceController
     {
         $data = $this->request->getPost();
 
-        // Pastikan data diterima dengan benar
+        // Log data yang diterima
+        log_message('info', 'Data POST diterima: ' . print_r($data, true));
+
         if (empty($data)) {
+            log_message('error', 'Data POST kosong atau tidak valid.');
             return redirect()->back()->with('error', 'Data tidak ditemukan atau format tidak sesuai.');
         }
 
         try {
-            // Pastikan insert berhasil
             $this->pencairanPembinaanModel->insertBatchWithCalculation($data);
+            log_message('info', 'Data berhasil disimpan ke database.');
             return redirect()->to(site_url('/pencairan/pembinaan/index'))->with('success', 'Data Berhasil Disimpan');
         } catch (DatabaseException $e) {
+            log_message('error', 'Database error: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Database error: ' . $e->getMessage());
         } catch (\Exception $e) {
+            log_message('error', 'Error: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
         }
     }
@@ -94,55 +102,31 @@ class PencairanPembinaan extends ResourceController
     public function delete($id = null)
     {
         if (!$id) {
+            log_message('error', 'ID tidak valid untuk penghapusan.');
             return redirect()->back()->with('error', 'ID tidak valid');
         }
 
         try {
             // Pastikan data ada sebelum dihapus
             if (!$this->pencairanPembinaanModel->find($id)) {
+                log_message('error', 'Data dengan ID ' . $id . ' tidak ditemukan.');
                 return redirect()->back()->with('error', 'Data tidak ditemukan.');
             }
 
-            if ($this->pencairanPembinaanModel->delete($id)) {
+            // Gunakan method baru untuk delete dan update pagu
+            if ($this->pencairanPembinaanModel->deletePencairanAndUpdatePagu($id)) {
+                log_message('info', 'Data dengan ID ' . $id . ' berhasil dihapus dan pagu diperbarui.');
                 return redirect()->to(site_url('/pencairan/pembinaan/index'))->with('success', 'Data Berhasil Dihapus');
             } else {
                 throw new \Exception('Gagal menghapus data.');
             }
-        } catch (\Exception $e) {
+        } catch (\InvalidArgumentException $e) {
+            // Tangkap error spesifik dari model
+            log_message('error', 'Validasi error: ' . $e->getMessage());
             return redirect()->back()->with('error', $e->getMessage());
-        }
-    }
-
-    public function edit($id = null)
-    {
-        try {
-            $data['dtpencairan_pembinaan'] = $this->pencairanPembinaanModel->findAll();
-            return $this->response->setJSON($data);
         } catch (\Exception $e) {
-            return $this->response->setJSON(['error' => 'Gagal mengambil data: ' . $e->getMessage()]);
-        }
-    }
-
-    public function update($id = null)
-    {
-        $data = $this->request->getPost();
-
-        if (!$id) {
-            return redirect()->back()->with('error', 'ID tidak valid');
-        }
-
-        try {
-            // Pastikan data valid sebelum diupdate
-            if (!$this->pencairanPembinaanModel->find($id)) {
-                return redirect()->back()->with('error', 'ID tidak ditemukan.');
-            }
-
-            if ($this->pencairanPembinaanModel->updateData($id, $data)) {
-                return redirect()->to(site_url('/pencairan/pembinaan/index'))->with('success', 'Data Berhasil Diubah');
-            } else {
-                throw new \Exception('Gagal mengubah data.');
-            }
-        } catch (\Exception $e) {
+            // Tangkap error umum
+            log_message('error', 'Error saat menghapus data: ' . $e->getMessage());
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
@@ -153,8 +137,12 @@ class PencairanPembinaan extends ResourceController
             $sekarang = $this->formatTanggalIndonesia(date('d-m-Y'));
             $data = $this->request->getGet();
 
+            // Log parameter yang diterima
+            log_message('info', 'Parameter GET diterima: ' . json_encode($data));
+
             // Validasi parameter
             if (empty($data['nota']) || empty($data['nomor']) || empty($data['tanggal']) || empty($data['jenis'])) {
+                log_message('error', 'Parameter tidak lengkap: ' . json_encode($data));
                 throw new \Exception('Parameter tidak lengkap. Pastikan semua input tersedia.');
             }
 
@@ -163,6 +151,8 @@ class PencairanPembinaan extends ResourceController
                 ->where('no_kwitansi', $data['nota'])
                 ->get()
                 ->getRow();
+
+            log_message('debug', 'Nota Dinas ditemukan: ' . json_encode($notaDinas));
 
             if (!$notaDinas) {
                 throw new \Exception('Data Nota Dinas tidak ditemukan');
@@ -182,6 +172,8 @@ class PencairanPembinaan extends ResourceController
                 ->groupBy(['pencairan_pembinaan.no_kwitansi', 'akun.kode_akun', 'akun.nama_akun'])
                 ->get()
                 ->getResult();
+
+            log_message('debug', 'Data Akun ditemukan: ' . json_encode($akun));
 
             if (empty($akun)) {
                 throw new \Exception('Data Akun tidak ditemukan');
@@ -208,11 +200,36 @@ class PencairanPembinaan extends ResourceController
                     throw new \Exception('Jenis cetakan tidak valid');
             }
         } catch (\Exception $e) {
+            log_message('error', 'Terjadi kesalahan: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
+    }
 
-        log_message('debug', 'Data diterima: ' . json_encode($data));
-        log_message('debug', 'Nota Dinas: ' . $data['nota']);
+    public function update($id = null)
+    {
+
+        $data = [
+            'tanggal' => $this->request->getPost('tanggal'),
+            'perihal' => $this->request->getPost('perihal'),
+            'kegiatan' => $this->request->getPost('kegiatan'),
+            'rincian' => $this->request->getPost('rincian'),
+            'volume' => $this->request->getPost('volume'),
+            'harga_satuan' => $this->request->getPost('harga_satuan')
+        ];
+
+        try {
+            if ($this->pencairanPembinaanModel->updateData($id, $data)) {
+                return $this->response->setJSON([
+                    'status' => 200,
+                    'message' => 'Data berhasil diupdate'
+                ]);
+            }
+        } catch (\Exception $e) {
+            return $this->response->setJSON([
+                'status' => 500,
+                'message' => 'Gagal mengupdate data'
+            ]);
+        }
     }
 
     public function formatTanggalIndonesia($tanggal)

@@ -14,16 +14,16 @@ INI TEMPAT EDIT<?= $this->extend('layout/backend') ?>
                 <h4>Edit Data Akun Master Output</h4>
             </div>
             <div class="card-body p-4">
-                <form method="post" action="<?= site_url('master/pagu/edit/' . $pagu[0]->id) ?>">
+                <form method="post" action="<?= site_url('master/pagu/edit/' . $pagu[0]->id_paguanggaran) ?>">
                     <?= csrf_field() ?>
                     <input type="hidden" name="_methode" value="PUT">
                     <div class="form-group">
                         <label>KODE KEGIATAN</label>
-                        <select class="form-control" name="kode_sub_output" value="<?= $pagu[0]->kode_sub_output ?>">
+                        <select class="form-control" name="kode_suboutput" value="<?= $pagu[0]->kode_suboutput ?>">
                             <?php foreach ($dtakun_kegiatan as $key => $value) : ?>
-                            <option value="<?= $value->kode_sub_output ?>">
-                                <?= $value->kode_sub_output ?> - <?= $value->nama_sub_output ?>
-                            </option>
+                                <option value="<?= $value->kode_suboutput ?>">
+                                    <?= $value->kode_suboutput ?> - <?= $value->nama_suboutput ?>
+                                </option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -31,9 +31,9 @@ INI TEMPAT EDIT<?= $this->extend('layout/backend') ?>
                         <label>KODE ITEM</label>
                         <select class="form-control" name="kode_item" value="<?= $pagu[0]->kode_item ?>">
                             <?php foreach ($dtakun_program as $key => $value) : ?>
-                            <option value="<?= $value->kode_item ?>">
-                                <?= $value->kode_item ?> - <?= $value->nama_item ?>
-                            </option>
+                                <option value="<?= $value->kode_item ?>">
+                                    <?= $value->kode_item ?> - <?= $value->nama_item ?>
+                                </option>
                             <?php endforeach; ?>
                         </select>
                     </div>
