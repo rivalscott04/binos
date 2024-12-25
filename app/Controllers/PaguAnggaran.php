@@ -79,10 +79,12 @@ class PaguAnggaran extends BaseController
             'kode_item' => $this->request->getVar('kode_item'),
             'jumlah_pagu' => $this->request->getVar('jumlah_pagu'),
             'jumlah_terpakai' => $this->request->getVar('jumlah_terpakai'),
+            'jumlah' => $this->request->getVar('jumlah_pagu'), // Duplikasi nilai jumlah_pagu ke jumlah
         ];
         $this->db->table('paguanggaran')->insert($data);
         return redirect()->to(site_url('/master/pagu/index'))->with('success', 'Data Berhasil Disimpan');
     }
+
 
     /**
      * Return the editable properties of a resource object.

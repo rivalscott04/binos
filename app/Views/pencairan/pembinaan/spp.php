@@ -248,9 +248,9 @@
                             ?>
                                 <tr>
                                     <td style="border: 1px solid #ccc; padding: 8px; text-align: center;"><?= $i + 1 ?></td>
-                                    <td style="border: 1px solid #ccc; padding: 8px;"><?= $value->nama_suboutput ?? 'Tidak Ada' ?></td>
+                                    <td style="border: 1px solid #ccc; padding: 8px;"><?= $value->kegiatan ?? 'Tidak Ada' ?></td>
                                     <td style="border: 1px solid #ccc; padding: 8px;"><?= $value->nama_item ?? 'Tidak Ada' ?></td>
-                                    <td style="border: 1px solid #ccc; padding: 8px; text-align: center;"><?= number_format($value->pagu ?? 0, 0, ',', '.') ?></td>
+                                    <td style="border: 1px solid #ccc; padding: 8px; text-align: center;"><?= number_format($value->pagu_dalam_dipa ?? 0, 0, ',', '.') ?></td>
                                     <td style="border: 1px solid #ccc; padding: 8px; text-align: center;"><?= number_format($value->jumlah_spp ?? 0, 0, ',', '.') ?></td>
                                     <td style="border: 1px solid #ccc; padding: 8px; text-align: center;"><?= number_format($value->sisa_pagu ?? 0, 0, ',', '.') ?></td>
                                 </tr>

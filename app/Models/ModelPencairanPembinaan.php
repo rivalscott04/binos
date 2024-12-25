@@ -35,14 +35,52 @@ class ModelPencairanPembinaan extends Model
         return str_pad($no, 4, '0', STR_PAD_LEFT);
     }
 
-    public function getKegiatanDanAkun()
+    /**
+     * Mengambil data kegiatan dari tabel suboutput untuk dropdown.
+     *
+     * @return array
+     */
+    public function getKegiatan(): array
     {
-        return $this->select('kegiatan, akun')->distinct()->findAll(0, true); // true untuk array
+        $db = \Config\Database::connect();
+        return $db->table('suboutput')
+            ->select('nama_suboutput as kegiatan')
+            ->distinct()
+            ->orderBy('nama_suboutput', 'ASC')
+            ->get()
+            ->getResultArray();
     }
 
-    public function getKodeItem()
+    /**
+     * Mengambil data akun dari tabel akun untuk dropdown.
+     *
+     * @return array
+     */
+    public function getAkun(): array
     {
-        return $this->select('kode_item')->distinct()->findAll(0, true); // true untuk array
+        $db = \Config\Database::connect();
+        return $db->table('akun')
+            ->select('kode_akun as akun')
+            ->distinct()
+            ->orderBy('kode_akun', 'ASC')
+            ->get()
+            ->getResultArray();
+    }
+
+    /**
+     * Mengambil data kode item dari tabel item untuk dropdown.
+     *
+     * @return array
+     */
+    public function getKodeItem(): array
+    {
+        $db = \Config\Database::connect();
+        return $db->table('item')
+            ->select('id_item as kode_item')
+            ->distinct()
+            ->orderBy('id_item', 'ASC')
+            ->get()
+            ->getResultArray();
     }
 
     /**
@@ -52,6 +90,7 @@ class ModelPencairanPembinaan extends Model
      * @return bool
      * @throws \InvalidArgumentException
      */
+
     public function insertBatchWithCalculation(array $data): bool
     {
         $processedData = [];
@@ -101,7 +140,7 @@ class ModelPencairanPembinaan extends Model
         if ($cek == 1) {
             $pagu = $model->where('kode_item', $lokasi)->get()->getResultArray();
 
-            if (!empty($pagu) && ($pagu[0]['jumlah_terpakai'] + $jumlah) <= $pagu[0]['jumlah_pagu']) {
+            if (!empty($pagu) && ($jumlah) <= $pagu[0]['jumlah_pagu']) {
                 try {
                     $this->db->transBegin();
 

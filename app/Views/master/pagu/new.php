@@ -18,10 +18,10 @@
                     <?= csrf_field() ?>
                     <div class="form-group">
                         <label>KODE KEGIATAN</label>
-                        <select class="form-control" name="kode_sub_output">
+                        <select class="form-control" name="kode_suboutput">
                             <?php foreach ($dtakun_kegiatan as $key => $value) : ?>
-                                <option value="<?= $value->kode_sub_output ?>">
-                                    <?= $value->kode_sub_output ?> - <?= $value->nama_sub_output ?>
+                                <option value="<?= $value->kode_suboutput ?>">
+                                    <?= $value->kode_suboutput ?> - <?= $value->nama_suboutput ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>

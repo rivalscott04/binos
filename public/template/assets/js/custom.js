@@ -130,15 +130,15 @@ function FormSelectStatus(Nomor) {
 }
 
 // Mengonversi data PHP ke format JSON dan menyimpannya dalam variabel JavaScript
-var kegiatanAkun = JSON.parse(
-  document.getElementById("kegiatan-akun-data").textContent
-);
+var kegiatan = JSON.parse(document.getElementById("kegiatan-data").textContent);
+var akun = JSON.parse(document.getElementById("akun-data").textContent);
 var kodeItem = JSON.parse(
   document.getElementById("kode-item-data").textContent
 );
 
-console.log(kegiatanAkun); // Debugging untuk memastikan data diterima
-console.log(kodeItem); // Debugging untuk memastikan data diterima
+console.log(kegiatan); // Debugging untuk memastikan data kegiatan diterima
+console.log(akun); // Debugging untuk memastikan data akun diterima
+console.log(kodeItem); // Debugging untuk memastikan data kode item diterima
 
 // Fungsi untuk menambahkan baris baru
 function addRow() {
@@ -146,14 +146,15 @@ function addRow() {
   const rowCount = tableBody.rows.length;
   const newRow = tableBody.insertRow(rowCount);
 
+  // Membuat opsi dropdown untuk Kegiatan, Akun, dan Kode Item
   let kegiatanOptions = "";
-  kegiatanAkun.forEach(function (kegiatan) {
-    kegiatanOptions += `<option value="${kegiatan.kegiatan}">${kegiatan.kegiatan}</option>`;
+  kegiatan.forEach(function (item) {
+    kegiatanOptions += `<option value="${item.kegiatan}">${item.kegiatan}</option>`;
   });
 
   let akunOptions = "";
-  kegiatanAkun.forEach(function (kegiatan) {
-    akunOptions += `<option value="${kegiatan.akun}">${kegiatan.akun}</option>`;
+  akun.forEach(function (item) {
+    akunOptions += `<option value="${item.akun}">${item.akun}</option>`;
   });
 
   let kodeItemOptions = "";
@@ -161,6 +162,7 @@ function addRow() {
     kodeItemOptions += `<option value="${item.kode_item}">${item.kode_item}</option>`;
   });
 
+  // Menambahkan baris baru ke tabel
   newRow.innerHTML = `
         <td style="width: 5%">${rowCount + 1}</td>
         <td style="width: 20%">
@@ -193,6 +195,7 @@ function addRow() {
   const hargaInput = row.querySelector(".harga-input");
   const jumlahInput = row.querySelector(".jumlah-input");
 
+  // Fungsi untuk menghitung total jumlah
   function updateJumlah() {
     const volume = parseFloat(volumeInput.value) || 0;
     const harga = parseFloat(hargaInput.value) || 0;
@@ -203,6 +206,7 @@ function addRow() {
   volumeInput.addEventListener("input", updateJumlah);
   hargaInput.addEventListener("input", updateJumlah);
 
+  // Fungsi untuk menghapus baris
   const removeButton = newRow.querySelector(".remove");
   removeButton.addEventListener("click", function () {
     newRow.remove();
@@ -210,7 +214,7 @@ function addRow() {
   });
 }
 
-// Fungsi untuk memperbarui nomor urut
+// Fungsi untuk memperbarui nomor urut pada tabel
 function updateRowNumbers() {
   const rows = document.querySelectorAll("#tableBody tr");
   rows.forEach((row, index) => {
@@ -218,6 +222,7 @@ function updateRowNumbers() {
   });
 }
 
+// Validasi input saat form disubmit
 document.querySelector("form").addEventListener("submit", function (e) {
   const rows = document.querySelectorAll("#tableBody tr");
   let valid = true;
@@ -237,27 +242,12 @@ document.querySelector("form").addEventListener("submit", function (e) {
   }
 });
 
-document.querySelectorAll("select").forEach(function (select) {
-  select.addEventListener("change", function () {
-    console.log(`${this.name}: ${this.value}`);
-  });
-});
-
-function addEventListenersToSelects() {
-  document.querySelectorAll("select").forEach(function (select) {
-    if (!select.dataset.listenerAdded) {
-      select.addEventListener("change", function () {
-        console.log(`${this.name}: ${this.value}`);
-      });
-      select.dataset.listenerAdded = true;
-    }
-  });
-}
-
+// Event listener untuk tombol tambah baris
 document.getElementById("addRowButton").addEventListener("click", function () {
   addRow();
 });
 
+// Menambahkan event listener untuk dropdown saat halaman dimuat
 document.addEventListener("DOMContentLoaded", function () {
   addRow();
 });

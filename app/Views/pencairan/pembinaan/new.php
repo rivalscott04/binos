@@ -62,8 +62,11 @@
     </div>
 </section>
 
-<script type="application/json" id="kegiatan-akun-data">
-    <?= json_encode($kegiatan_akun) ?>
+<script type="application/json" id="kegiatan-data">
+    <?= json_encode($kegiatan) ?>
+</script>
+<script type="application/json" id="akun-data">
+    <?= json_encode($akun) ?>
 </script>
 <script type="application/json" id="kode-item-data">
     <?= json_encode($kode_item) ?>

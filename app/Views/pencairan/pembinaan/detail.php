@@ -116,7 +116,7 @@
                             foreach ($data as $item): ?>
                                 <tr>
                                     <td><?= $no++ ?></td>
-                                    <td><?= $item->akun ?></td>
+                                    <td><?= $item->kegiatan ?></td>
                                     <td><?= $item->nama_item ?></td>
                                     <td><?= $item->rincian ?></td>
                                     <td><?= $item->volume ?></td>
