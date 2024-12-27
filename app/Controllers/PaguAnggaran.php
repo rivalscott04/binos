@@ -56,13 +56,17 @@ class PaguAnggaran extends BaseController
      */
     public function new()
     {
-        $builder = $this->db->table('item');
+        // Change this query to use akun_pembinaan table instead of item
+        $builder = $this->db->table('akun_pembinaan');
         $query = $builder->get();
 
         $builder2 = $this->db->table('suboutput');
         $query2 = $builder2->get();
-        $data['dtakun_kegiatan'] = $query2->getResult(); //$this->objKegiatan->findAll();
+
+        $data['dtakun_kegiatan'] = $query2->getResult();
+        // This will now contain kode_item from akun_pembinaan table
         $data['dtakun_program'] = $query->getResult();
+
         return view('master/pagu/new', $data);
     }
 

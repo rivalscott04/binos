@@ -75,10 +75,9 @@ class ModelPencairanPembinaan extends Model
     public function getKodeItem(): array
     {
         $db = \Config\Database::connect();
-        return $db->table('item')
-            ->select('id_item as kode_item')
+        return $db->table('akun_pembinaan')
+            ->select('kode_item')
             ->distinct()
-            ->orderBy('id_item', 'ASC')
             ->get()
             ->getResultArray();
     }
