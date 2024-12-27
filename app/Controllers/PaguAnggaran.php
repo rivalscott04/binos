@@ -123,16 +123,24 @@ class PaguAnggaran extends BaseController
      */
     public function update($id_paguanggaran = null)
     {
+        // Ambil data pagu yang ada
+        $existingPagu = $this->db->table('paguanggaran')
+            ->where('id_paguanggaran', $id_paguanggaran)
+            ->get()
+            ->getRow();
+
         $data = [
             'kode_suboutput' => $this->request->getVar('kode_suboutput'),
             'kode_item' => $this->request->getVar('kode_item'),
             'jumlah_pagu' => $this->request->getVar('jumlah_pagu'),
-            'jumlah_terpakai' => $this->request->getVar('jumlah_terpakai'),
+            'jumlah_terpakai' => $existingPagu->jumlah_terpakai, // Gunakan nilai yang sudah ada
         ];
+
         $this->db
             ->table('paguanggaran')
             ->where(['id_paguanggaran' => $id_paguanggaran])
             ->update($data);
+
         return redirect()->to(site_url('/master/pagu/index'))->with('success', 'Data Berhasil Disimpan');
     }
 

@@ -56,15 +56,12 @@
                                     <td><?= $value->tanggal ?></td>
                                     <td><?= $value->perihal ?></td>
                                     <td class="text text-center">
-                                        <!-- DETAIL -->
                                         <a href="<?= site_url('pencairan/pembinaan/detail/' . $value->no_kwitansi) ?>" class="btn btn-warning"><i class="fa-solid fa-eye"></i></a>
-                                        <!-- EDIT -->
                                         <button type="button" class="btn btn-warning edit-btn" data-id="<?= $value->id_pencairan_pembinaan ?>" data-no_kwitansi="<?= $value->no_kwitansi ?>" data-tanggal="<?= $value->tanggal ?>" data-akun="<?= $value->akun ?>" data-kode_item="<?= $value->kode_item ?>" data-perihal="<?= $value->perihal ?>" data-rincian="<?= $value->rincian ?>" data-volume="<?= $value->volume ?>" data-harga_satuan="<?= $value->harga_satuan ?>" data-toggle="modal" data-target="#editModal"><i class="fa-regular fa-pen-to-square"></i></button>
-                                        <!-- DELETE -->
-                                        <form action="<?= site_url('pencairan/pembinaan/index/' . $value->id_pencairan_pembinaan) ?>" method="post" id="del-<?= $value->id_pencairan_pembinaan ?>" class="d-inline">
+                                        <button class="btn btn-danger btn-small delete-btn" data-id="<?= $value->id_pencairan_pembinaan ?>"><i class="fa-solid fa-trash"></i></button>
+                                        <form id="delete-form-<?= $value->id_pencairan_pembinaan ?>" action="<?= site_url('pencairan/pembinaan/index/' . $value->id_pencairan_pembinaan) ?>" method="post" class="d-none">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <?= csrf_field(); ?>
-                                            <button class="btn btn-danger btn-small" data-confirm="Hapus Data ... ? | Apakah Anda Yakin ... ?" data-confirm-yes="hapus(<?= $value->id_pencairan_pembinaan ?>)"><i class="fa-solid fa-trash"></i></button>
                                         </form>
                                     </td>
                                 </tr>
@@ -133,10 +130,12 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
     document.querySelectorAll('.edit-btn').forEach(button => {
         button.addEventListener('click', function() {
-            document.getElementById('formEdit').action =  "<?= site_url('pencairan/pembinaan/edit/') ?>" + this.dataset.id;
+            document.getElementById('formEdit').action = "<?= site_url('pencairan/pembinaan/edit/') ?>" + this.dataset.id;
             document.getElementById('edit-id').value = this.dataset.id;
             document.getElementById('edit-akun').value = this.dataset.akun;
             document.getElementById('edit-kode_item').value = this.dataset.kode_item;
@@ -146,6 +145,28 @@
             document.getElementById('edit-rincian').value = this.dataset.rincian;
             document.getElementById('edit-volume').value = this.dataset.volume;
             document.getElementById('edit-harga').value = this.dataset.harga_satuan;
+        });
+    });
+
+    // Delete confirmation with SweetAlert
+    document.querySelectorAll('.delete-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.dataset.id;
+
+            Swal.fire({
+                title: 'Hapus Data?',
+                text: "Data yang dihapus tidak dapat dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(`delete-form-${id}`).submit();
+                }
+            });
         });
     });
 </script>

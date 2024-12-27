@@ -19,9 +19,9 @@ INI TEMPAT EDIT<?= $this->extend('layout/backend') ?>
                     <input type="hidden" name="_methode" value="PUT">
                     <div class="form-group">
                         <label>KODE KEGIATAN</label>
-                        <select class="form-control" name="kode_suboutput" value="<?= $pagu[0]->kode_suboutput ?>">
+                        <select class="form-control" name="kode_suboutput">
                             <?php foreach ($dtakun_kegiatan as $key => $value) : ?>
-                                <option value="<?= $value->kode_suboutput ?>">
+                                <option value="<?= $value->kode_suboutput ?>" <?= ($value->kode_suboutput == $pagu[0]->kode_suboutput) ? 'selected' : '' ?>>
                                     <?= $value->kode_suboutput ?> - <?= $value->nama_suboutput ?>
                                 </option>
                             <?php endforeach; ?>
@@ -29,9 +29,9 @@ INI TEMPAT EDIT<?= $this->extend('layout/backend') ?>
                     </div>
                     <div class="form-group">
                         <label>KODE ITEM</label>
-                        <select class="form-control" name="kode_item" value="<?= $pagu[0]->kode_item ?>">
+                        <select class="form-control" name="kode_item">
                             <?php foreach ($dtakun_program as $key => $value) : ?>
-                                <option value="<?= $value->kode_item ?>">
+                                <option value="<?= $value->kode_item ?>" <?= ($value->kode_item == $pagu[0]->kode_item) ? 'selected' : '' ?>>
                                     <?= $value->kode_item ?> - <?= $value->nama_item ?>
                                 </option>
                             <?php endforeach; ?>
@@ -43,7 +43,7 @@ INI TEMPAT EDIT<?= $this->extend('layout/backend') ?>
                     </div>
                     <div class="form-group">
                         <label>REALISASI PAGU</label>
-                        <input type="number" class="form-control" name="Jumlag Terpakai" placeholder="0" readonly value="<?= $pagu[0]->jumlah_terpakai ?>" required>
+                        <input type="number" class="form-control" name="jumlah_terpakai" placeholder="0" readonly value="<?= $pagu[0]->jumlah_terpakai ?>" required>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Update

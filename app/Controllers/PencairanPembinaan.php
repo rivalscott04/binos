@@ -256,7 +256,6 @@ class PencairanPembinaan extends ResourceController
 
     public function update($id = null)
     {
-
         $data = [
             'tanggal' => $this->request->getPost('tanggal'),
             'perihal' => $this->request->getPost('perihal'),
@@ -268,18 +267,21 @@ class PencairanPembinaan extends ResourceController
 
         try {
             if ($this->pencairanPembinaanModel->updateData($id, $data)) {
-                return $this->response->setJSON([
-                    'status' => 200,
-                    'message' => 'Data berhasil diupdate'
-                ]);
+                // Set flashdata success
+                session()->setFlashdata('success', 'Data berhasil diupdate');
+                return redirect()->to('/pencairan/pembinaan/index'); // Redirect ke halaman utama
+            } else {
+                // Set flashdata error
+                session()->setFlashdata('error', 'Gagal mengupdate data');
+                return redirect()->to('/pencairan/pembinaan/index'); // Redirect tetap ke halaman utama
             }
         } catch (\Exception $e) {
-            return $this->response->setJSON([
-                'status' => 500,
-                'message' => 'Gagal mengupdate data'
-            ]);
+            // Set flashdata untuk error yang tidak terduga
+            session()->setFlashdata('error', 'Terjadi kesalahan saat mengupdate data');
+            return redirect()->to('/pencairan/pembinaan/index');
         }
     }
+
 
     public function formatTanggalIndonesia($tanggal)
     {
