@@ -93,12 +93,11 @@ class ModelPencairanPembinaan extends Model
     public function insertBatchWithCalculation(array $data): bool
     {
         $processedData = [];
-        $model = new PaguAnggaran();
+        $akunModel = new ModelAkunPembinaan();
         $cek = 0;
         $lokasi = '';
         $jumlah = 0;
 
-        // Loop through data array instead of volume
         foreach ($data['data'] as $index => $item) {
             if (!isset($item['volume']) || !isset($item['harga_satuan'])) {
                 log_message('error', "Kolom 'volume' atau 'harga_satuan' tidak disertakan pada index {$index}");
@@ -106,18 +105,16 @@ class ModelPencairanPembinaan extends Model
             }
 
             if ($cek == 0) {
-                $pagu = $model
+                $akunData = $akunModel
                     ->where('kode_item', $item['kode_item'])
-                    ->get()
-                    ->getResultArray();
+                    ->first();
 
-                if (count($pagu) > 0) {
-                    $lokasi = $pagu[0]['kode_item'];
+                if ($akunData) {
+                    $lokasi = $item['kode_item'];
                     $cek = 1;
                 }
             }
 
-            // Calculate jumlah dari volume dan harga_satuan yang ada di item
             $itemJumlah = $item['volume'] * $item['harga_satuan'];
 
             $processedData[] = [
@@ -137,18 +134,16 @@ class ModelPencairanPembinaan extends Model
         }
 
         if ($cek == 1) {
-            $pagu = $model->where('kode_item', $lokasi)->get()->getResultArray();
+            $akunData = $akunModel->where('kode_item', $lokasi)->first();
 
-            if (!empty($pagu) && ($jumlah) <= $pagu[0]['jumlah_pagu']) {
+            if ($akunData && $jumlah <= $akunData->saldo) {
                 try {
                     $this->db->transBegin();
 
-                    // Insert ke tabel pencairan_pembinaan
                     $insertResult = $this->db->table('pencairan_pembinaan')->insertBatch($processedData);
 
                     if ($insertResult) {
-                        // Update pagu menggunakan method yang sudah ada
-                        $updateResult = $model->updateTerpakaiDanKurangiPagu($lokasi, $jumlah);
+                        $updateResult = $akunModel->updateSaldo($lokasi, $jumlah);
 
                         if ($updateResult) {
                             $this->db->transCommit();
@@ -164,20 +159,20 @@ class ModelPencairanPembinaan extends Model
                     throw new \InvalidArgumentException($e->getMessage());
                 }
             } else {
-                log_message('error', "Sisa Pagu tidak cukup untuk kode item {$lokasi}. Diperlukan {$jumlah} lebih.");
-                throw new \InvalidArgumentException('Sisa Pagu tidak cukup');
+                log_message('error', "Saldo tidak mencukupi untuk kode item {$lokasi}. Diperlukan {$jumlah}.");
+                throw new \InvalidArgumentException('Saldo tidak mencukupi');
             }
         } else {
-            log_message('error', "Pagu tidak ditemukan untuk kode item {$lokasi}");
-            throw new \InvalidArgumentException('Pagu tidak ditemukan untuk kode barang yang diberikan');
+            log_message('error', "Akun tidak ditemukan untuk kode item {$lokasi}");
+            throw new \InvalidArgumentException('Akun tidak ditemukan untuk kode item yang diberikan');
         }
     }
 
     public function updateData(int $id, array $data): bool
     {
-        $model = new PaguAnggaran();
+        $akunModel = new ModelAkunPembinaan();
 
-        // Ambil data lama sebelum diupdate dan konversi ke array jika object
+        // Ambil data lama sebelum diupdate
         $oldData = $this->find($id);
         if (!$oldData) {
             throw new \InvalidArgumentException("Data pencairan tidak ditemukan.");
@@ -190,7 +185,7 @@ class ModelPencairanPembinaan extends Model
         $newJumlah = floatval($data['volume']) * floatval($data['harga_satuan']);
         $selisihJumlah = $newJumlah - floatval($oldData['jumlah']);
 
-        // Siapkan hanya data yang akan diupdate
+        // Siapkan data yang akan diupdate
         $processedData = [
             'tanggal' => $data['tanggal'],
             'perihal' => $data['perihal'],
@@ -214,13 +209,13 @@ class ModelPencairanPembinaan extends Model
             $updateResult = $this->update($id, $processedData);
 
             if ($updateResult) {
-                // Update pagu anggaran dengan selisih jumlah
-                $updatePaguResult = $model->updateTerpakaiDanKurangiPagu(
+                // Update saldo akun dengan selisih jumlah
+                $updateAkunResult = $akunModel->updateSaldo(
                     $oldData['kode_item'],
                     $selisihJumlah
                 );
 
-                if ($updatePaguResult) {
+                if ($updateAkunResult) {
                     $this->db->transCommit();
                     return true;
                 }
@@ -234,7 +229,6 @@ class ModelPencairanPembinaan extends Model
             throw new \InvalidArgumentException($e->getMessage());
         }
     }
-
     public function updateNomor(string $id, string $no): bool
     {
         $data = [
@@ -258,9 +252,8 @@ class ModelPencairanPembinaan extends Model
 
     public function deletePencairanAndUpdatePagu($id)
     {
-        $model = new PaguAnggaran();
+        $akunModel = new ModelAkunPembinaan();
 
-        // Sesuaikan dengan primary key yang benar
         $pencairan = $this->db->table('pencairan_pembinaan')
             ->where('id_pencairan_pembinaan', $id)
             ->get()
@@ -273,14 +266,13 @@ class ModelPencairanPembinaan extends Model
         try {
             $this->db->transBegin();
 
-            // Kurangi jumlah_terpakai di pagu anggaran
-            $updateResult = $model->updateTerpakaiDanKurangiPagu(
+            // Kembalikan saldo yang sudah terpakai (jumlah negatif untuk menambah saldo)
+            $updateResult = $akunModel->updateSaldo(
                 $pencairan['kode_item'],
                 -$pencairan['jumlah']
             );
 
             if ($updateResult) {
-                // Update where clause dengan primary key yang benar
                 $deleteResult = $this->db->table('pencairan_pembinaan')
                     ->where('id_pencairan_pembinaan', $id)
                     ->delete();

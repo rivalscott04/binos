@@ -44,6 +44,26 @@ class ModelAkunPembinaan extends Model
     // protected $beforeDelete   = [];
     // protected $afterDelete    = [];
 
+    public function updateSaldo($kodeItem, $jumlah)
+    {
+        // Validasi data akun berdasarkan kode_item
+        $akun = $this->where('kode_item', $kodeItem)->first();
+
+        if (!$akun) {
+            throw new \InvalidArgumentException("Akun dengan kode item $kodeItem tidak ditemukan.");
+        }
+
+        // Konversi objek stdClass ke array atau akses langsung properti objek
+        $saldoBaru = $akun->saldo - $jumlah;
+
+        if ($saldoBaru < 0) {
+            throw new \InvalidArgumentException("Saldo tidak mencukupi. Sisa saldo: {$akun->saldo}, Dibutuhkan: {$jumlah}");
+        }
+
+        return $this->where('kode_item', $kodeItem)
+            ->set(['saldo' => $saldoBaru])
+            ->update();
+    }
     public function getAllAkun()
     {
         return $this->findAll();
