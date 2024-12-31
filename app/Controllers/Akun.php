@@ -68,6 +68,7 @@ class Akun extends ResourceController
             'akun' => $this->request->getVar('akun'),
             'kode_item' => $this->request->getVar('kode_item'),
             'nama_item' => $this->request->getVar('nama_item'),
+            'saldo_awal' => $this->request->getVar('saldo'),
             'saldo' => $this->request->getVar('saldo'),
         ];
         $this->db->table('akun_pembinaan')->insert($data);

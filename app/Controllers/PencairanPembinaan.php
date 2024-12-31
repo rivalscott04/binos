@@ -48,6 +48,31 @@ class PencairanPembinaan extends ResourceController
         }
     }
 
+    public function create()
+    {
+        $data = $this->request->getPost();
+
+        log_message('info', 'Data POST diterima: ' . print_r($data, true));
+
+        if (empty($data)) {
+            log_message('error', 'Data POST kosong atau tidak valid.');
+            return redirect()->back()->with('error', 'Data tidak ditemukan atau format tidak sesuai.');
+        }
+
+        try {
+            $this->pencairanPembinaanModel->insertBatchWithCalculation($data);
+            log_message('info', 'Data berhasil disimpan ke database.');
+            return redirect()->to(site_url('/pencairan/pembinaan/index'))->with('success', 'Data Berhasil Disimpan');
+        } catch (DatabaseException $e) {
+            log_message('error', 'Database error: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Database error: ' . $e->getMessage());
+        } catch (\Exception $e) {
+            log_message('error', 'Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+        }
+    }
+
+
     public function detail($kode = null)
     {
         try {
@@ -72,29 +97,6 @@ class PencairanPembinaan extends ResourceController
         }
     }
 
-    public function create()
-    {
-        $data = $this->request->getPost();
-
-        log_message('info', 'Data POST diterima: ' . print_r($data, true));
-
-        if (empty($data)) {
-            log_message('error', 'Data POST kosong atau tidak valid.');
-            return redirect()->back()->with('error', 'Data tidak ditemukan atau format tidak sesuai.');
-        }
-
-        try {
-            $this->pencairanPembinaanModel->insertBatchWithCalculation($data);
-            log_message('info', 'Data berhasil disimpan ke database.');
-            return redirect()->to(site_url('/pencairan/pembinaan/index'))->with('success', 'Data Berhasil Disimpan');
-        } catch (DatabaseException $e) {
-            log_message('error', 'Database error: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Database error: ' . $e->getMessage());
-        } catch (\Exception $e) {
-            log_message('error', 'Error: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
-        }
-    }
 
     public function delete($id = null)
     {
@@ -168,10 +170,13 @@ class PencairanPembinaan extends ResourceController
                 ->update();
 
             $akun = $this->db->table('pencairan_pembinaan')
-                ->select('pencairan_pembinaan.no_kwitansi, pencairan_pembinaan.kegiatan, akun.kode_akun, akun.nama_akun, SUM(pencairan_pembinaan.jumlah) as total_jumlah')
-                ->join('akun', 'pencairan_pembinaan.akun = akun.kode_akun', 'left')
+                ->select('pencairan_pembinaan.no_kwitansi, 
+                     pencairan_pembinaan.kegiatan, 
+                     akun_pembinaan.akun, 
+                     SUM(pencairan_pembinaan.jumlah) as total_jumlah')
+                ->join('akun_pembinaan', 'pencairan_pembinaan.akun = akun_pembinaan.akun', 'left')
                 ->where('pencairan_pembinaan.no_kwitansi', $data['nota'])
-                ->groupBy(['pencairan_pembinaan.no_kwitansi', 'akun.kode_akun', 'akun.nama_akun', 'pencairan_pembinaan.kegiatan'])
+                ->groupBy(['pencairan_pembinaan.no_kwitansi', 'akun_pembinaan.akun', 'pencairan_pembinaan.kegiatan'])
                 ->get()
                 ->getResult();
 
@@ -181,51 +186,56 @@ class PencairanPembinaan extends ResourceController
                 throw new \Exception('Data Akun tidak ditemukan');
             }
 
-            $kode_item_selected = $this->db->table('pencairan_pembinaan')
-                ->select('kode_item')
-                ->where('no_kwitansi', $data['nota'])
-                ->get()
-                ->getResult();
-
-            $kode_item_list = array_map(function ($item) {
-                return $item->kode_item;
-            }, $kode_item_selected);
-
+            // Modified to only use saldo_awal
             $paguAwal = [];
             foreach ($kode_item_list as $kodeItem) {
-                $paguData = $this->db->table('paguanggaran')
-                    ->select('jumlah')
+                $paguData = $this->db->table('akun_pembinaan')
+                    ->select('saldo_awal')
                     ->where('kode_item', $kodeItem)
                     ->get()
                     ->getRow();
 
-                $paguAwal[$kodeItem] = $paguData->jumlah;
+                log_message('debug', 'Data Saldo Awal dari akun_pembinaan: ' . json_encode($paguData));
+                $paguAwal[$kodeItem] = $paguData ? $paguData->saldo_awal : 0;
             }
+
+            $check_data = $this->db->table('pencairan_pembinaan')
+                ->select('kegiatan, kode_item')
+                ->where('no_kwitansi', $data['nota'])
+                ->get()
+                ->getResult();
+            log_message('debug', 'Raw pencairan_pembinaan data: ' . json_encode($check_data));
 
             $dtrealisasi_anggaran = $this->db->table('pencairan_pembinaan')
                 ->select('
                     pencairan_pembinaan.kode_item,
                     pencairan_pembinaan.kegiatan,
+                    pencairan_pembinaan.rincian,
                     pencairan_pembinaan.tanggal,
                     item.nama_item,
-                    paguanggaran.jumlah as pagu_dalam_dipa,
-                    pencairan_pembinaan.jumlah as jumlah_spp
+                    pencairan_pembinaan.jumlah as jumlah_spp, 
+                    akun_pembinaan.saldo_awal
                 ')
                 ->join('item', 'pencairan_pembinaan.kode_item = item.kode_item', 'left')
-                ->join('paguanggaran', 'pencairan_pembinaan.kode_item = paguanggaran.kode_item', 'left')
+                ->join('akun_pembinaan', 'pencairan_pembinaan.kode_item = akun_pembinaan.kode_item', 'left')
                 ->whereIn('pencairan_pembinaan.kode_item', $kode_item_list)
                 ->orderBy('pencairan_pembinaan.tanggal', 'ASC')
                 ->orderBy('pencairan_pembinaan.id_pencairan_pembinaan', 'ASC')
                 ->get()
                 ->getResult();
 
+            // Inisialisasi array untuk tracking sisa pagu per kode item menggunakan saldo_awal
             $runningSisaPagu = [];
             foreach ($kode_item_list as $kodeItem) {
                 $runningSisaPagu[$kodeItem] = $paguAwal[$kodeItem];
             }
 
+            // Hitung sisa pagu secara berurutan
             foreach ($dtrealisasi_anggaran as $index => $row) {
                 $row->pagu_dalam_dipa = $paguAwal[$row->kode_item];
+                if ($index === 0 || $dtrealisasi_anggaran[$index - 1]->kode_item !== $row->kode_item) {
+                    $runningSisaPagu[$row->kode_item] = $paguAwal[$row->kode_item];
+                }
                 $row->sisa_pagu = $runningSisaPagu[$row->kode_item] - $row->jumlah_spp;
                 $runningSisaPagu[$row->kode_item] = $row->sisa_pagu;
             }
@@ -236,6 +246,10 @@ class PencairanPembinaan extends ResourceController
                 throw new \Exception('Data Realisasi Anggaran tidak ditemukan');
             }
 
+            $total_pembayaran = array_reduce($dtrealisasi_anggaran, function ($carry, $item) {
+                return $carry + ($item->jumlah_spp ?? 0);
+            }, 0);
+
             switch ($data['jenis']) {
                 case 'nodis':
                     $isi = $this->pencairanPembinaanModel->get_detail($data['nota']);
@@ -244,7 +258,7 @@ class PencairanPembinaan extends ResourceController
                     return view('pencairan/pembinaan/sptjm', compact('data', 'sekarang', 'akun'));
                 case 'spp':
                     $isi = $this->pencairanPembinaanModel->get_detail($data['nota']);
-                    return view('pencairan/pembinaan/spp', compact('data', 'sekarang', 'akun', 'isi', 'dtrealisasi_anggaran', 'notaDinas'));
+                    return view('pencairan/pembinaan/spp', compact('data', 'sekarang', 'akun', 'isi', 'dtrealisasi_anggaran', 'notaDinas', 'total_pembayaran'));
                 default:
                     throw new \Exception('Jenis cetakan tidak valid');
             }

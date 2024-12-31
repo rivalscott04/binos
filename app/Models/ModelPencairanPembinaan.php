@@ -59,10 +59,9 @@ class ModelPencairanPembinaan extends Model
     public function getAkun(): array
     {
         $db = \Config\Database::connect();
-        return $db->table('akun')
-            ->select('kode_akun as akun')
+        return $db->table('akun_pembinaan')
+            ->select('akun')
             ->distinct()
-            ->orderBy('kode_akun', 'ASC')
             ->get()
             ->getResultArray();
     }
@@ -97,6 +96,9 @@ class ModelPencairanPembinaan extends Model
         $cek = 0;
         $lokasi = '';
         $jumlah = 0;
+
+        // Tambahkan log untuk debug
+        log_message('debug', 'Received data: ' . print_r($data, true));
 
         foreach ($data['data'] as $index => $item) {
             if (!isset($item['volume']) || !isset($item['harga_satuan'])) {
@@ -133,6 +135,9 @@ class ModelPencairanPembinaan extends Model
             $jumlah += $itemJumlah;
         }
 
+        // Log data yang akan diinsert
+        log_message('debug', 'Processed data for insert: ' . print_r($processedData, true));
+
         if ($cek == 1) {
             $akunData = $akunModel->where('kode_item', $lokasi)->first();
 
@@ -155,8 +160,8 @@ class ModelPencairanPembinaan extends Model
                     return false;
                 } catch (\Exception $e) {
                     $this->db->transRollback();
-                    log_message('error', $e->getMessage());
-                    throw new \InvalidArgumentException($e->getMessage());
+                    log_message('error', 'Error during transaction: ' . $e->getMessage());
+                    throw $e;
                 }
             } else {
                 log_message('error', "Saldo tidak mencukupi untuk kode item {$lokasi}. Diperlukan {$jumlah}.");

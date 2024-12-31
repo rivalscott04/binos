@@ -174,7 +174,7 @@
                 <tr>
                     <td>Jenis Pembayaran </td>
                     <td>:</td>
-                    <td><?= $akun[0]->kode_akun . ' | ' . $akun[0]->nama_akun ?></td>
+                    <td><?= $akun[0]->akun ?></td>
                 </tr>
             </table>
 
@@ -194,9 +194,10 @@
                     <td>Jumlah Pembayaran yang diterima</td>
                     <td>:</td>
                     <td>
-                        Rp <?= number_format($akun[0]->total_jumlah, 0, ',', '.') ?>
-                        (<?= terbilang($akun[0]->total_jumlah) ?> rupiah)
+                        Rp <?= number_format($total_pembayaran, 0, ',', '.') ?>
+                        (<?= terbilang($total_pembayaran) ?> rupiah)
                     </td>
+
                 </tr>
                 <tr>
                     <td style="width: 15px;">2.</td>
@@ -249,8 +250,8 @@
                                 <tr>
                                     <td style="border: 1px solid #ccc; padding: 8px; text-align: center;"><?= $i + 1 ?></td>
                                     <td style="border: 1px solid #ccc; padding: 8px;"><?= $value->kegiatan ?? 'Tidak Ada' ?></td>
-                                    <td style="border: 1px solid #ccc; padding: 8px;"><?= $value->nama_item ?? 'Tidak Ada' ?></td>
-                                    <td style="border: 1px solid #ccc; padding: 8px; text-align: center;"><?= number_format($value->pagu_dalam_dipa ?? 0, 0, ',', '.') ?></td>
+                                    <td style="border: 1px solid #ccc; padding: 8px;"><?= $value->rincian ?? 'Tidak Ada' ?></td>
+                                    <td style="border: 1px solid #ccc; padding: 8px; text-align: center;"><?= number_format($value->saldo_awal ?? 0, 0, ',', '.') ?></td>
                                     <td style="border: 1px solid #ccc; padding: 8px; text-align: center;"><?= number_format($value->jumlah_spp ?? 0, 0, ',', '.') ?></td>
                                     <td style="border: 1px solid #ccc; padding: 8px; text-align: center;"><?= number_format($value->sisa_pagu ?? 0, 0, ',', '.') ?></td>
                                 </tr>
