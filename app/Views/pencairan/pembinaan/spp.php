@@ -7,37 +7,38 @@
     <link rel="stylesheet" href="<?= base_url('template/assets/css/paper.min.css') ?>">
     <style>
         @page {
-            size: F4;
-            /* Legal size */
-            margin: 20mm;
-            margin-bottom: 0;
+            size: A4;
+            margin: 0;
         }
 
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            width: 100%;
         }
 
         .sheet {
+            /* A4 measurements */
             width: 210mm;
-            height: auto;
-            /* Changed from fixed height to auto */
-            margin: 0 auto;
-            padding: 20mm;
+            /* Standard A4 width */
+            height: 297mm;
+            /* Standard A4 height */
+            margin: auto;
+            padding: 15mm 15mm 15mm 15mm;
+            /* top right bottom left */
             background: white;
             page-break-inside: avoid;
-            /* Prevent content splitting */
             page-break-after: always;
             overflow: hidden;
         }
 
-        /* Ensure the last sheet does not force a page break */
+
         .sheet:last-child {
             page-break-after: avoid;
         }
 
-
+        /* Rest of your existing styles */
         hr {
             border: 1.5px solid #000;
             margin-top: 10px;
@@ -58,30 +59,33 @@
         @media print {
             body {
                 width: 210mm;
-                margin: 0 auto;
+                /* A4 width */
+                margin: 0;
+                padding: 0;
             }
 
             .sheet {
                 margin: 0;
-                padding: 20mm;
+                padding: 15mm 15mm 15mm 15mm;
                 page-break-inside: avoid;
                 page-break-after: always;
             }
 
             .sheet:last-child {
                 page-break-after: avoid;
-                /* Prevent extra blank page */
             }
+
         }
 
-        /* Additional styles from the second document */
+        /* Your additional styles remain unchanged */
         ._center {
             text-align: center;
         }
 
         ._main {
             font-size: 14px;
-            margin-top: 20px;
+            margin-top: 0;
+            /* Changed from 20px to 0 */
             font-family: "Times New Roman", Times, serif;
         }
 
@@ -98,7 +102,7 @@
             width: 30%;
             padding-left: 10px;
             padding-right: 10px;
-            margin-top: 0px;
+            margin-top: 0;
             font-size: 14px;
             font-family: "Times New Roman", Times, serif;
         }
@@ -219,7 +223,7 @@
             </table>
 
             <?php
-            $max_per_page = 3; // Maksimal data per halaman
+            $max_per_page = 5; // Maksimal data per halaman
             $total_data = count($dtrealisasi_anggaran); // Total data
             $total_pages = ceil($total_data / $max_per_page); // Hitung jumlah halaman
             ?>
