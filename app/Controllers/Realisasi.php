@@ -14,14 +14,21 @@ class Realisasi extends BaseController
     {
         $this->db = \Config\Database::connect(); //mengenalkan koneksi ke database
     }
+
     public function index()
     {
-        $builder = $this->db->table('paguanggaran');
-        $builder->select('paguanggaran.*, suboutput.nama_suboutput, item.nama_item'); // Memilih kolom dari tabel paguanggaran, suboutput, dan item
-        $builder->join('suboutput', 'paguanggaran.kode_suboutput = suboutput.kode_suboutput', 'left'); // Melakukan join LEFT dengan suboutput
-        $builder->join('item', 'paguanggaran.kode_item = item.kode_item', 'left'); // Melakukan join LEFT dengan item
-        $query = $builder->get(); // Menjalankan query
-        $data['dtrealisasi_anggaran'] = $query->getResult(); // Mendapatkan hasil query dalam bentuk objek
+        $builder = $this->db->table('akun_pembinaan');
+        $builder->select('
+            akun_pembinaan.kegiatan,
+            akun_pembinaan.saldo_awal as jumlah_pagu,
+            akun_pembinaan.saldo,
+            pencairan_pembinaan.rincian as nama_item,
+            COALESCE(SUM(pencairan_pembinaan.jumlah), 0) as jumlah_terpakai
+        ');
+        $builder->join('pencairan_pembinaan', 'akun_pembinaan.kode_item = pencairan_pembinaan.kode_item', 'left');
+        $builder->groupBy('akun_pembinaan.kode_item');
+        $query = $builder->get();
+        $data['dtrealisasi_anggaran'] = $query->getResult();
 
         return view('transaksi/Realisasi/index', $data);
     }

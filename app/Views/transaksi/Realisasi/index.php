@@ -60,15 +60,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $no = 1; ?> <!-- Inisialisasi nomor urut -->
+                            <?php $no = 1; ?>
                             <?php foreach ($dtrealisasi_anggaran as $key => $value) : ?>
                                 <tr>
-                                    <td class="text-center"><?= $no++ ?></td> <!-- Nomor urut otomatis -->
-                                    <td class="text-center"><?= $value->nama_suboutput ?> </td>
-                                    <td class="text-center"><?= $value->nama_item ?> </td>
-                                    <td><?= number_format((float)$value->jumlah_pagu, 0, ',', '.') ?></td> <!-- Format jumlah pagu -->
-                                    <td><?= number_format((float)$value->jumlah_terpakai, 0, ',', '.') ?></td> <!-- Format jumlah terpakai -->
-                                    <td><?= number_format((float)$value->jumlah_pagu - (float)$value->jumlah_terpakai, 0, ',', '.') ?></td> <!-- Sisa pagu -->
+                                    <td class="text-center"><?= $no++ ?></td>
+                                    <td class="text-center"><?= $value->kegiatan ?></td>
+                                    <td class="text-center"><?= $value->nama_item ?></td>
+                                    <td><?= number_format((float)$value->jumlah_pagu, 0, ',', '.') ?></td>
+                                    <td><?= number_format((float)$value->jumlah_terpakai, 0, ',', '.') ?></td>
+                                    <td><?= number_format((float)$value->saldo, 0, ',', '.') ?></td>
                                     <td>
                                         <?php
                                         $persentase = 0;
